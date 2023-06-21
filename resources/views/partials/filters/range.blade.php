@@ -1,4 +1,4 @@
-<?
+<?php
 $value=isset($value) ? $value:"";
 $type=isset($type) ? $type:"";
 ?>

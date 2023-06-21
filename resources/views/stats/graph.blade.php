@@ -1,7 +1,7 @@
 <div>
     <canvas id="myChart" height="40vh" width="80vw"></canvas>
 </div>
-<?
+<?php
 
 $count=$el1->count();
 $voted = $el3->where('voted',1)->count();

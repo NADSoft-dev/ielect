@@ -14,7 +14,7 @@
 <div class="familyStep1 familyStep">
 <h4>נא לבחור משפחות שברצונך לאחד</h4>
 
-<?
+<?php
 $field=[
   'type'=>"text",
   "label"=>"משפחה",
@@ -57,7 +57,7 @@ $field=[
 
 <div class="familyStep2 familyStep" style="display:none;">
   <h4>נא לבחור משפחה שאליה אתה רוצה לאחד</h4>
-  <?
+  <?php
   $field=[
     'type'=>"text",
     "label"=>"משפחה",

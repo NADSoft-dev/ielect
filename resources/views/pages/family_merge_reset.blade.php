@@ -13,7 +13,7 @@
 <div class="panel-body">
 <div class="familyStep1 familyStep">
 
-<?
+<?php
 $families=DB::select('SELECT * FROM `electors` WHERE FamilyName != originalFamilyName group BY originalFamilyName order By originalFamilyName ASC');
 
 ?>
@@ -55,7 +55,7 @@ $families=DB::select('SELECT * FROM `electors` WHERE FamilyName != originalFamil
 
 <div class="familyStep2 familyStep" style="display:none;">
   <h4>נא לבחור משפחה שאליה אתה רוצה לאחד</h4>
-  <?
+  <?php
   $field=[
     'type'=>"text",
     "label"=>"משפחה",

@@ -1,6 +1,6 @@
 <table class="table table-bordered table-hover">
   <thead>
-    <?
+    <?php
     $fields=config('electors.fields');
     $show=["IDNumber","FamilyName","PersonalName","FatherName","gender","birthYear","Serial","AddCode","list","mayor","group"];
     ?>
@@ -10,11 +10,11 @@
 
   </thead>
 <tbody>
-  <?
+  <?php
   $electors=App\Http\Controllers\ElectorsController::fixResponse($electors,$show);
   ?>
   @foreach($electors as $elector)
-  <?
+  <?php
 $css=[];
 if($elector->list) $css[]="hasList";
 if($elector->voted==1) $css[]="voted";

@@ -32,7 +32,7 @@ page[size="A4"] {
 <h2 style="text-align:right;">{{$title}}</h2>
 
     @foreach($rows as $row)
-    <?
+    <?php
     $electors=DB::table('electors')->where('list',$row->id)->count();
     ?>
     <tr class="Tr" >

@@ -1,7 +1,7 @@
 <div>
     <canvas id="groupchart" height="40vh" width="80vw"></canvas>
 </div>
-<?
+<?php
 $mayors=DB::table('groups')->select('*')->get();
 $labels=$voted=[];
 foreach($mayors as $mayor){

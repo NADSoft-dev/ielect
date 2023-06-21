@@ -13,7 +13,7 @@
 <div class="panel-body">
 <form class="form-horizontal"  action="/page/settings">
 <div class="col-sm-12">
-<?
+<?php
 $fields=config('settings.fields');
 $filters=config('settings.edit');
 
@@ -23,7 +23,7 @@ $row['data']=json_decode($row['data'],true);
 
 ?>
 @foreach($filters as $filter)
-  <?
+  <?php
     $i++;
 
     $field=$fields[$filter];

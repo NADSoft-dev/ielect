@@ -15,7 +15,7 @@
 
 
 <div class="col-sm-4 col-xs-12">
-  <?
+  <?php
 $data = DB::table('electors')->count();
   ?>
   <div class="tile tile-3" >
@@ -32,7 +32,7 @@ $data = DB::table('electors')->count();
 </div>
 
 <div class="col-sm-4 col-xs-12">
-  <?
+  <?php
 $data = DB::table('delegate')->count();
   ?>
   <div class="tile tile-4" >
@@ -49,7 +49,7 @@ $data = DB::table('delegate')->count();
 </div>
 
 <div class="col-sm-4 col-xs-12">
-  <?
+  <?php
 $data = DB::table('personal_list')->count();
   ?>
   <div class="tile tile-1" >
@@ -68,7 +68,7 @@ $data = DB::table('personal_list')->count();
 
 
 <div class="col-sm-4 col-xs-12 mrg-tp-20">
-  <?
+  <?php
 $data = DB::table('groups')->count();
   ?>
   <div class="tile tile-2" >
@@ -87,7 +87,7 @@ $data = DB::table('groups')->count();
 
 
 <div class="col-sm-4 col-xs-12 mrg-tp-20">
-  <?
+  <?php
 $data = DB::table('mayors')->count();
   ?>
   <div class="tile tile-default" >
@@ -108,7 +108,7 @@ $data = DB::table('mayors')->count();
 
 
 <div class="col-sm-4 col-xs-12 mrg-tp-20">
-  <?
+  <?php
 $data = DB::table('ballot')->count();
   ?>
   <div class="tile tile-5" >
@@ -129,7 +129,7 @@ $data = DB::table('ballot')->count();
 
 
 <div class="panel panel-default">
-<?
+<?php
 $el1=DB::table('electors');
 $el2=DB::table('electors');
 $el3=DB::table('electors');

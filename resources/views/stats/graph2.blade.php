@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<?
+<?php
 
 $count=$el1->count();
 $voted = $el3->where('voted',1)->count();

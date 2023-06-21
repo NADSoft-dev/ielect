@@ -125,13 +125,13 @@
   <span style="width:100px;" class="pull-left">
   <label>תוצאות בדף</label>
   <select  class="selectpicker form-control changePagesCount">
-  <?
+  <?php
 $pageCount=Request::cookie('pageCount');
 $pageCount= $pageCount ? $pageCount:50;
   ?>
     @for($i=1; $i<=100; $i++ )
     @if($i % 10 == 0)
-    <?
+    <?php
     $count=$i*5;
     $selected= $pageCount == $count ? 'selected':'';
     ?>
@@ -148,7 +148,7 @@ $pageCount= $pageCount ? $pageCount:50;
 
 <table class="table table-bordered table-hover" id="electorsTable">
 	<thead>
-		<?
+		<?php
     $fields=config('electors.fields');
 
     ?>
@@ -159,7 +159,7 @@ $pageCount= $pageCount ? $pageCount:50;
 	</thead>
 	<tbody>
 		@foreach($electors as $elector)
-		<?
+		<?php
    $css=[];
    if($elector->list) $css[]="hasList";
    if($elector->voted==1) $css[]="voted";

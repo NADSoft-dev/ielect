@@ -7,7 +7,7 @@
 
 <form class="form-horizontal" id="filterForm">
 <div class="col-sm-6">
-<?
+<?php
 $fields=config('statistics.fields');
 $by=config('statistics.by');
 $filters=config('statistics.filter');
@@ -15,13 +15,13 @@ $count=round(count($filters)/2);
 $i=0;
 ?>
 @foreach($filters as $filter)
-  <?
+  <?php
     $i++;
     if($i>$count){
       ?>
     </div>
     <div class="col-sm-6">
-      <?
+      <?php
     }
     $field=$fields[$filter];
     $field['name']=$filter;
@@ -43,11 +43,11 @@ $i=0;
     <hr>
     <div class="fields_select ">
   <span class="label label-lg label-title">סטטיסטיקות לפי: </span>
-      <?
+      <?php
       $i=0;
       ?>
     @foreach($by as $field)
-    <?
+    <?php
     $i++;
     $css=$i==1 ? "active":"";
     ?>

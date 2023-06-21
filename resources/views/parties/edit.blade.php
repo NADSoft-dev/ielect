@@ -13,7 +13,7 @@
 <div class="panel-body">
 <form class="form-horizontal"  action="/page/parties-save/{{$row->id}}">
 <div class="col-sm-6">
-<?
+<?php
 $fields=config('parties.fields');
 $filters=config('parties.edit');
 
@@ -22,13 +22,13 @@ $i=0;
 
 ?>
 @foreach($filters as $filter)
-  <?
+  <?php
     $i++;
     if($i>$count){
       ?>
     </div>
     <div class="col-sm-6">
-      <?
+      <?php
     }
     $field=$fields[$filter];
     $field['name']=$filter;

@@ -12,7 +12,7 @@
 <div class="panel-body">
 <form class="form-horizontal"  action="/group/add">
 <div class="col-sm-6">
-<?
+<?php
 $fields=config('group.fields');
 $filters=config('group.create');
 $count=round(count($filters)/2);
@@ -20,13 +20,13 @@ $i=0;
 
 ?>
 @foreach($filters as $filter)
-  <?
+  <?php
     $i++;
     if($i>$count){
       ?>
     </div>
     <div class="col-sm-6">
-      <?
+      <?php
     }
     $field=$fields[$filter];
     $field['name']=$filter;

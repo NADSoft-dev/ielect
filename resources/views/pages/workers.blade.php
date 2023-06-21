@@ -13,20 +13,20 @@
   <form class="form-horizontal" id="workerForm" method="POST" action="/page/workers">
 
   <div class="col-sm-6">
-  <?
+  <?php
   $fields=config('workers.fields');
   $filters=config('workers.create');
   $count=round(count($filters)/2);
   $i=0;
   ?>
   @foreach($filters as $filter)
-    <?
+    <?php
       $i++;
       if($i>$count){
         ?>
       </div>
       <div class="col-sm-6">
-        <?
+        <?php
       }
       $field=$fields[$filter];
       $field['name']=$filter;
@@ -45,7 +45,7 @@
 
 
 
-<?
+<?php
 $kalfy=DB::table('ballot')->select('*')->get();
 ?>
 <hr />
@@ -65,7 +65,7 @@ $kalfy=DB::table('ballot')->select('*')->get();
       <th>ניהול</th>
     </tr>
     <tbody class="shift1">
-      <?
+      <?php
         $rows=DB::table('workers')->where('kalfy',$k->ballot_id)->where('shift',1)->select('*')->get();
       ?>
       @foreach($rows as $row)
@@ -73,7 +73,7 @@ $kalfy=DB::table('ballot')->select('*')->get();
       @endforeach
     </tbody>
     <tbody class="shift2">
-      <?
+      <?php
         $rows=DB::table('workers')->where('kalfy',$k->ballot_id)->where('shift',2)->select('*')->get();
       ?>
       @foreach($rows as $row)
@@ -81,7 +81,7 @@ $kalfy=DB::table('ballot')->select('*')->get();
       @endforeach
     </tbody>
     <tbody class="shift3">
-      <?
+      <?php
         $rows=DB::table('workers')->where('kalfy',$k->ballot_id)->where('shift',3)->select('*')->get();
       ?>
       @foreach($rows as $row)

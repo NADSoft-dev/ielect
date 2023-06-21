@@ -3,7 +3,7 @@
 
 <form class="form-horizontal" method="POST" action="/group/add-to">
 <input name="ids" class="selectedIDS" type="hidden" />
-   <?
+   <?php
 $field=config('electors.fields.group');
 $field['name']="group";
    ?>
@@ -19,7 +19,7 @@ $field['name']="group";
    הוסף קבוצה
 </div>
 <div class="col-xs-12">
-<?
+<?php
 $fields=config('group.fields');
 $filters=config('group.create');
 ?>
@@ -27,7 +27,7 @@ $filters=config('group.create');
 <div class="collapse" id="collapseExample">
 
   @foreach($filters as $filter)
-   <?
+   <?php
       $field=$fields[$filter];
       $field['name']=$filter;
     ?>

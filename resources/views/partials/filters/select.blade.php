@@ -1,4 +1,4 @@
-<?
+<?php
 $value=isset($value) ? $value:"";
 
 $array=is_array($field['data']) ? $field['data']:false;
@@ -29,7 +29,7 @@ foreach($array as $k=>$v){
     <option value="0">בחר</option>
   @foreach($alldata as $row)
 
-  <?
+  <?php
 
   $row=(array)$row;
   $selected=$row[$key]==$value ? "selected='selected'":"";

@@ -4,7 +4,7 @@
 <form class="form-horizontal" method="POST" action="/list/add-to">
 <input name="ids" class="selectedIDS" type="hidden" />
 
-<?
+<?php
 $field=config('list.fields.manid');
 $field['name']="under";
 ?>
@@ -18,7 +18,7 @@ $field['name']="under";
 
 
 
-   <?
+   <?php
 $field=config('list.fields.list');
 
 $field['name']="list";
@@ -29,15 +29,15 @@ $field['name']="list";
     @include('partials.filters.select',['field'=>$field])
   </div>
   </div>
-  <?
+  <?php
 
 if(session('permission')==1){
  ?>
  <script>
-$('.run-rselect.field-under').val('<?=session('member')->id;?>').trigger('change').closest('.form-group').remove();
+$('.run-rselect.field-under').val('<?php=session('member')->id;?>').trigger('change').closest('.form-group').remove();
 </script>
 
- <?
+ <?php
 }
 ?>
 
@@ -45,7 +45,7 @@ $('.run-rselect.field-under').val('<?=session('member')->id;?>').trigger('change
   הוסף רשימה
 </div>
 <div class="col-xs-12">
-<?
+<?php
 $fields=config('list.fields');
 $filters=config('list.create_pop');
 ?>
@@ -53,7 +53,7 @@ $filters=config('list.create_pop');
 <div class="collapse" id="collapseExample">
 
   @foreach($filters as $filter)
-  <?
+  <?php
 
       $field=$fields[$filter];
       $field['name']=$filter;

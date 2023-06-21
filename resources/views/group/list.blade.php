@@ -25,7 +25,7 @@
   <tbody>
 
     @foreach($rows as $row)
-<?
+<?php
 $electors=DB::table('electors')->where('group',$row->id)->count();
 ?>
 <tr class="Row-{{$row->id}}">

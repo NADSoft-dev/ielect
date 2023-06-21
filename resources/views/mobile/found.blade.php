@@ -1,4 +1,4 @@
-<?
+<?php
 
 $elector=DB::table('electors')->where('IDNumber',$IDNumber)->first();
 if($elector){

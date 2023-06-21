@@ -3,7 +3,7 @@
 
 <form class="form-horizontal" method="POST" action="/mayor/add-to">
 <input name="ids" class="selectedIDS" type="hidden" />
-   <?
+   <?php
 $field=config('electors.fields.mayor');
 $field['name']="mayor";
    ?>
@@ -19,7 +19,7 @@ $field['name']="mayor";
    הוסף ראש ראשות
 </div>
 <div class="col-xs-12">
-<?
+<?php
 $fields=config('mayor.fields');
 $filters=config('mayor.create');
 ?>
@@ -27,7 +27,7 @@ $filters=config('mayor.create');
 <div class="collapse" id="collapseExample">
 
   @foreach($filters as $filter)
-   <?
+   <?php
       $field=$fields[$filter];
       $field['name']=$filter;
     ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 $row=(array)$row;
 ?>
 <tr class="Row-{{$row['id']}}">
