@@ -1,0 +1,32 @@
+body{background:#dad659;font-family: 'Rubik', sans-serif;}
+.loginContainer{height:100vh;    max-width: 800px;}
+.formContainer{height:auto;position: relative;background:#fff;   padding:0px;margin-top:10vh;}
+.formContainer .right-side{width:100%;padding-top:50px;padding-bottom:50px;text-align:center;height:auto;background:url('/images/ielect-02.png');    background-repeat: no-repeat;
+    background-size: cover;}
+    .right-side img{     display: inline-block; }
+.formContainer .left-side{padding-left: 30px;padding-right:30px;}
+.form-control{
+  border: 0;
+box-shadow: none;
+border-bottom:1px solid #e6e6e6;
+border-radius:0;
+height: 45px;
+outline: none !important;
+outline-style:none;
+box-shadow:none !important;
+font-size: 17px;
+    font-weight: 100;
+    margin-bottom:25px;
+}
+.ico{    width: 15px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -7.5px;}
+.form-group{position:relative;}
+.btn-login{float:left;color:#1b3536;border:1px solid #1b3536;    border-radius: 30px;
+    padding: 5px 20px; outline:0 !important;margin-top:15px;margin-bottom:20px;}
+.form-control:focus {outline:none;}
+h2{margin-bottom:40px;color:#dad659;font-weight: 100}
+.row{margin-right: 0;
+    margin-left: 0;}

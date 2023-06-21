@@ -1,0 +1,40 @@
+<?
+$value=isset($value) ? $value:"";
+
+$array=is_array($field['data']) ? $field['data']:false;
+$field['id']=isset($field['id']) ? $field['id']:false;
+$field['disabled']=isset($field['disabled']) ? $field['disabled']:false;
+$field['required']=isset($field['required']) ?  "required" : false;
+if(!$array){
+
+  if(count(explode(',',$field['data']))==5){
+    list($label,$table,$key,$k,$v)=explode(',',$field['data']);
+    
+    $alldata=DB::table($table)->where($k,$v)->select('*')->get()->toArray();
+  }else{
+  list($label,$table,$key)=explode(',',$field['data']);
+  $alldata=DB::table($table)->select('*')->get()->toArray();
+  }
+}else{
+$key="id";
+$label="label";
+$alldata=[];
+foreach($array as $k=>$v){
+  $alldata[]=[$key=>$k,$label=>$v];
+}
+}
+
+?>
+<select class="@if($field['required']) req @endif selectpicker form-control run-{{$field['type']}} field-{{$field['name']}}"   @if($field['id']) id="{{$field['id']}}" @endif @if($field['disabled']) disabled @endif name="{{$field['name']}}" @if($field['type']=='rselect') data-rselect="{{$field['rselect']}}" data-rselectid="{{$field['rselectid']}}"  @endif>
+    <option value="0">בחר</option>
+  @foreach($alldata as $row)
+
+  <?
+
+  $row=(array)$row;
+  $selected=$row[$key]==$value ? "selected='selected'":"";
+  ?>
+  <option value="{{$row[$key]}}" {{$selected}}>{{$row[$label]}}</option>
+
+@endforeach
+</select>
