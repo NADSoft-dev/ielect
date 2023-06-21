@@ -77,5 +77,8 @@
         "allow-plugins": {
             "kylekatarnls/update-helper": true
         }
-    }
+        
+    },
+    "psr/container": "1.0.0"
+    
 }
