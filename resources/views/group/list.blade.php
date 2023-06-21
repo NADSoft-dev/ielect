@@ -48,7 +48,7 @@ $electors=DB::table('electors')->where('group',$row->id)->count();
 </div>
 </div>
 </div>
-
+{{-- {{ dd('hh') }} --}}
 
 </div>
 

@@ -24,7 +24,8 @@
         "pragmarx/google2fa": "^2.0",
         "pragmarx/google2fa-laravel": "^0.1.2",
         "spatie/laravel-db-snapshots": "^1.1",
-        "yajra/laravel-datatables-oracle": "~8.0"
+        "yajra/laravel-datatables-oracle": "~8.0",
+        "psr/container": "1.0.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -78,7 +79,7 @@
             "kylekatarnls/update-helper": true
         }
         
-    },
-    "psr/container": "1.0.0"
+    }
+    
     
 }
