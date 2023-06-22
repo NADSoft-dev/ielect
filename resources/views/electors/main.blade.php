@@ -78,6 +78,7 @@ $i=0;
     
     if($field['type']=='disabled') $field['type']='text';
   ?>
+ 
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-3 control-label">{{$field['label']}}</label>
 <div class="col-sm-9">

@@ -34,7 +34,22 @@ foreach($array as $k=>$v){
   $row=(array)$row;
   $selected=$row[$key]==$value ? "selected='selected'":"";
   ?>
-  <option value="{{$row[$key]}}" {{$selected}}>{{$row[$label]}}</option>
+  <?php
+  $subCategory=DB::table('groups')->where('category_id',$row[$key])->get();
+?>
+  @if ($field['name'] == 'group')
+    <option value="{{$row[$key]}}" {{$selected}}>
+        {{$row[$label]}}
+
+        @foreach ($subCategory as $sub)
+          <option value="{{ $sub->id }}">--{{ $sub->name }} </option>
+        @endforeach
+    </option>
+  @else
+  <option value="{{$row[$key]}}" {{$selected}}>{{$row[$label]}} </option>
+
+  @endif
+  
 
 @endforeach
 </select>
