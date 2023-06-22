@@ -49,7 +49,7 @@ $i=0;
         $parent=DB::table('groups')->where('category_id',null)->get();
       ?>
               <select
-                  class="form-select form-control field-name select-dropdown-style form-select-solid filters form-field-style multi"
+                  class="selectpicker form-control changePagesCount"
                   data-control="select2" data-hide-search="false"
                   data-placeholder="اختر الفئة الام"
                   data-kt-ecommerce-product-filter="status1"
@@ -60,7 +60,6 @@ $i=0;
                       @foreach ($parent as $row )
                         <?php
                           $subCategory=DB::table('groups')->where('category_id',$row->id)->get();
-                          $parent=DB::table('groups')->where('category_id',null)->get();
                         ?>
                           <option value="{{$row->id}}" style="font-weight: bold;">
                             {{ $row->name }}
