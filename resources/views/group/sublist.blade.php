@@ -21,11 +21,12 @@
     <thead>
     <th>שם:{{$row->name}}</th>
     <th>sub cat count</th>
+    <th>בוחרים</th>
+
    
     </thead>
   <tbody>
 
-    {{-- @foreach($rows as $row) --}}
     <?php
     $subCategory=DB::table('groups')->where('category_id',$row->id)->get();
     $categoryCount=DB::table('groups')->where('category_id',$row->id)->count();
@@ -34,7 +35,7 @@
 @foreach ($subCategory as $sub)
 <?php
     $SubcategoryCount=DB::table('groups')->where('category_id',$sub->id)->count();
-
+    $electors=DB::table('electors')->where('group',$sub->id)->count();
     ?>
 <tr class="Row-{{$row->id}}">
 <td>{{$sub->name}}</td>
@@ -46,11 +47,13 @@
   @endif
   
 </td>
+<td>
+  <a href="/#/electors/main/group/{{$sub->id}}/">{{$electors}}</a>
+</td>
 
 
 </tr>
 @endforeach
-{{-- @endforeach --}}
   </tbody>
 </table>
 
