@@ -49,7 +49,7 @@ foreach($array as $k=>$v){
             ?>
             @if(!empty($subSubCategory))
             @foreach ($subSubCategory as $subSub)
-              <option value="{{$subSub->id }}" >---{{$subSub->name}}</option>
+              <option value="{{$subSub->id }}" >----{{$subSub->name}}</option>
             @endforeach
             @endif 
           </option>
