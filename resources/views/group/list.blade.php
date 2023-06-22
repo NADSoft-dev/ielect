@@ -29,6 +29,18 @@
 <?php
 $electors=DB::table('electors')->where('group',$row->id)->count();
 $subCategoryCount=DB::table('groups')->where('category_id',$row->id)->count();
+$subCategory=DB::table('groups')->where('category_id',$row->id)->first();
+if(isset($subCategory) || !empty($subCategory) || $subCategory !=null){
+$electorsSub=DB::table('electors')->where('group',$subCategory->id)->count();
+// $subSubCategory=DB::table('groups')->where('category_id',$subCategory->id)->first();
+  // if(isset($subSubCategory) || !empty($subSubCategory) || $subSubCategory !=null){
+  // $electorsSubSub=DB::table('electors')->where('group',$subSubCategory->id)->count();}
+  // else{
+  //   $electorsSubSub=0;
+  // }
+}
+
+$electors += $electorsSub;
 ?>
 <tr class="Row-{{$row->id}}">
 <td>{{$row->name}}</td>
