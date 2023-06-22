@@ -19,6 +19,7 @@
   <table class="table table-bordered table-hover">
     <thead>
     <th>שם</th>
+    <th>sub cat</th>
     <th>בוחרים</th>
     <th>ניהול</th>
     </thead>
@@ -27,9 +28,13 @@
     @foreach($rows as $row)
 <?php
 $electors=DB::table('electors')->where('group',$row->id)->count();
+$subCategoryCount=DB::table('groups')->where('category_id',$row->id)->count();
 ?>
 <tr class="Row-{{$row->id}}">
 <td>{{$row->name}}</td>
+<td>
+  <a href="/#/group/sublist/{{$row->id}}/"> {{$subCategoryCount}}</a>
+</td>
 <td>
   <a href="/#/electors/main/group/{{$row->id}}/">{{$electors}}</a>
 </td>
@@ -48,7 +53,6 @@ $electors=DB::table('electors')->where('group',$row->id)->count();
 </div>
 </div>
 </div>
-{{-- {{ dd('hh') }} --}}
 
 </div>
 

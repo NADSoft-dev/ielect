@@ -22,7 +22,8 @@ class GroupController extends Controller
     }
 
     function getAdd(){
-      return view('group.add');
+      $list=DB::table('groups')->select('*')->get();
+      return view('group.add')->with('rows',$list);
     }
 
     function postComplete(){
@@ -53,6 +54,11 @@ class GroupController extends Controller
       $row=DB::table('groups')->where('id',$id)->first();
       return view('group.edit')->with('row',$row);
     }
+    function getSublist($id){
+      $row=DB::table('groups')->where('id',$id)->first();
+      return view('group.sublist')->with('row',$row);
+    }
+
 
 
   

@@ -1,6 +1,5 @@
 <div class="col-xs-12">
   <div class="countDownHead">
-
 <h3 style="text-align:center;margin-bottom:15px;">נשאר לסגירת קלפי:</h3>
 <center>
   <div class="countdown"></div>
