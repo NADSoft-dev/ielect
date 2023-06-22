@@ -38,7 +38,14 @@
     ?>
 <tr class="Row-{{$row->id}}">
 <td>{{$sub->name}}</td>
-<td>{{$SubcategoryCount}}</td>
+<td>
+  @if ($SubcategoryCount > 0)
+  <a href="/#/group/sublist/{{$sub->id}}/"> {{$SubcategoryCount}}</a>
+  @else
+  {{$SubcategoryCount}}
+  @endif
+  
+</td>
 
 
 </tr>
