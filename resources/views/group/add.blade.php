@@ -45,6 +45,9 @@ $i=0;
 <div class="form-group">
     <label for="inputEmail3" class="col-sm-3 control-label">اختر الفئة الام </label>
     <div class="col-sm-9">
+      <?php
+        $parent=DB::table('groups')->where('category_id',null)->get();
+      ?>
               <select
                   class="form-select form-control field-name select-dropdown-style form-select-solid filters form-field-style multi"
                   data-control="select2" data-hide-search="false"
@@ -54,10 +57,17 @@ $i=0;
 
                   @if (isset($rows) && !empty($rows))
                     <option value="All" selected > </option>
-                      @foreach ($rows as $row )
-                        <option value="{{$row->id}}">
-                          {{ $row->name }}
-                        </option>
+                      @foreach ($parent as $row )
+                        <?php
+                          $subCategory=DB::table('groups')->where('category_id',$row->id)->get();
+                          $parent=DB::table('groups')->where('category_id',null)->get();
+                        ?>
+                          <option value="{{$row->id}}" style="font-weight: bold;">
+                            {{ $row->name }}
+                            @foreach ($subCategory as $sub)
+                              <option value="{{ $sub->id }}">--{{ $sub->name }} </option>
+                            @endforeach
+                          </option>
                       @endforeach
                   @endif
 
