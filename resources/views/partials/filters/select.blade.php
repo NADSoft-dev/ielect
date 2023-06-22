@@ -33,12 +33,12 @@ foreach($array as $k=>$v){
 
   $row=(array)$row;
   $selected=$row[$key]==$value ? "selected='selected'":"";
-  ?>
-  <?php
   $subCategory=DB::table('groups')->where('category_id',$row[$key])->get();
-?>
+
+  ?>
+  
   @if ($field['name'] == 'group')
-    <option value="{{$row[$key]}}" {{$selected}}>
+    <option value="{{$row[$key]}}" {{$selected}} style="font-weight: bold;">
         {{$row[$label]}}
 
         @foreach ($subCategory as $sub)
