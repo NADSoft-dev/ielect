@@ -47,12 +47,12 @@ $i=0;
   <label for="inputEmail3" class="col-sm-3 control-label"> בחר קבוצת אם </label>
   <div class="col-sm-9">
     <?php
-      $parent=DB::table('groups')->where('category_id',null)->get();
+      $parent=DB::table('groups')->where('category_id',null)->OrWhere('category_id',0)->get();
     ?>
             <select
                 class="selectpicker form-control changePagesCount"
                 data-control="select2" data-hide-search="false"
-                data-placeholder="اختر الفئة الام"
+                data-placeholder="בחר קבוצת אם"
                 data-kt-ecommerce-product-filter="status1"
                 name="category_id" >
 
@@ -68,6 +68,25 @@ $i=0;
                           @foreach ($subCategory as $sub)
                             <option value="{{ $sub->id }}" @if($sub->id == $subid->category_id) selected @endif>
                               --{{ $sub->name }}
+                              <?php
+                               $subSubCategory=DB::table('groups')->where('category_id',$sub->id)->get();
+                              ?>
+                              @if(!empty($subSubCategory))
+                              @foreach ($subSubCategory as $subSub)
+                                <option value="{{$subSub->id }}" @if($subSub->id == $subid->category_id) selected @endif >
+                                  ----{{$subSub->name}}
+                                 <?php
+                                  $subSubSubCategory=DB::table('groups')->where('category_id',$subSub->id)->get();
+                                 ?>
+                                 @if(!empty($subSubSubCategory))
+                                 @foreach ($subSubSubCategory as $subSubSub)
+                                   <option value="{{$subSubSub->id }}" @if($subSubSub->id == $subid->category_id) selected @endif >
+                                    ------{{$subSubSub->name}}</option>
+                                 @endforeach
+                                 @endif
+                                </option>
+                              @endforeach
+                              @endif
                             </option>
                             @endforeach
                         </option>

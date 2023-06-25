@@ -83,7 +83,7 @@ class GroupController extends Controller
     }
 
     function getAll(){
-      $list=DB::table('groups')->select('*')->where('category_id',null)->get();
+      $list=DB::table('groups')->select('*')->where('category_id',null)->OrWhere('category_id',0)->get();
       return view('group.list')->with('rows',$list);
     }
 

@@ -47,12 +47,12 @@ $i=0;
   <label for="inputEmail3" class="col-sm-3 control-label">בחר קבוצת אם </label>
   <div class="col-sm-9">
     <?php
-      $parent=DB::table('groups')->where('category_id',null)->get();
+      $parent=DB::table('groups')->where('category_id',null)->OrWhere('category_id',0)->get();
     ?>
             <select
                 class="selectpicker form-control changePagesCount"
                 data-control="select2" data-hide-search="false"
-                data-placeholder="اختر الفئة الام"
+                data-placeholder="בחר קבוצת אם"
                 data-kt-ecommerce-product-filter="status1"
                 name="category_id" >
 
@@ -62,17 +62,17 @@ $i=0;
                       <?php
                         $subCategory=DB::table('groups')->where('category_id',$row->id)->get();
                       ?>
-                        <option  value="{{$row->id}}" @if($field['label'] == $row->name) selected @endif style="font-weight: bold;">
+                        <option  value="{{$row->id}}" @if($row->id == $row->category_id) selected @endif style="font-weight: bold;">
                           {{ $row->name }}
                           @foreach ($subCategory as $sub)
-                            <option value="{{ $sub->id }}" @if($field['label'] == $sub->name) selected @endif>
+                            <option value="{{ $sub->id }}" @if($sub->id == $row->category_id) selected @endif selected @endif>
                               --{{ $sub->name }}
                               <?php
                                $subSubCategory=DB::table('groups')->where('category_id',$sub->id)->get();
                               ?>
                               @if(!empty($subSubCategory))
                               @foreach ($subSubCategory as $subSub)
-                                <option value="{{$subSub->id }}" @if($field['label'] == $subSub->name) selected @endif >----{{$subSub->name}}</option>
+                                <option value="{{$subSub->id }}" @if($subSub->id == $row->category_id) selected @endif >----{{$subSub->name}}</option>
                               @endforeach
                               @endif
                             </option>

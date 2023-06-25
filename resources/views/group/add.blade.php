@@ -46,12 +46,12 @@ $i=0;
     <label for="inputEmail3" class="col-sm-3 control-label"> בחר קבוצת אם </label>
     <div class="col-sm-9">
       <?php
-        $parent=DB::table('groups')->where('category_id',null)->get();
+        $parent=DB::table('groups')->where('category_id',null)->OrWhere('category_id',0)->get();
       ?>
               <select
                   class="selectpicker form-control changePagesCount"
                   data-control="select2" data-hide-search="false"
-                  data-placeholder="اختر الفئة الام"
+                  data-placeholder="בחר קבוצת אם"
                   data-kt-ecommerce-product-filter="status1"
                   name="category_id" >
 
@@ -71,7 +71,17 @@ $i=0;
                                 ?>
                                 @if(!empty($subSubCategory))
                                 @foreach ($subSubCategory as $subSub)
-                                  <option value="{{$subSub->id }}" >----{{$subSub->name}}</option>
+                                  <option value="{{$subSub->id }}" >
+                                    ----{{$subSub->name}}
+                                <?php
+                                 $subSubSubCategory=DB::table('groups')->where('category_id',$subSub->id)->get();
+                                ?>
+                                @if(!empty($subSubSubCategory))
+                                @foreach ($subSubSubCategory as $subSubSub)
+                                  <option value="{{$subSubSub->id }}" >------{{$subSubSub->name}}</option>
+                                @endforeach
+                                @endif
+                                  </option>
                                 @endforeach
                                 @endif
                               </option>
