@@ -65,7 +65,7 @@ $i=0;
                         <option  value="{{$row->id}}" @if($row->id == $row->category_id) selected @endif style="font-weight: bold;">
                           {{ $row->name }}
                           @foreach ($subCategory as $sub)
-                            <option value="{{ $sub->id }}" @if($sub->id == $row->category_id) selected @endif selected @endif>
+                            <option value="{{ $sub->id }}" @if($sub->id == $row->category_id) selected @endif >
                               --{{ $sub->name }}
                               <?php
                                $subSubCategory=DB::table('groups')->where('category_id',$sub->id)->get();
