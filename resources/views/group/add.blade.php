@@ -43,7 +43,7 @@ $i=0;
 </div>
 @endforeach
 <div class="form-group">
-    <label for="inputEmail3" class="col-sm-3 control-label">اختر الفئة الام </label>
+    <label for="inputEmail3" class="col-sm-3 control-label"> בחר קבוצת אם </label>
     <div class="col-sm-9">
       <?php
         $parent=DB::table('groups')->where('category_id',null)->get();

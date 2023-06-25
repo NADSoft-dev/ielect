@@ -19,7 +19,7 @@
   <table class="table table-bordered table-hover">
     <thead>
     <th>שם</th>
-    <th>sub cat</th>
+    <th>תת קבוצות</th>
     <th>בוחרים</th>
     <th>ניהול</th>
     </thead>

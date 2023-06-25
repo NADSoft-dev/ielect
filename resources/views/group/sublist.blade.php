@@ -20,7 +20,7 @@
   <table class="table table-bordered table-hover">
     <thead>
     <th>שם:{{$row->name}}</th>
-    <th>sub cat count</th>
+    <th>מס תת קבוצות</th>
     <th>בוחרים</th>
     <th>ניהול</th>
 
