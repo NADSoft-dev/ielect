@@ -78,9 +78,8 @@ class GroupController extends Controller
       return response('')->header('x-callback',"$('.popover').popover('destroy');$('.selected').addClass('hasList').removeClass('selected');");
     }
 
-
     function getAll(){
-      $list=DB::table('groups')->select('*')->get();
+      $list=DB::table('groups')->select('*')->where('category_id',null)->get();
       return view('group.list')->with('rows',$list);
     }
 
