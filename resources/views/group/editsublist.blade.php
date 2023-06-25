@@ -3,7 +3,7 @@
   <ol class="breadcrumb">
 <li><a href="/#/main/">ראשי</a></li>
 <li><a href="/#/group/all/">רשימת קבוצות</a></li>
-<li class="active">{{$row->name}}</li>
+<li class="active">{{$subid->name}}</li>
 </ol>
 
 
@@ -11,7 +11,7 @@
   <div class="panel-heading">עדכון פעיל</div>
 
 <div class="panel-body">
-<form class="form-horizontal"  action="/group/save/{{$row->id}}">
+<form class="form-horizontal"  action="/group/save/{{$subid->id}}">
 <div class="col-sm-6">
 <?php
 $fields=config('group.fields');
@@ -33,7 +33,7 @@ $i=0;
     $field=$fields[$filter];
     $field['name']=$filter;
 
-    $value=$row->$filter;
+    $value=$subid->$filter;
 
 
   ?>
@@ -57,28 +57,22 @@ $i=0;
                 name="category_id" >
 
                 @if (isset($parent) && !empty($parent))
-                  <option value="All" selected > </option>
+                <option value="All"  > </option>
                     @foreach ($parent as $row )
                       <?php
                         $subCategory=DB::table('groups')->where('category_id',$row->id)->get();
                       ?>
-                        <option  value="{{$row->id}}" @if($field['label'] == $row->name) selected @endif style="font-weight: bold;">
+                       
+                        <option  value="{{$row->id}}" @if($row->id == $subid->category_id) selected @endif style="font-weight: bold;">
                           {{ $row->name }}
                           @foreach ($subCategory as $sub)
-                            <option value="{{ $sub->id }}" @if($field['label'] == $sub->name) selected @endif>
+                            <option value="{{ $sub->id }}" @if($sub->id == $subid->category_id) selected @endif>
                               --{{ $sub->name }}
-                              <?php
-                               $subSubCategory=DB::table('groups')->where('category_id',$sub->id)->get();
-                              ?>
-                              @if(!empty($subSubCategory))
-                              @foreach ($subSubCategory as $subSub)
-                                <option value="{{$subSub->id }}" @if($field['label'] == $subSub->name) selected @endif >----{{$subSub->name}}</option>
-                              @endforeach
-                              @endif
                             </option>
-                          @endforeach
+                            @endforeach
                         </option>
-                    @endforeach
+                        @endforeach
+                    
                 @endif
 
               </select>

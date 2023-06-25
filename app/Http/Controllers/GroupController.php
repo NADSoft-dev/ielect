@@ -54,6 +54,10 @@ class GroupController extends Controller
       $row=DB::table('groups')->where('id',$id)->first();
       return view('group.edit')->with('row',$row);
     }
+    function getEditsublist($id){
+      $subid=DB::table('groups')->where('id',$id)->first();
+      return view('group.editsublist')->with('subid',$subid);
+    }
     function getSublist($id){
       $row=DB::table('groups')->where('id',$id)->first();
       return view('group.sublist')->with('row',$row);

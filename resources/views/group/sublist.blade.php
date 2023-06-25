@@ -22,6 +22,7 @@
     <th>שם:{{$row->name}}</th>
     <th>sub cat count</th>
     <th>בוחרים</th>
+    <th>ניהול</th>
 
    
     </thead>
@@ -50,7 +51,11 @@
 <td>
   <a href="/#/electors/main/group/{{$sub->id}}/">{{$electors}}</a>
 </td>
-
+<td>
+  <a href="/#/group/editsublist/{{$sub->id}}/">
+    <button class="btn btn-sm btn-primary">עדכון</button>
+  </a>
+</td>
 
 </tr>
 @endforeach
