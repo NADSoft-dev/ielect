@@ -49,7 +49,17 @@ foreach($array as $k=>$v){
             ?>
             @if(!empty($subSubCategory))
             @foreach ($subSubCategory as $subSub)
-              <option value="{{$subSub->id }}" >----{{$subSub->name}}</option>
+              <option value="{{$subSub->id }}" >
+                ----{{$subSub->name}}
+                <?php
+                  $subSubSubCategory=DB::table('groups')->where('category_id',$subSub->id)->get();
+                ?>
+                @if(!empty($subSubSubCategory))
+                @foreach ($subSubSubCategory as $subSubSub)
+                  <option value="{{$subSubSub->id }}" >------{{$subSubSub->name}}</option>
+                @endforeach
+                @endif
+              </option>
             @endforeach
             @endif 
           </option>
