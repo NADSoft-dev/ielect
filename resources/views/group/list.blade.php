@@ -37,10 +37,14 @@ $subSubCategory=DB::table('groups')->where('category_id',$subCategory->id)->firs
   if(isset($subSubCategory) || !empty($subSubCategory) || $subSubCategory !=null){
   $electorsSubSub=DB::table('electors')->where('group',$subSubCategory->id)->count();
   $electors+=$electorsSubSub;
+ 
+  $subSubSubCategory=DB::table('groups')->where('category_id',$subSubCategory->id)->first();
+  if(isset($subSubSubCategory) || !empty($subSubSubCategory) || $subSubSubCategory !=null){
+  $electorsSubSubSub=DB::table('electors')->where('group',$subSubSubCategory->id)->count();
+  $electors+=$electorsSubSubSub;
   }
-  // $electors = $electors +$electorsSub +$electorsSubSub; 
 }
-
+}
 
 ?>
 <tr class="Row-{{$row->id}}">
