@@ -1,5 +1,5 @@
 
-<?
+<?php
 $value=isset($value) && $value ? $value:"http://placehold.it/180";
 ?>
 <div class="uploadContainer">

@@ -3,7 +3,7 @@
 <div>
     <canvas id="{{$table}}chart" height="40vh" width="80vw"></canvas>
 </div>
-<?
+<?php
 $mayors=DB::table($table)->select('*')->get();
 $labels=$voted=[];
 foreach($mayors as $mayor){

@@ -1,4 +1,4 @@
-<?
+<?php
 $value=isset($value) ? $value:"";
 $field['autocomplete']=isset($field['autocomplete']) ?  $field['autocomplete'] : false;
 $field['placeholder']=isset($field['placeholder']) ?  "placeholder='".$field['placeholder']."'" : "";

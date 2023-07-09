@@ -13,7 +13,7 @@
 <div class="panel-body">
 <form class="form-horizontal"  action="/page/worker-edit/{{$row->id}}">
 <div class="col-sm-6">
-<?
+<?php
 $fields=config('workers.fields');
 $filters=config('workers.create');
 
@@ -22,13 +22,13 @@ $i=0;
 
 ?>
 @foreach($filters as $filter)
-  <?
+  <?php
     $i++;
     if($i>$count){
       ?>
     </div>
     <div class="col-sm-6">
-      <?
+      <?php
     }
     $field=$fields[$filter];
     $field['name']=$filter;

@@ -19,17 +19,35 @@
   <table class="table table-bordered table-hover">
     <thead>
     <th>שם</th>
+    <th>תת קבוצות</th>
     <th>בוחרים</th>
     <th>ניהול</th>
     </thead>
   <tbody>
 
     @foreach($rows as $row)
-<?
+<?php
 $electors=DB::table('electors')->where('group',$row->id)->count();
+$subCategoryCount=DB::table('groups')->where('category_id',$row->id)->count();
+$subCategory=DB::table('groups')->where('category_id',$row->id)->first();
+if(isset($subCategory) || !empty($subCategory) || $subCategory !=null){
+$electorsSub=DB::table('electors')->where('group',$subCategory->id)->count();
+$electors +=$electorsSub;
+$subSubCategory=DB::table('groups')->where('category_id',$subCategory->id)->first();
+  if(isset($subSubCategory) || !empty($subSubCategory) || $subSubCategory !=null){
+  $electorsSubSub=DB::table('electors')->where('group',$subSubCategory->id)->count();
+  $electors+=$electorsSubSub;
+  }
+  // $electors = $electors +$electorsSub +$electorsSubSub; 
+}
+
+
 ?>
 <tr class="Row-{{$row->id}}">
 <td>{{$row->name}}</td>
+<td>
+  <a href="/#/group/sublist/{{$row->id}}/"> {{$subCategoryCount}}</a>
+</td>
 <td>
   <a href="/#/electors/main/group/{{$row->id}}/">{{$electors}}</a>
 </td>
@@ -48,7 +66,6 @@ $electors=DB::table('electors')->where('group',$row->id)->count();
 </div>
 </div>
 </div>
-
 
 </div>
 

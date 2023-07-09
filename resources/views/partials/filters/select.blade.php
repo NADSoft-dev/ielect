@@ -1,4 +1,4 @@
-<?
+<?php
 $value=isset($value) ? $value:"";
 
 $array=is_array($field['data']) ? $field['data']:false;
@@ -29,12 +29,47 @@ foreach($array as $k=>$v){
     <option value="0">בחר</option>
   @foreach($alldata as $row)
 
-  <?
+  <?php
 
   $row=(array)$row;
   $selected=$row[$key]==$value ? "selected='selected'":"";
+  $subCategory=DB::table('groups')->where('category_id',$row[$key])->get();
+
   ?>
-  <option value="{{$row[$key]}}" {{$selected}}>{{$row[$label]}}</option>
+  
+  @if ($field['name'] == 'group')
+    <option value="{{$row[$key]}}" {{$selected}} style="font-weight: bold;">
+        {{$row[$label]}}
+
+        @foreach ($subCategory as $sub)
+          <option value="{{ $sub->id }}">
+            --{{ $sub->name }}
+            <?php
+              $subSubCategory=DB::table('groups')->where('category_id',$sub->id)->get();
+            ?>
+            @if(!empty($subSubCategory))
+            @foreach ($subSubCategory as $subSub)
+              <option value="{{$subSub->id }}" >
+                ----{{$subSub->name}}
+                <?php
+                  $subSubSubCategory=DB::table('groups')->where('category_id',$subSub->id)->get();
+                ?>
+                @if(!empty($subSubSubCategory))
+                @foreach ($subSubSubCategory as $subSubSub)
+                  <option value="{{$subSubSub->id }}" >------{{$subSubSub->name}}</option>
+                @endforeach
+                @endif
+              </option>
+            @endforeach
+            @endif 
+          </option>
+        @endforeach
+    </option>
+  @else
+  <option value="{{$row[$key]}}" {{$selected}}>{{$row[$label]}} </option>
+
+  @endif
+  
 
 @endforeach
 </select>

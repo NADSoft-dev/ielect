@@ -1,4 +1,4 @@
-<?
+<?php
 $settings=DB::table('settings')->where('name','app')->select('data')->first();
 if($settings){
 $settings=json_decode($settings->data,true);
@@ -42,6 +42,6 @@ $settings['tel']=isset($settings['tel']) ? $settings['tel']:false;
 </td>
 </tr>
 </table>
-<?
+<?php
 }
 ?>

@@ -31,7 +31,7 @@ page[size="A4"] {
 <h2 style="text-align:right;">{{$title}}</h2>
 
     @foreach($rows as $row)
-    <?
+    <?php
     $electors=DB::table('electors')->where('group',$row->id)->count();
     ?>
     <tr class="Tr" >

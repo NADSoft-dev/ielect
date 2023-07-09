@@ -1,6 +1,6 @@
 @extends('mobile.master')
 @section('content')
-<?
+<?php
 $shift=Session::get('memberMobile')->shift;
 ?>
 @if($shift==1 || $shift==2)

@@ -13,7 +13,6 @@
 </h3>
 
 
-
 </div>
 <div class="panel-body">
 <div class="table-responsive">
@@ -31,7 +30,7 @@
   <tbody>
 
     @foreach($rows as $row)
-<?
+<?php
 $list=DB::table('personal_list')->where('under',$row->id)->count();
 $electors=DB::table('electors')->where('manid',$row->id)->count();
 ?>

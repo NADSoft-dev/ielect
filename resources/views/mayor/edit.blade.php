@@ -12,7 +12,7 @@
 <div class="panel-body">
 <form class="form-horizontal"  action="/mayor/save/{{$row->id}}">
 <div class="col-sm-6">
-<?
+<?php
 $fields=config('mayor.fields');
 $filters=config('mayor.edit');
 $count=round(count($filters)/2);
@@ -20,13 +20,13 @@ $i=0;
 
 ?>
 @foreach($filters as $filter)
-  <?
+  <?php
     $i++;
     if($i>$count){
       ?>
     </div>
     <div class="col-sm-6">
-      <?
+      <?php
     }
     $field=$fields[$filter];
     $field['name']=$filter;

@@ -11,7 +11,7 @@
 
 <form class="form-horizontal" id="filterForm">
 <div class="col-sm-6">
-<?
+<?php
 $fields=config('electors.fields');
 
 
@@ -23,7 +23,7 @@ $currentPage="electors";
 $i=0;
 ?>
 @foreach($filters as $filter)
-  <?
+  <?php
   if(session('permission')==1){
     if($filter=='group'){
        continue;
@@ -69,7 +69,7 @@ $i=0;
       ?>
     </div>
     <div class="col-sm-6">
-      <?
+      <?php
     }
     $field=$fields[$filter];
     $field['name']=$filter;
@@ -78,6 +78,7 @@ $i=0;
     
     if($field['type']=='disabled') $field['type']='text';
   ?>
+ 
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-3 control-label">{{$field['label']}}</label>
 <div class="col-sm-9">
@@ -100,11 +101,11 @@ $i=0;
   <div class="panel-body">
     <div class="fields_select mrg-tp-15">
 
-<?
+<?php
 $filters=config('electors.filter_fields');
 ?>
     @foreach($filters as $filter)
-      <?
+      <?php
       if(session('permission')==1 || session('permission')==2){
         if($filter=='group') continue;
         if($filter=='mayor') continue;

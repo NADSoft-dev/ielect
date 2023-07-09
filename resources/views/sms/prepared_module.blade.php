@@ -1,4 +1,4 @@
-<?
+<?php
 if(count($allPhones)==0) $smsCount=0;
 else $smsCount=$countMessage/count($allPhones);
 $send=true;
@@ -16,7 +16,7 @@ $send=true;
 
 
   @else
-  <?
+  <?php
 $send=false;
   ?>
   <div class="alert alert-warning" role="alert">
@@ -25,7 +25,7 @@ $send=false;
   @endif
 
   @if($countMessage<1)
-  <?
+  <?php
   $send=false;
   ?>
   <div class="alert alert-warning" role="alert">

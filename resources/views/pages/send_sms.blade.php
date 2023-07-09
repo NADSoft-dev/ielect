@@ -17,7 +17,7 @@
 <textarea class="form-control msgText" rows="5"></textarea>
 <p class="mrg-tp-15"><span class="charsCount">0</span> אותיות / <span class="smsCount">0</span> הודעות</p>
 </div>
-<?
+<?php
 $groups=DB::table('groups')->select('*')->get();
 ?>
 <div class="col-xs-12 mrg-tp-15">
@@ -33,7 +33,7 @@ $groups=DB::table('groups')->select('*')->get();
 
 
 
-<?
+<?php
 $groups=DB::table('personal_list')->select('*')->get();
 ?>
 <div class="col-xs-12 mrg-tp-15">
@@ -48,7 +48,7 @@ $groups=DB::table('personal_list')->select('*')->get();
 
 
 
-<?
+<?php
 $groups=DB::table('delegate')->select('*')->get();
 ?>
 <div class="col-xs-12 mrg-tp-15">

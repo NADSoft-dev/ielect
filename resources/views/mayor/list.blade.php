@@ -27,13 +27,13 @@
   <tbody>
 
     @foreach($rows as $row)
-<?
+<?php
 $electors=DB::table('electors')->where('mayor',$row->id)->count();
 ?>
 <tr class="Row-{{$row->id}}">
 <td>{{$row->full_name}}</td>
 <td>
-  <?
+  <?php
   $selected=$row->support ? "checked":"";
   ?>
   <input type="radio" name="support" class="supportMayor" {{$selected}} value="{{$row->id}}">

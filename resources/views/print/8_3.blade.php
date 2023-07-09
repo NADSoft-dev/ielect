@@ -1,4 +1,4 @@
-<?
+<?php
 $settings=DB::table('settings')->where('name','app')->select('data')->first();
 if($settings){
 $settings=json_decode($settings->data,true);

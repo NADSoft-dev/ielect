@@ -1,4 +1,4 @@
-<?
+<?php
 $delegate=isset($delegate) ? $delegate:false;
 ?>
 <div class="row">
@@ -46,7 +46,7 @@ $delegate=isset($delegate) ? $delegate:false;
   <tbody>
 
     @foreach($rows as $row)
-<?
+<?php
 $electors=DB::table('electors')->where('list',$row->id)->count();
 $delegate=DB::table('delegate')->find($row->under);
 $delegate_name= $delegate ? $delegate->full_name :"";

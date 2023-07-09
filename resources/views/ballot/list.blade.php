@@ -23,7 +23,7 @@
   <tbody>
 
     @foreach($rows as $row)
-    <?
+    <?php
       $count=DB::table('electors')->where('AddCode',$row->ballot_id)->count();
     ?>
 

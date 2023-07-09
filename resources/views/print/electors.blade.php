@@ -22,7 +22,7 @@ page[size="A4"] {
 @include('print.header')
 <table style="width:100%;text-align:cemter;padding-top:20px;" Cellpadding="0" cellspacing="0" dir="rtl">
   <thead class="Tr">
-    <?
+    <?php
     $fields=config('electors.fields');
 
     ?>
@@ -33,7 +33,7 @@ page[size="A4"] {
   </thead>
 <tbody>
   @foreach($electors as $elector)
-  <?
+  <?php
    $css="";
    if($elector->list) $css="hasList";
   ?>

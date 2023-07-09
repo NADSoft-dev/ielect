@@ -1,7 +1,7 @@
 <div>
     <canvas id="myChart" height="40vh" width="80vw"></canvas>
 </div>
-<?
+<?php
 $stats=DB::table('electors')->select(DB::raw('COUNT(`id`) as total'),DB::raw('SUM(if(`voted`=1,1,0)) as `voted`'),DB::raw('sum(if(`voted`=1 AND `list`>0,1,0)) as `votedfriend`'),DB::raw('SUM(if(`list`>0,1,0)) as `friend`'))->first();
 $notfriend = $stats->total - $stats->friend;
 $notvoted=$stats->total - $stats->voted;

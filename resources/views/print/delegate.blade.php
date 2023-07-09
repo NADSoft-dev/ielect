@@ -35,7 +35,7 @@ page[size="A4"] {
 <h2 style="text-align:right;">{{$title}}</h2>
 
     @foreach($rows as $row)
-    <?
+    <?php
     $list=DB::table('personal_list')->where('under',$row->id)->count();
     $electors=DB::table('electors')->where('manid',$row->id)->count();
     ?>

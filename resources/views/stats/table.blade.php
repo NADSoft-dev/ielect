@@ -1,4 +1,4 @@
-<?
+<?php
 $fieldlabel=config('electors.fields.'.$field.'.label');
 $totAll = 0;
 $totMale = 0;
@@ -125,12 +125,12 @@ table.statistics td{padding: 0 !important;    vertical-align: middle !important;
 </div>
 </td>
 </tr>
-<?
+<?php
 $TheCount=0;
 $i=0;
 ?>
 @foreach($list as $row)
-<?
+<?php
 
 $filter=json_decode(Request::get('filter'),true);
 $stats=GF::buildElectorsQuery($filter);
@@ -220,7 +220,7 @@ $totVotedFriend+=$stats->votedfriend;
 
 
 @endforeach
-<?
+<?php
 
 $totMalePer = $totAll==0 ? $totAll:number_format(($totMale / $totAll) * 100,2);
 $totFemalePer = $totAll==0 ? $totAll:number_format(($totFemale / $totAll) * 100,2);
