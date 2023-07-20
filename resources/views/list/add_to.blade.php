@@ -34,7 +34,7 @@ $field['name']="list";
 if(session('permission')==1){
  ?>
  <script>
-$('.run-rselect.field-under').val('<?php=session('member')->id;?>').trigger('change').closest('.form-group').remove();
+$('.run-rselect.field-under').val('<?=session('member')->id;?>').trigger('change').closest('.form-group').remove();
 </script>
 
  <?php
