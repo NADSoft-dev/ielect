@@ -38,7 +38,7 @@
     $SubcategoryCount=DB::table('groups')->where('category_id',$sub->id)->count();
     $electors=DB::table('electors')->where('group',$sub->id)->count();
     ?>
-<tr class="Row-{{$row->id}}">
+<tr class="Row-{{$sub->id}}">
 <td>{{$sub->name}}</td>
 <td>
   @if ($SubcategoryCount > 0)
@@ -55,6 +55,7 @@
   <a href="/#/group/editsublist/{{$sub->id}}/">
     <button class="btn btn-sm btn-primary">עדכון</button>
   </a>
+  <button class="btn btn-sm btn-danger deleteRow" data-controller="group" data-id="{{$sub->id}}">מחיקה</button>
 </td>
 
 </tr>
