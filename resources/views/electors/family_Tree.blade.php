@@ -238,7 +238,7 @@
                                                 <div class="select-div" id="select-div{{$child->id}}">
                                                     <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                                     
-                                                        <select  name="idNumberSelect" id="selectAdd{{$child->id}}">
+                                                        <select  name="idNumberSelect" id="selectAdd{{$child->id}}" class="selectclass">
                                                                 <option value="0">choose</option>
                                                                 @foreach ($all_Id_Numbers as $Id_Number )
                                                                     
@@ -313,7 +313,7 @@
                                 <div class="select-div" id="select-div{{$person->id }}">
                                     <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                     
-                                        <select name="idNumberSelect" id="selectAdd{{$person->id}}" >
+                                        <select name="idNumberSelect" id="selectAdd{{$person->id}}" class="selectclass">
                                                 <option value="0">choose</option>
                                                 @foreach ($all_Id_Numbers as $Id_Number )
                                                     
@@ -378,7 +378,7 @@
                             <div class="select-div" id="select-div2{{$person->id}}">
                                 <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                 
-                                    <select name="idNumberSelect" id="selectAdd" >
+                                    <select name="idNumberSelect" id="selectAdd" class="selectclass" >
                                             <option value="0">choose</option>
                                             @foreach ($all_Id_Numbers as $Id_Number )
                                                 
@@ -551,7 +551,7 @@
         document.onclick = function(e){
         //   alert(e.target.classList[0]);
          
-            if(e.target.classList[0] !== 'select-div' && e.target.classList[0] !== 'fa'){
+            if(e.target.classList[0] !== 'select-div' && e.target.classList[0] !== 'fa' && e.target.classList[0] !== 'selectclass'){
             //element clicked wasn't the div; hide the div
             // alert(modal.length);
              for(let i=0; i< modal.length; i++)
