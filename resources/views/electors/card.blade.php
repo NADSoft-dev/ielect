@@ -98,9 +98,9 @@ $i=0;
 <span class="glyphicon glyphicon-print"></span>
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="/electors/print?ids=<?php=implode(',',$ids);?>" data-url="/electors/print" class="printSelected"  target="_blank">טבלה</a></li>
-								<li><a href="/electors/print/10_3?ids=<?php=implode(',',$ids);?>" data-url="/electors/print/10_3" class="printSelected" target="_blank">מדבקות 10/3</a></li>
-								<li><a href="/electors/print/8_3?ids=<?php=implode(',',$ids);?>" data-url="/electors/print/8_3" class="printSelected" target="_blank">מדבקות 8/3 </a></li>
+								<li><a href="/electors/print?ids=<?=implode(',',$ids);?>" data-url="/electors/print" class="printSelected"  target="_blank">טבלה</a></li>
+								<li><a href="/electors/print/10_3?ids=<?=implode(',',$ids);?>" data-url="/electors/print/10_3" class="printSelected" target="_blank">מדבקות 10/3</a></li>
+								<li><a href="/electors/print/8_3?ids=<?=implode(',',$ids);?>" data-url="/electors/print/8_3" class="printSelected" target="_blank">מדבקות 8/3 </a></li>
 							</ul>
 						</div>
 						</li>	
