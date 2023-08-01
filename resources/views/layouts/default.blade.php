@@ -6,11 +6,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Ielect</title>
-
+    {{-- <style>
+          /*Now the CSS*/
+      /* * {margin: 0; padding: 0} */
+      .tree{
+      display: flex;
+      justify-content: right;
+      width: 100%;
+      height: 100%;
+      /* overflow-x: scroll;
+      overflow-y: hidden; */
+      }
+      .tree ul {
+      padding-top: 20px; position: relative;
+      transition: all 0.5s;
+      -webkit-transition: all 0.5s;
+      -moz-transition: all 0.5s;
+      /* overflow-x: auto; */
+      }
+      .tree li {
+      /* overflow-x: auto; */
+      float: left; text-align: center;
+      list-style-type: none;
+      position: relative;
+      padding: 20px 5px 0 5px;
+      transition: all 0.5s;
+      -webkit-transition: all 0.5s;
+      -moz-transition: all 0.5s;
+      }
+      /*We will use ::before and ::after to draw the connectors*/
+      .tree li::before, .tree li::after{
+      content: '';
+      position: absolute; top: 0; right: 50%;
+      border-top: 1px solid #ccc;
+      width: 50%; height: 20px;
+      }
+      .tree li::after{
+      right: auto; left: 50%;
+      border-left: 1px solid #ccc;
+      }
+      /*We need to remove left-right connectors from elements without
+      any siblings*/
+      .tree li:only-child::after, .tree li:only-child::before {
+      display: none;
+      }
+      /*Remove space from the top of single children*/
+      .tree li:only-child{ padding-top: 0;}
+      /*Remove left connector from first child and
+      right connector from last child*/
+      .tree li:first-child::before, .tree li:last-child::after{
+      border: 0 none;
+      }
+      /*Adding back the vertical connector to the last nodes*/
+      .tree li:last-child::before{
+      border-right: 1px solid #ccc;
+      border-radius: 0 5px 0 0;
+      -webkit-border-radius: 0 5px 0 0;
+      -moz-border-radius: 0 5px 0 0;
+      }
+      .tree li:first-child::after{
+      border-radius: 5px 0 0 0;
+      -webkit-border-radius: 5px 0 0 0;
+      -moz-border-radius: 5px 0 0 0;
+      }
+      /*Time to add downward connectors from parents*/
+      .tree ul ul::before{
+      content: '';
+      position: absolute; top: 0; left: 50%;
+      border-left: 1px solid #ccc;
+      width: 0; height: 20px;
+      }
+      .tree li .box{
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #666;
+      font-family: arial, verdana, tahoma;
+      font-size: 11px;
+      display: inline-block;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      transition: all 0.5s;
+      -webkit-transition: all 0.5s;
+      -moz-transition: all 0.5s;
+      }
+      /*Time for some hover effects*/
+      /*We will apply the hover effect the the lineage of the element also*/
+      .tree li a:hover, .tree li a:hover+ul li a {
+      background: #C8E4F8; color: #000; border: 1px solid #94A0B4;
+      }
+      /*Connector styles on hover*/
+      .tree li a:hover+ul li::after,
+      .tree li a:hover+ul li::before,
+      .tree li a:hover+ul::before,
+      .tree li a:hover+ul ul::before{
+      border-color:  #94A0B4;
+      }
+      /*Thats all. I hope you enjoyed it.
+      Thanks :)*/
+      .wrap-select-div:hover .select-div{
+      display: block;
+      }
+      .wrap-select-div{
+      position: relative;
+      }
+      .select-div{
+      position: absolute;
+      top: 10px;
+      right: 0;
+      /* display: none; */
+      padding: 40px;
+      }
+    </style> --}}
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
     <link href="https://bootswatch.com/3/flatly/bootstrap.min.css" rel="stylesheet">
 
 
@@ -19,12 +131,12 @@
 
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
 <link href="https://fonts.googleapis.com/css?family=Assistant:200|Rubik:300,400" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/font.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dscountdown.css') }}">
   <link rel="stylesheet" href="{{ mix('css/all.css') }}">
-
+  
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,6 +144,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  {{-- <h1>test</h1> --}}
   <body>
 <div class="loading Loading" style="display:none;">Loading&#8230;</div>
 <div id="dModals"></div>
@@ -204,7 +317,6 @@
               </div>
 
           </nav><!-- /navbar -->
-
   <div class="container" id="MainContent">
     <script>
     if(!window.location.hash) window.location.href="#/main/";
