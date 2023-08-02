@@ -204,19 +204,10 @@
     </div><!-- /modal-wassat -->
 </div><!-- /modal -->
 
-{{-- <script>
-  var hash = window.location.hash, //get the hash from url
-  cleanhash = hash.replace("#", ""); //remove the #
-  //alert(cleanhash);
-</script> --}}
-<?php
-  // $hash = "<script>document.writeln(cleanhash);</script>";
-  // echo $hash;
-?>
-{{-- @if($hash != 'familyTree/{id}/{idNumber}')
- echo ('hh') 
- @endif --}}
-          <nav class="navbar navbar-default no-radius" role="navigation">
+  
+
+
+          <nav id="navDiv" class="navbar navbar-default no-radius" role="navigation">
             <div class="container no-padding" >
 
 
@@ -326,7 +317,8 @@
             </div><!-- /.navbar-collapse -->
               </div>
 
-          </nav><!-- /navbar -->
+          </nav>
+          <!-- /navbar -->
   <div class="container" id="MainContent">
     <script>
     if(!window.location.hash) window.location.href="#/main/";
@@ -351,6 +343,18 @@
       <script type="text/javascript" src="js/events.js?v=<?=rand();?>"></script>
       <script type="text/javascript" src="js/dscountdown.min.js"></script>
 
-
+      <script>
+        var url = window.location.hash; //get the hash from url
+        //  var cleanhash = url.replace("#", ""); //remove the #
+        var array = url.split('/');
+        // alert(array[1]);
+        if(array[1] =='familyTree')
+        // document.getElementById("navDiv").style.display='none';
+        $("#navDiv").css("display","none");
+        else
+        // document.getElementById("navDiv").style.display='flex';
+        $("#navDiv").css("display","flex");
+    
+      </script>
   </body>
 </html>

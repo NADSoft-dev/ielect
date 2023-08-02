@@ -159,21 +159,21 @@
             margin-top: 10%;
             padding: 2px 37px;
         }
-        .stickTopContainer{
+        /* .stickTopContainer{
             position: fixed;
             right:30% ;
             bottom: 0;
             width: 100%;
             color: white;
-            /* text-align: left; */
-            /* justify-content: center; */
-        }
-        .navbar-default {
+            
+        } */
+        /* .navbar-default {
             min-width:2500px;
-        }
+        } */
     </style>
 </head>
 <body>
+    {{-- {{"test:". Route::currentRouteName() }} --}}
     <div class="tree"> 
         <?php
         $person=DB::table('electors')->where('id',$id)->first();
