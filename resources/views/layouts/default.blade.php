@@ -344,15 +344,11 @@
       <script type="text/javascript" src="js/dscountdown.min.js"></script>
 
       <script>
-        var url = window.location.hash; //get the hash from url
-        //  var cleanhash = url.replace("#", ""); //remove the #
+        var url = window.location.hash; 
         var array = url.split('/');
-        // alert(array[1]);
         if(array[1] =='familyTree')
-        // document.getElementById("navDiv").style.display='none';
         $("#navDiv").css("display","none");
         else
-        // document.getElementById("navDiv").style.display='flex';
         $("#navDiv").css("display","flex");
     
       </script>

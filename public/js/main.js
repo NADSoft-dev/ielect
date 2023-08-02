@@ -280,11 +280,11 @@ $('body').on('click','.resetFields',function(){
 
 $('body').on('click','.disableList',function(){
   // alert(arrarIDNumber);
-  $('.selectedIDS').val(arrarIDNumber);
+  // $('.selectedIDS').val(arrarIDNumber);
   // alert($('.selectedIDS').length);
   var type=$(this).attr('data-type');
-  // if(window.selectedIds.length){
-    if($('.selectedIDS').length){
+  if(window.selectedIds.length){
+    // if($('.selectedIDS').length){
     // alert(arrarIDNumber);
     ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
     var join=window.selectedIds.join();
@@ -693,7 +693,7 @@ getSelectedIds();
 // alert(arrarIDNumber);
 var id=selectedIds;
 
-if($('.selectedIDS').length){
+if(window.selectedIds.length){
 
 
 }
