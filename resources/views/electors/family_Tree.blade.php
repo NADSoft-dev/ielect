@@ -240,15 +240,15 @@
                                                     <div class="select-div" id="select-div{{$child->id ?? 0}}">
                                                         <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                                         
-                                                            <select  name="idNumberSelect" id="selectAdd{{$child->id ?? 0}}" class="selectclass">
+                                                            <select  name="idNumberSelect" id="selectAdd{{$child->id ?? 0}}"  class=" selectclass selectpicker " onchange="selectChange({{$child->id ?? 0}})">
                                                                     <option value="0">choose</option>
                                                                     @foreach ($all_Id_Numbers as $Id_Number )
                                                                         
-                                                                        <option value="{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
+                                                                        <option value="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
                                                                     @endforeach
                                                                     
                                                             </select>
-                                                            <p id="paraId" >{{$Id_Number->PersonalName}}:{{$Id_Number->IDNumber }}  </p>
+                                                            <p id="paraId{{$child->id ?? 0}}" style="display: none;margin: 10%" ></p>
                                                             <input type="hidden" value="{{$children_Children[0]->mother_id ?? ''}}" name="mother_id" />
                                                             <input type="hidden" value="{{$children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                             <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
@@ -316,15 +316,15 @@
                                     <div class="select-div" id="select-div{{$person->id }}">
                                         <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                         
-                                            <select name="idNumberSelect" id="selectAdd{{$person->id ?? 0}}" class="selectclass">
+                                            <select name="idNumberSelect" id="selectAdd{{$person->id }}" class=" selectclass selectpicker" onchange="selectChange({{$person->id }})">
                                                     <option value="0">choose</option>
                                                     @foreach ($all_Id_Numbers as $Id_Number )
                                                         
-                                                        <option value="{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
+                                                        <option value="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
                                                     @endforeach
                                                     
                                             </select>
-                                            <p id="paraId" style="display: none">{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}  </p>
+                                            <p id="paraId{{$person->id }}"  style="display: none;margin: 10%"></p>
 
                                             <input type="hidden" value="{{$children[0]->mother_id ?? ''}}" name="mother_id" />
                                             <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
@@ -373,19 +373,19 @@
                     
                         <li>
                             <div class="wrap-select-div">
-                                <button id="showselect" onclick="showSelect2({{$person->id ?? 0}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
-                                <div class="select-div" id="select-div2{{$person->id ?? 0}}">
+                                <button id="showselect" onclick="showSelect({{$person->id ?? 0}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
+                                <div class="select-div" id="select-div{{$person->id ?? 0}}">
                                     <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                     
-                                        <select name="idNumberSelect" id="selectAdd" class="selectclass" >
+                                        <select name="idNumberSelect" id="selectAdd{{$person->id ?? 0}}" class=" selectclass selectpicker" onchange="selectChange({{$person->id }})">
                                                 <option value="0">choose</option>
                                                 @foreach ($all_Id_Numbers as $Id_Number )
                                                     
-                                                    <option value="{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
+                                                    <option value="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
                                                 @endforeach
                                                 
                                         </select>
-                                        <p id="paraId" style="display: none">{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}  </p>
+                                        <p id="paraId{{$person->id }}" style="display: none;margin: 10%"></p>
 
                                         <input type="hidden" value="{{$mother->IDNumber ?? ''}}" name="mother_id" />
                                         <input type="hidden" value="{{$father->IDNumber ?? ''}}" name="father_id" />
@@ -495,9 +495,9 @@
 
         let modal = document.querySelectorAll('.select-div');
         document.onclick = function(e){
-        //   alert(e.target.classList[0]);
+        //   alert( e.target.classList[e.target.classList.length-1]);
          
-            if(e.target.classList[0] !== 'select-div' && e.target.classList[0] !== 'fa' && e.target.classList[0] !== 'selectclass'){
+            if(e.target.classList[0] !== 'select-div' && e.target.classList[0] !== 'fa' && e.target.classList[e.target.classList.length-1] !== 'pull-left' && e.target.classList[e.target.classList.length-1] !== 'text'){
             //element clicked wasn't the div; hide the div
             // alert(modal.length);
              for(let i=0; i< modal.length; i++)
@@ -511,7 +511,16 @@
             
             }
         };
-       
+        
+      function selectChange(id){
+        // alert('change');
+        //  document.getElementById("select-div"+id).style.display = "block";
+        // $("select-div"+id).css("display","block");
+        // alert($("#selectAdd"+id).val());
+        $("#paraId"+id).text($("#selectAdd"+id).val());
+        $("#paraId"+id).css("display","block");
+      }
+            
     </script>
      
 </body>
