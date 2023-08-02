@@ -161,168 +161,234 @@
     </style>
 </head>
 <body>
+    <div class="tree"> 
+        <?php
+        $person=DB::table('electors')->where('id',$id)->first();
+        $children=DB::table('electors')->where('mother_id',$IDNumber)->orWhere('father_id',$IDNumber)->get();
+        $couple=DB::table('electors')->where('couple',$IDNumber)->first();
+        $all_Id_Numbers=DB::table('electors')->where('mother_id',0)->where('father_id',0)->where('id','!=',$person->id ?? 0)->where('id','!=',$couple->id ?? 0)->get();
+        $father=DB::table('electors')->where('IDNumber',$person->father_id)->first();
+        $mother=DB::table('electors')->where('IDNumber',$person->mother_id)->first();
+        $brother=DB::table('electors')->where('mother_id',$person->mother_id)->orWhere('father_id',$person->father_id)->get();
+        // print_r($all_Id_Numbers);
+        ?>
+        @if(isset($person) && !empty($person) && $person->couple !=0) <!-- is single or not -->
+            <ul>
+                
+                <li>
+                    @if (isset($couple) && $couple!=null && $couple->gender !=null)
+                    
+                    <div class="partner box"> 
+                        {{-- <p style="margin: 3% 0;color:black">partner</p> --}}
+                            @if($couple->gender === 1 )
+                            <i style="font-size:24px" class="fa">&#xf222;</i>
+                            @else
+                            <i style="font-size:24px" class="fa">&#xf221;</i>
+                            @endif   
+                    
+                        
+                        <p style="margin: 3% 0"> {{$couple->PersonalName ?? ''}}: {{$couple->IDNumber ?? ''}}</p>
+                        <input type="checkbox" data-id="{{$couple->IDNumber ?? ''}}" id="parent{{$couple->IDNumber ?? ''}}" name="parent{{$couple->IDNumber ?? ''}}" value="{{$couple->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$couple->IDNumber ?? 0}})">
+                        
+                    </div>
+                    @endif  
+                    <div class="person box">
+                        @if (isset($person) && $person!=null && $person->gender !=null)
+                            @if($person->gender === 1 )
+                            <i style="font-size:24px" class="fa">&#xf222;</i>
+                            @else
+                            <i style="font-size:24px" class="fa">&#xf221;</i>
+                            @endif   
+                        @endif 
+                    <p style="margin: 3% 0"> {{$person->PersonalName ?? ''}}: {{$person->IDNumber ?? ''}}</p>
+                    <input type="checkbox" data-id="{{$person->IDNumber ?? ''}}" id="parent{{$person->IDNumber ?? ''}}" name="parent{{$person->IDNumber ?? ''}}" value="{{$person->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$person->IDNumber ?? 0}})">
+                        
+                    </div>
+                    
+                
+                    <ul>
+                        
+                        
+                        @if(isset($children) && !empty($children))
+                                
+                            @foreach ($children as $child)
 
-<div class="tree"> 
-    <?php
-     $person=DB::table('electors')->where('id',$id)->first();
-     $children=DB::table('electors')->where('mother_id',$IDNumber)->orWhere('father_id',$IDNumber)->get();
-     $couple=DB::table('electors')->where('couple',$IDNumber)->first();
-     $all_Id_Numbers=DB::table('electors')->where('mother_id',0)->where('father_id',0)->where('id','!=',$person->id)->where('id','!=',$couple->id)->pluck('IDNumber');
-    //   echo($IDNumber);
-    ?>
-    @if(isset($person) && !empty($person) && $person->couple !=0) <!-- is single or not -->
-        <ul>
-            
-            <li>
-                @if (isset($couple) && $couple!=null && $couple->gender !=null)
-                
-                <div class="partner box"> 
-                    <p style="margin: 3% 0;color:black">partner</p>
-                        @if($couple->gender === 1 )
-                        <i style="font-size:24px" class="fa">&#xf222;</i>
-                        @else
-                        <i style="font-size:24px" class="fa">&#xf221;</i>
-                        @endif   
-                
-                    
-                    <p style="margin: 3% 0"> {{$couple->PersonalName ?? ''}}: {{$couple->IDNumber ?? ''}}</p>
-                    <input type="checkbox" data-id="{{$couple->IDNumber ?? ''}}" id="parent{{$couple->IDNumber ?? ''}}" name="parent{{$couple->IDNumber ?? ''}}" value="{{$couple->IDNumber ?? ''}}" class="rowSelect  elector">
-                    
-                </div>
-                @endif  
-                <div class="person box">
-                    @if (isset($person) && $person!=null && $person->gender !=null)
-                        @if($person->gender === 1 )
-                        <i style="font-size:24px" class="fa">&#xf222;</i>
-                        @else
-                        <i style="font-size:24px" class="fa">&#xf221;</i>
-                        @endif   
-                    @endif 
-                <p style="margin: 3% 0"> {{$person->PersonalName ?? ''}}: {{$person->IDNumber ?? ''}}</p>
-                <input type="checkbox" data-id="{{$person->IDNumber ?? ''}}" id="parent{{$person->IDNumber ?? ''}}" name="parent{{$person->IDNumber ?? ''}}" value="{{$person->IDNumber ?? ''}}" class="rowSelect  elector">
-                    
-                </div>
-                
-            
-                <ul>
-                    
-                    
-                    @if(isset($children) && !empty($children))
-                            
-                        @foreach ($children as $child)
-
-                            <li>
-                                <div class="child box">
-                                    @if (isset($children) && $children!=null && $child->gender !=null)
-                                        @if($child->gender == 1 )
-                                        <i style="font-size:24px" class="fa">&#xf222;</i>
-                                        @else
-                                        <i style="font-size:24px" class="fa">&#xf221;</i>
-                                        @endif   
-                                    @endif 
-                                    <p style="margin: 3% 0"> {{$child->PersonalName ?? ''}}: {{$child->IDNumber ?? ''}}</p>
-                                    <input type="checkbox" data-id="{{$child->IDNumber ?? ''}}" id="parent{{$child->IDNumber ?? ''}}" name="parent{{$child->IDNumber ?? ''}}" value="{{$child->IDNumber ?? ''}}" class="rowSelect  elector"> 
-                                </div>
-                                <?php
-                                    $children_Children=DB::table('electors')->where('mother_id',$child->IDNumber)->orWhere('father_id',$child->IDNumber)->get();
-                                    // print_r($children_Children);
-                                ?>
-                                @if(isset($children_Children) && !empty($children_Children))
-                                    
-                                    <ul>
-                                        @if(isset($children_Children) && count($children_Children)>0)
-                                        <li>
-                                            <div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>
-                                            <div class="wrap-select-div">
-                                                <button id="showselect" onclick="showSelect({{$child->id}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
-                                                <div class="select-div" id="select-div{{$child->id}}">
-                                                    <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
-                                                    
-                                                        <select  name="idNumberSelect" id="selectAdd{{$child->id}}" class="selectclass">
-                                                                <option value="0">choose</option>
-                                                                @foreach ($all_Id_Numbers as $Id_Number )
+                                <li>
+                                    <div class="child box">
+                                        @if (isset($children) && $children!=null && $child->gender !=null)
+                                            @if($child->gender == 1 )
+                                            <i style="font-size:24px" class="fa">&#xf222;</i>
+                                            @else
+                                            <i style="font-size:24px" class="fa">&#xf221;</i>
+                                            @endif   
+                                        @endif 
+                                        <p style="margin: 3% 0"> {{$child->PersonalName ?? ''}}: {{$child->IDNumber ?? ''}}</p>
+                                        <input type="checkbox" data-id="{{$child->IDNumber ?? ''}}" id="parent{{$child->IDNumber ?? ''}}" name="parent{{$child->IDNumber ?? ''}}" value="{{$child->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$child->IDNumber ?? 0}})"> 
+                                    </div>
+                                    <?php
+                                        $children_Children=DB::table('electors')->where('mother_id',$child->IDNumber)->orWhere('father_id',$child->IDNumber)->get();
+                                        // print_r($children_Children);
+                                    ?>
+                                    @if(isset($children_Children) && !empty($children_Children))
+                                        
+                                        <ul>
+                                            @if(isset($children_Children) && count($children_Children)>0)
+                                            <li>
+                                                <div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>
+                                                <div class="wrap-select-div">
+                                                    <button id="showselect" onclick="showSelect({{$child->id ?? 0}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
+                                                    <div class="select-div" id="select-div{{$child->id ?? 0}}">
+                                                        <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
+                                                        
+                                                            <select  name="idNumberSelect" id="selectAdd{{$child->id ?? 0}}" class="selectclass">
+                                                                    <option value="0">choose</option>
+                                                                    @foreach ($all_Id_Numbers as $Id_Number )
+                                                                        
+                                                                        <option value="{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
+                                                                    @endforeach
                                                                     
-                                                                    <option value="{{$Id_Number }}" >{{$Id_Number}}</option>
-                                                                @endforeach
-                                                                
-                                                        </select>
-                                                        <input type="hidden" value="{{$children_Children[0]->mother_id ?? ''}}" name="mother_id" />
-                                                        <input type="hidden" value="{{$children_Children[0]->father_id ?? ''}}" name="father_id" />
-                                                        <input type="hidden" value="{{$person->id ?? ''}}" name="id" />
-                                                        <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                        <button type="submit" class="btn btn-primary" >add</button>
-                                                    </form>
+                                                            </select>
+                                                            <p id="paraId" >{{$Id_Number->PersonalName}}:{{$Id_Number->IDNumber }}  </p>
+                                                            <input type="hidden" value="{{$children_Children[0]->mother_id ?? ''}}" name="mother_id" />
+                                                            <input type="hidden" value="{{$children_Children[0]->father_id ?? ''}}" name="father_id" />
+                                                            <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
+                                                            <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
+                                                            <button type="submit" class="btn btn-primary" >add</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        @endif
-                                        @foreach ($children_Children as $subchild)
-                                        <li>
-                                            
-                                            <div class="childchild box">
-                                                @if (isset($children_Children) && $children_Children!=null && $subchild->gender !=null)
-                                                    @if($subchild->gender === 1 )
-                                                    <i style="font-size:24px" class="fa">&#xf222;</i>
-                                                    @else
-                                                    <i style="font-size:24px" class="fa">&#xf221;</i>
-                                                    @endif   
-                                                @endif 
-                                                <p style="margin: 3% 0"> {{$subchild->PersonalName ?? ''}}: {{$subchild->IDNumber ?? ''}}</p>
-                                                <input type="checkbox" data-id="{{$subchild->IDNumber ?? ''}}" id="parent{{$subchild->IDNumber ?? ''}}" name="parent{{$subchild->IDNumber ?? ''}}" value="{{$subchild->IDNumber ?? ''}}" class="rowSelect  elector"> 
-                                            </div>
-                                            <?php
-                                                $children_Children_Children=DB::table('electors')->where('mother_id',$subchild->IDNumber)->get();
-                                                // echo($children_Children);
-                                            ?>
-                                            @if(isset($children_Children_Children) && !empty($children_Children_Children))
-                                                
-                                                <ul>
-                                                    @foreach ($children_Children_Children as $subsubchild)
-                                                    <li>
-                                                        
-                                                        <div class="childchild box">
-                                                            @if (isset($children_Children_Children) && $children_Children_Children!=null && $subsubchild->gender !=null)
-                                                                @if($subsubchild->gender === 1 )
-                                                                <i style="font-size:24px" class="fa">&#xf222;</i>
-                                                                @else
-                                                                <i style="font-size:24px" class="fa">&#xf221;</i>
-                                                                @endif   
-                                                            @endif
-                                                            <p style="margin: 3% 0"> {{$subsubchild->PersonalName ?? ''}}: {{$subsubchild->IDNumber ?? ''}}</p>
-                                                            <input type="checkbox" data-id="{{$subsubchild->IDNumber ?? ''}}" id="parent{{$subsubchild->IDNumber ?? ''}}" name="parent{{$subsubchild->IDNumber ?? ''}}" value="{{$subsubchild->IDNumber ?? ''}}" class="rowSelect  elector"> 
-                                                        </div>
-                                                        
-                                                    </li>
-                                                    @endforeach
-                                                </ul>
-                                                
+                                            </li>
                                             @endif
-                                            
-                                        </li>
-                                        @endforeach
-                                    
-                                    </ul>
-                                    
-                                @endif
+                                            @foreach ($children_Children as $subchild)
+                                            <li>
+                                                
+                                                <div class="childchild box">
+                                                    @if (isset($children_Children) && $children_Children!=null && $subchild->gender !=null)
+                                                        @if($subchild->gender === 1 )
+                                                        <i style="font-size:24px" class="fa">&#xf222;</i>
+                                                        @else
+                                                        <i style="font-size:24px" class="fa">&#xf221;</i>
+                                                        @endif   
+                                                    @endif 
+                                                    <p style="margin: 3% 0"> {{$subchild->PersonalName ?? ''}}: {{$subchild->IDNumber ?? ''}}</p>
+                                                    <input type="checkbox" data-id="{{$subchild->IDNumber ?? ''}}" id="parent{{$subchild->IDNumber ?? ''}}" name="parent{{$subchild->IDNumber ?? ''}}" value="{{$subchild->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$subchild->IDNumber ?? 0}})"> 
+                                                </div>
+                                                <?php
+                                                    $children_Children_Children=DB::table('electors')->where('mother_id',$subchild->IDNumber)->get();
+                                                    // echo($children_Children);
+                                                ?>
+                                                @if(isset($children_Children_Children) && !empty($children_Children_Children))
+                                                    
+                                                    <ul>
+                                                        @foreach ($children_Children_Children as $subsubchild)
+                                                        <li>
+                                                            
+                                                            <div class="childchild box">
+                                                                @if (isset($children_Children_Children) && $children_Children_Children!=null && $subsubchild->gender !=null)
+                                                                    @if($subsubchild->gender === 1 )
+                                                                    <i style="font-size:24px" class="fa">&#xf222;</i>
+                                                                    @else
+                                                                    <i style="font-size:24px" class="fa">&#xf221;</i>
+                                                                    @endif   
+                                                                @endif
+                                                                <p style="margin: 3% 0"> {{$subsubchild->PersonalName ?? ''}}: {{$subsubchild->IDNumber ?? ''}}</p>
+                                                                <input type="checkbox" data-id="{{$subsubchild->IDNumber ?? ''}}" id="parent{{$subsubchild->IDNumber ?? ''}}" name="parent{{$subsubchild->IDNumber ?? ''}}" value="{{$subsubchild->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$subsubchild->IDNumber ?? 0}})"> 
+                                                            </div>
+                                                            
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                    
+                                                @endif
+                                                
+                                            </li>
+                                            @endforeach
+                                        
+                                        </ul>
+                                        
+                                    @endif
+                                </li>
+                                
+                            @endforeach
+                            <li>
+                                <div class="wrap-select-div">
+                                    <button id="showselect" onclick="showSelect({{$person->id}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
+                                    <div class="select-div" id="select-div{{$person->id }}">
+                                        <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
+                                        
+                                            <select name="idNumberSelect" id="selectAdd{{$person->id ?? 0}}" class="selectclass">
+                                                    <option value="0">choose</option>
+                                                    @foreach ($all_Id_Numbers as $Id_Number )
+                                                        
+                                                        <option value="{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
+                                                    @endforeach
+                                                    
+                                            </select>
+                                            <p id="paraId" style="display: none">{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}  </p>
+
+                                            <input type="hidden" value="{{$children[0]->mother_id ?? ''}}" name="mother_id" />
+                                            <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
+                                            <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
+                                            <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
+                                            <button type="submit" class="btn btn-primary">add</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </li>
+                        @endif
+                        
+                        
+                    </ul>
+                </li>
+
+            </ul>
+        @else
+        
+            <ul>
+                
+                <li>
+                
+                    @if (isset($person) && $person!=null && $person->gender !=null)
+                        <div class="mother box">
+                            {{-- <p style="margin: 3% 0;color:black">Mother</p> --}}
+                            <i style="font-size:24px" class="fa">&#xf221;</i>
+                    
+                            <p style="margin: 3% 0"> {{$mother->PersonalName ?? ''}}: {{$mother->IDNumber ?? ''}}</p>
+                            <input type="checkbox" data-id="{{$mother->IDNumber ?? ''}}" id="parent{{$mother->IDNumber ?? ''}}" name="parent{{$mother->IDNumber ?? ''}}" value="{{$mother->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$mother->IDNumber ?? 0}})">
                             
-                        @endforeach
+                        </div>
+                        <div class="father box"> 
+                            {{-- <p style="margin: 3% 0;color:black">father</p> --}}
+                            <i style="font-size:24px" class="fa">&#xf222;</i>
+                            <p style="margin: 3% 0"> {{$father->PersonalName ?? ''}}: {{$father->IDNumber ?? ''}}</p>
+                            <input type="checkbox" data-id="{{$father->IDNumber ?? ''}}" id="parent{{$father->IDNumber ?? ''}}" name="parent{{$father->IDNumber ?? ''}}" value="{{$father->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$father->IDNumber ?? 0}})">
+                                
+                        </div>
+                    
+                    @endif
+                
+                
+                    <ul>
+                    
+                    
                         <li>
                             <div class="wrap-select-div">
-                                <button id="showselect" onclick="showSelect({{$person->id}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
-                                <div class="select-div" id="select-div{{$person->id }}">
+                                <button id="showselect" onclick="showSelect2({{$person->id ?? 0}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
+                                <div class="select-div" id="select-div2{{$person->id ?? 0}}">
                                     <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                     
-                                        <select name="idNumberSelect" id="selectAdd{{$person->id}}" class="selectclass">
+                                        <select name="idNumberSelect" id="selectAdd" class="selectclass" >
                                                 <option value="0">choose</option>
                                                 @foreach ($all_Id_Numbers as $Id_Number )
                                                     
-                                                    <option value="{{$Id_Number }}" >{{$Id_Number}}</option>
+                                                    <option value="{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
                                                 @endforeach
                                                 
                                         </select>
-                                        <input type="hidden" value="{{$children[0]->mother_id ?? ''}}" name="mother_id" />
-                                        <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
+                                        <p id="paraId" style="display: none">{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}  </p>
+
+                                        <input type="hidden" value="{{$mother->IDNumber ?? ''}}" name="mother_id" />
+                                        <input type="hidden" value="{{$father->IDNumber ?? ''}}" name="father_id" />
                                         <input type="hidden" value="{{$person->id ?? ''}}" name="id" />
                                         <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
                                         <button type="submit" class="btn btn-primary">add</button>
@@ -330,221 +396,101 @@
                                 </div>
                             </div>
                         </li>
-                    @endif
-                    
-                    
-                </ul>
-            </li>
-
-        </ul>
-    @else
-    
-        <ul>
-            
-            <li>
-                <?php
-                $father=DB::table('electors')->where('IDNumber',$person->father_id)->first();
-                $mother=DB::table('electors')->where('IDNumber',$person->mother_id)->first();
-                $brother=DB::table('electors')->where('mother_id',$person->mother_id)->orWhere('father_id',$person->father_id)->get();
-                
-                // print_r($all_Id_Numbers);
-                ?>
-                @if (isset($person) && $person!=null && $person->gender !=null)
-                    <div class="mother box">
-                        <p style="margin: 3% 0;color:black">Mother</p>
-                        <i style="font-size:24px" class="fa">&#xf221;</i>
-                
-                        <p style="margin: 3% 0"> {{$mother->PersonalName ?? ''}}: {{$mother->IDNumber ?? ''}}</p>
-                        <input type="checkbox" data-id="{{$mother->IDNumber ?? ''}}" id="parent{{$mother->IDNumber ?? ''}}" name="parent{{$mother->IDNumber ?? ''}}" value="{{$mother->IDNumber ?? ''}}" class="rowSelect  elector">
                         
-                    </div>
-                    <div class="father box"> 
-                        <p style="margin: 3% 0;color:black">father</p>
-                        <i style="font-size:24px" class="fa">&#xf222;</i>
-                        <p style="margin: 3% 0"> {{$father->PersonalName ?? ''}}: {{$father->IDNumber ?? ''}}</p>
-                        <input type="checkbox" data-id="{{$father->IDNumber ?? ''}}" id="parent{{$father->IDNumber ?? ''}}" name="parent{{$father->IDNumber ?? ''}}" value="{{$father->IDNumber ?? ''}}" class="rowSelect  elector">
                             
-                    </div>
-                
-                @endif
-            
-            
-                <ul>
-                
-                
-                    <li>
-                        <div class="wrap-select-div">
-                            <button id="showselect" onclick="showSelect2({{$person->id}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
-                            <div class="select-div" id="select-div2{{$person->id}}">
-                                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
-                                
-                                    <select name="idNumberSelect" id="selectAdd" class="selectclass" >
-                                            <option value="0">choose</option>
-                                            @foreach ($all_Id_Numbers as $Id_Number )
-                                                
-                                                <option value="{{$Id_Number }}" >{{$Id_Number}}</option>
-                                            @endforeach
-                                            
-                                    </select>
-                                    <input type="hidden" value="{{$mother->IDNumber ?? ''}}" name="mother_id" />
-                                    <input type="hidden" value="{{$father->IDNumber ?? ''}}" name="father_id" />
-                                    <input type="hidden" value="{{$person->id ?? ''}}" name="id" />
-                                    <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                    <button type="submit" class="btn btn-primary">add</button>
-                                </form>
+                        @if(isset($brother) && !empty($brother))
+                        @foreach($brother as  $brotherfirst)
+                        <li>
+                            <div class="brother box" @if($brotherfirst->IDNumber == $person->IDNumber ) style="border:1px solid black" @endif >
+                                @if($brotherfirst->gender == 1 )
+                                <i style="font-size:24px" class="fa">&#xf222;</i>
+                                @else
+                                <i style="font-size:24px" class="fa">&#xf221;</i>
+                                @endif   
+                            
+                                <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}: {{$brotherfirst->IDNumber ?? ''}}</p>
+                                <input type="checkbox" data-id="{{$brotherfirst->IDNumber ?? ''}}" id="parent{{$brotherfirst->IDNumber ?? ''}}" name="parent{{$brotherfirst->IDNumber ?? ''}}" value="{{$brotherfirst->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$brotherfirst->IDNumber ?? 0}})"> 
                             </div>
-                        </div>
+                        </li>
+                        @endforeach
+                            
+                        @endif
+                        
+                        
+                            
+                    </ul>
+                </li>
+
+            </ul>
+        @endif
+        
+    </div> 
+
+
+    <div class="col-xs-12 stickTopContainer" style="margin: 10%">
+
+            <ul class="nav nav-pills" role="tablist">
+                @if(session('is_admin') || session('permission')==1)
+                    <li role="presentation">
+                        <a href="javascript:void(0);" data-href="/list/add-to" data-title="שייך לפעיל" class="ajaxPOP">שייך לפעיל
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
                     </li>
-                    
-                        
-                    @if(isset($brother) && !empty($brother))
-                    @foreach($brother as  $brotherfirst)
-                    <li>
-                        <div class="brother box" @if($brotherfirst->IDNumber == $person->IDNumber ) style="border:1px solid black" @endif >
-                            @if($brotherfirst->gender == 1 )
-                            <i style="font-size:24px" class="fa">&#xf222;</i>
-                            @else
-                            <i style="font-size:24px" class="fa">&#xf221;</i>
-                            @endif   
-                        
-                            <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}: {{$brotherfirst->IDNumber ?? ''}}</p>
-                            <input type="checkbox" data-id="{{$brotherfirst->IDNumber ?? ''}}" id="parent{{$brotherfirst->IDNumber ?? ''}}" name="parent{{$brotherfirst->IDNumber ?? ''}}" value="{{$brotherfirst->IDNumber ?? ''}}" class="rowSelect  elector"> 
-                        </div>
-                    </li>
-                    @endforeach
-                        
                     @endif
+                    @if(session('is_admin'))
+                    <li role="presentation">
+                        <a href="javascript:void(0);" data-href="/group/add-to" data-title="שייך לקבוצה" class="ajaxPOP">שייך לקבוצה
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </li>
                     
+                    <li role="presentation">
+                        <a href="javascript:void(0);" data-href="/mayor/add-to" data-title="שייך לראש ראשות" class="ajaxPOP">שייך לראש רשות
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-ielect dropdown-toggle" data-toggle="dropdown">
+                                ביטול 
+                                <span class="glyphicon glyphicon-remove"></span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="javascript:void(0);" class="disableList" data-type="list">שיוך פעיל</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="disableList" data-type="group">שיוך קבוצה</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="disableList" data-type="mayor">שיוך ראש רשות</a>
+                                </li>
+
+                                <li>
+                                    <a href="/electors/unvote"  data-title="ביטול הצבעה" data-type="POP">הצבעה</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     
-                        
-                </ul>
-            </li>
+                @endif
 
-        </ul>
-    @endif
-    
-</div> 
+            </ul>
+        
+    </div>
 
-
-<div class="col-xs-12 stickTopContainer" style="margin: 10%">
-	{{-- <div class="jumbotron stickTop"> --}}
-
-		<ul class="nav nav-pills" role="tablist">
-		@if(session('is_admin') || session('permission')==1)
-			<li role="presentation">
-				<a href="javascript:void(0);" data-href="/list/add-to" data-title="שייך לפעיל" class="ajaxPOP">שייך לפעיל
-					<span class="glyphicon glyphicon-plus"></span>
-				</a>
-			</li>
-			@endif
-			@if(session('is_admin'))
-			<li role="presentation">
-				<a href="javascript:void(0);" data-href="/group/add-to" data-title="שייך לקבוצה" class="ajaxPOP">שייך לקבוצה
-					<span class="glyphicon glyphicon-plus"></span>
-				</a>
-			</li>
-			
-			<li role="presentation">
-				<a href="javascript:void(0);" data-href="/mayor/add-to" data-title="שייך לראש ראשות" class="ajaxPOP">שייך לראש רשות
-					<span class="glyphicon glyphicon-plus"></span>
-				</a>
-			</li>
-			
-			<li>
-				<div class="btn-group">
-					<button type="button" class="btn btn-ielect dropdown-toggle" data-toggle="dropdown">
-						ביטול 
-						<span class="glyphicon glyphicon-remove"></span>
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li>
-							<a href="javascript:void(0);" class="disableList" data-type="list">שיוך פעיל</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);" class="disableList" data-type="group">שיוך קבוצה</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);" class="disableList" data-type="mayor">שיוך ראש רשות</a>
-						</li>
-
-						<li>
-							<a href="/electors/unvote"  data-title="ביטול הצבעה" data-type="POP">הצבעה</a>
-						</li>
-					</ul>
-				</div>
-			</li>
-			@endif
-
-			<li>
-
-					<div class="btn-group">
-							<button type="button" class="btn btn-ielect dropdown-toggle" data-toggle="dropdown">
-
-							הדפסה
-                            <span class="glyphicon glyphicon-print"></span>
-							<span class="caret"></span></button>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="/electors/print" data-url="/electors/print" class="printSelected"  target="_blank">טבלה</a></li>
-								<li><a href="/electors/print/10_3" data-url="/electors/print/10_3" class="printSelected" target="_blank">מדבקות 10/3</a></li>
-								<li><a href="/electors/print/8_3" data-url="/electors/print/8_3" class="printSelected" target="_blank">מדבקות 8/3 </a></li>
-							</ul>
-						</div>
-				</li>
-
-           @if(session('is_admin') || session('permission')==1)
-			<li>
-			
-				<div class="btn-group">
-					<button type="button" class="btn btn-ielect dropdown-toggle" data-toggle="dropdown">
-
-						שליחת הודעה
-						<span class="glyphicon glyphicon-envelope"></span>
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li>
-							<a href="javascript:void(0)" class="sendSmsAjaxEelectors" data-type="ballot-location">שלח מיקום הצבעה</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" class="sendSmsAjaxEelectors" data-type="electors">שלח הודעת טקסט</a>
-						</li>
-
-					</ul>
-				</div>
-				
-			</li>
-			@endif
-			<li>
-
-				<div class="btn-group">
-					<button type="button" class="btn btn-ielect dropdown-toggle" data-toggle="dropdown">
-
-						יצוא
-						<span class="glyphicon glyphicon-export"></span>
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li>
-							<a href="/electors/export/xls" target="_blank">Excel - xls</a>
-						</li>
-						<li>
-							<a href="/electors/export/xlsx" target="_blank">Excel - xlsx</a>
-						</li>
-						<li>
-							<a href="/electors/export/csv" target="_blank">CSV</a>
-						</li>
-					</ul>
-				</div>
-			</li>
-		</ul>
-	{{-- </div> --}}
-</div>
     <script>
-    
+    var arrarIDNumber =[];
         function showSelect(id) {
             // alert('h');
-        document.getElementById("select-div"+id).style.display = "block";
+           document.getElementById("select-div"+id).style.display = "block";
+
+        }
+        function fillCheckbox(IDNumber){
+            
+            arrarIDNumber.push(IDNumber);
+           
         }
 
         let modal = document.querySelectorAll('.select-div');
@@ -558,6 +504,8 @@
              {
                 // alert(modal[i].id) ;
                 modal[i].style.display = 'none';
+                
+
     
              }
             

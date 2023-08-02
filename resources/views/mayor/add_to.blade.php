@@ -52,11 +52,16 @@ $filters=config('mayor.create');
 </div>
 
 <script>
-if(window.selectedIds.length){
+  // alert($('.selectedIDS').length);
+if($('.selectedIDS').length){
   var join=window.selectedIds.join();
   console.log(join);
   $('.selectedIDS').val(join);
-}else{
+  // document.getElementsById(idsValue).value =arrarIDNumber;
+  $('.selectedIDS').val(arrarIDNumber);
+
+}
+else{
   $('.popover').popover('destroy');
   ShowAlert('עליך לבחור מרשימת הבוחרים');
 }

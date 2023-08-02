@@ -2,7 +2,7 @@
 
 
 <form class="form-horizontal" method="POST" action="/list/add-to">
-<input name="ids" class="selectedIDS" type="hidden" />
+<input id="idsValue" name="ids" class="selectedIDS" type="hidden" value=""  />
 
 <?php
 $field=config('list.fields.manid');
@@ -85,11 +85,18 @@ $filters=config('list.create_pop');
 </div>
 
 <script>
-if(window.selectedIds.length){
+  
+  // alert($('.selectedIDS').length);
+  // alert(arrarIDNumber);
+if($('.selectedIDS').length){
+  // alert(window.selectedIds.length);
   var join=window.selectedIds.join();
-  console.log(join);
+  // console.log(join);
   $('.selectedIDS').val(join);
-}else{
+  // document.getElementsById(idsValue).value =arrarIDNumber;
+  $('.selectedIDS').val(arrarIDNumber);
+}
+else{
   $('.popover').popover('destroy');
   ShowAlert('עליך לבחור מרשימת הבוחרים');
 }

@@ -52,10 +52,13 @@ $filters=config('group.create');
 </div>
 
 <script>
-if(window.selectedIds.length){
+if($('.selectedIDS').length){
   var join=window.selectedIds.join();
   console.log(join);
   $('.selectedIDS').val(join);
+  // document.getElementsById(idsValue).value =arrarIDNumber;
+  $('.selectedIDS').val(arrarIDNumber);
+
 }else{
   $('.popover').popover('destroy');
   ShowAlert('עליך לבחור מרשימת הבוחרים');

@@ -204,8 +204,18 @@
     </div><!-- /modal-wassat -->
 </div><!-- /modal -->
 
-
-
+{{-- <script>
+  var hash = window.location.hash, //get the hash from url
+  cleanhash = hash.replace("#", ""); //remove the #
+  //alert(cleanhash);
+</script> --}}
+<?php
+  // $hash = "<script>document.writeln(cleanhash);</script>";
+  // echo $hash;
+?>
+{{-- @if($hash != 'familyTree/{id}/{idNumber}')
+ echo ('hh') 
+ @endif --}}
           <nav class="navbar navbar-default no-radius" role="navigation">
             <div class="container no-padding" >
 

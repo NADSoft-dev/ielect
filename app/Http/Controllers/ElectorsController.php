@@ -421,7 +421,7 @@ class ElectorsController extends Controller
     }
     public function storeIdNumber(Request $request)
     {
-      echo($request::get('idNumberSelect'));
+      // echo($request::get('idNumberSelect'));
       $idSelected=$request::get('idNumberSelect');
       // $post=DB::table('electors')->where('IDNumber',$idSelected)->first();//person main
       //   $post->mother_id =$request::get('mother_id');
@@ -429,7 +429,7 @@ class ElectorsController extends Controller
       //   $post->save();
         DB::table('electors')->where('IDNumber', $idSelected)->update(['mother_id' =>$request::get('mother_id'),'father_id' =>$request::get('father_id')]);
 
-        return redirect('/familyTree'.'/'.$request::get('id').'/'.$request::get('idNumber'))->with('status', 'brother add sucessfully');
+        return redirect('/#/familyTree'.'/'.$request::get('id').'/'.$request::get('idNumber'))->with('status', 'brother add sucessfully');
     }
 
     public static function postPageCount(){

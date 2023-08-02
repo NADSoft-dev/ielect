@@ -180,7 +180,7 @@ $pageCount= $pageCount ? $pageCount:50;
 					@endif 
 				@endforeach
 				<td> 
-					<a href="/familyTree/{{$elector->id}}/{{$elector->IDNumber}}" target="_blank">
+					<a href="/#/familyTree/{{$elector->id}}/{{$elector->IDNumber}}" target="_blank">
 						{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
 						
 						{{-- <i style="font-size:24px" class="fa">&#xf1bb;</i> --}}
