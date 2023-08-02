@@ -32,6 +32,7 @@
          }
          .tree:first-child{
             overflow-x: scroll;
+            
          }
         .tree ul {
             padding-top: 20px; position: relative;
@@ -157,6 +158,18 @@
         .select-div .btn-primary{
             margin-top: 10%;
             padding: 2px 37px;
+        }
+        .stickTopContainer{
+            position: fixed;
+            right:30% ;
+            bottom: 0;
+            width: 100%;
+            color: white;
+            /* text-align: left; */
+            /* justify-content: center; */
+        }
+        .navbar-default {
+            min-width:2500px;
         }
     </style>
 </head>
@@ -427,7 +440,7 @@
     </div> 
 
 
-    <div class="col-xs-12 stickTopContainer" style="margin: 10%">
+    <div class=" stickTopContainer" >
 
             <ul class="nav nav-pills" role="tablist">
                 @if(session('is_admin') || session('permission')==1)
