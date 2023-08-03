@@ -121,3 +121,10 @@ Route::group(['middleware' => ['admin']], function () {
   AdvancedRoute::controller('sms', 'SmsController');
 
 });
+Route::get('/familyTree/{id}/{idNumber}', 'ElectorsController@getTree')->name('tree');
+Route::post('/storeIdNumber', 'ElectorsController@storeIdNumber');
+// Route::get('/#/test', 'ElectorsController@test');
+// Route::get('/tree', function () {
+//   // $fathername=DB::electors->get();
+//   return view('electors.family_Tree');
+// });

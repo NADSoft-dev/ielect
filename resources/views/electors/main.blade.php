@@ -103,6 +103,7 @@ $i=0;
 
 <?php
 $filters=config('electors.filter_fields');
+
 ?>
     @foreach($filters as $filter)
       <?php

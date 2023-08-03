@@ -3,6 +3,7 @@ var selectedIds=[];
 var familyMerge=[];
 var widgetsInterval=null;
 var has_focus=true;
+var arrarIDNumber=[];
 
 function cancelVoters(){
   
@@ -279,9 +280,15 @@ $('body').on('click','.resetFields',function(){
 });
 
 $('body').on('click','.disableList',function(){
+  // alert(arrarIDNumber.length);
+  // $('.selectedIDS').val(arrarIDNumber);
+  // alert($('.selectedIds').length);
   var type=$(this).attr('data-type');
   if(window.selectedIds.length){
-  ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
+    // if($('.selectedIDS').length){
+    // alert(arrarIDNumber);
+    // console.log(arrarIDNumber);
+    ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
     var join=window.selectedIds.join();
     PostData('/'+type+'/cancel','ids='+join,function(){
       if(type=='list'){
@@ -293,9 +300,29 @@ $('body').on('click','.disableList',function(){
       }
     },function(){},'POST')
   });
-}else{
-    ShowAlert('עליך לבחור מרשימת הבוחרים');
-}
+  }
+  else if(arrarIDNumber.length >0){
+    // if($('.selectedIDS').length){
+    // alert(arrarIDNumber +'test');
+    // console.log(arrarIDNumber);
+    ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
+    var join=window.selectedIds.join();
+    PostData('/'+type+'/cancel','ids='+join,function(){
+      if(type=='list'){
+      $('.selected').removeClass('selected hasList');
+      $('.filterElectors').click();
+      }else{
+        $('.selected').removeClass('selected');
+      $('.filterElectors').click();
+      }
+    },function(){},'POST')
+  });
+  }
+  else{
+      ShowAlert('עליך לבחור מרשימת הבוחרים');
+  }
+  
+ 
 });
 
 $(document).ajaxComplete(function(response,options) {
@@ -684,12 +711,14 @@ window.location.href="/#/sms/by-module/";
 $('body').on('click','.sendSmsAjaxEelectors',function(){
 var type=$(this).attr('data-type');
 getSelectedIds();
-
+// alert(arrarIDNumber);
 var id=selectedIds;
 
 if(window.selectedIds.length){
 
-}else{
+
+}
+else{
   ShowAlert('עליך לבחור מרשימת הבוחרים');
   return false;
 }

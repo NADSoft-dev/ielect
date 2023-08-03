@@ -54,7 +54,7 @@
 							<button type="button" class="btn btn-ielect dropdown-toggle" data-toggle="dropdown">
 
 							הדפסה
-<span class="glyphicon glyphicon-print"></span>
+                            <span class="glyphicon glyphicon-print"></span>
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="/electors/print" data-url="/electors/print" class="printSelected"  target="_blank">טבלה</a></li>
@@ -64,7 +64,7 @@
 						</div>
 				</li>
 
-@if(session('is_admin') || session('permission')==1)
+           @if(session('is_admin') || session('permission')==1)
 			<li>
 			
 				<div class="btn-group">
@@ -155,30 +155,41 @@ $pageCount= $pageCount ? $pageCount:50;
 		@foreach($listFields as $f)
 		<th>{{$fields[$f]['label']}}</th>
 		@endforeach
-
+		<th> עץ משפחה</th>
 	</thead>
+	
 	<tbody>
 		@foreach($electors as $elector)
-		<?php
-   $css=[];
-   if($elector->list) $css[]="hasList";
-   if($elector->voted==1) $css[]="voted";
-   $css=implode(' ',$css);
-   if($elector->list){
+			<?php
+				$css=[];
+				if($elector->list) $css[]="hasList";
+				if($elector->voted==1) $css[]="voted";
+				$css=implode(' ',$css);
+				if($elector->list){
 
-   }else $elector->list="ללא";
-  ?>
-		<tr data-id="{{$elector->IDNumber}}" class="rowSelect {{$css}} elector">
-			@foreach($listFields as $f) @if($f=='tel' || $f=='cell')
-			<td>
-				<input type="text" class="fieldUpdate" data-field="{{$f}}" data-id="{{$elector->id}}" value="{{$elector->$f}}" />
-			</td>
-			@else
-			<td>{{$elector->$f}}</td>
-			@endif @endforeach
+				}else $elector->list="ללא";
+			?>
+			<tr data-id="{{$elector->IDNumber}}" class="rowSelect {{$css}} elector">
+				@foreach($listFields as $f) 
+					@if($f=='tel' || $f=='cell')
+					<td>
+						<input type="text" class="fieldUpdate" data-field="{{$f}}" data-id="{{$elector->id}}" value="{{$elector->$f}}" />
+					</td>
+					@else
+					<td>{{$elector->$f}}</td>
+					@endif 
+				@endforeach
+				<td> 
+					<a href="/#/familyTree/{{$elector->id}}/{{$elector->IDNumber}}" target="_blank">
+						{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
+						
+						{{-- <i style="font-size:24px" class="fa">&#xf1bb;</i> --}}
+						<img src="/images/family.png" class="" style="height:30px;width:35px" />
+					</a>
+				</td>
 
-		</tr>
-		@endforeach
+			</tr>
+       @endforeach
 
 	</tbody>
 </table>

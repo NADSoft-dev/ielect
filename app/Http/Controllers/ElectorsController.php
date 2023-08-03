@@ -377,17 +377,59 @@ class ElectorsController extends Controller
       $listFields=Request::cookie('electorsListFileds');
       $listFields=json_decode($listFields,true);
     }
-
+      // print_r ($listFields);
       $electors=SELF::buildQuery($filter);
       $electors=$electors->paginate($pageCount);
       //$electors->withPath('/#/electors/list/');
 
       $electors=SELF::fixResponse($electors,$listFields);
-
     $html=view('electors.list')->with(['listFields'=>$listFields,'electors'=>$electors]);
     return response($html)->cookie('electorsFilter', json_encode($filter), 6000)->cookie('electorsListFileds', json_encode($listFields), 6000);
 
 
+    }
+    public function getTree($id,$IDNumber){
+
+      
+      $pageCount=Request::cookie('pageCount');
+      $pageCount=intval($pageCount);
+      $pageCount= $pageCount ? $pageCount:50;
+
+      if(Request::has('filter')){
+        $filter=json_decode(Request::get('filter'),true);
+      }else{
+        $filter=Request::cookie('electorsFilter');
+        $filter=json_decode($filter,true);
+      }
+          if(Request::has('listFields')){
+        $listFields=json_decode(Request::get('listFields'),true);
+      }else{
+
+        $listFields=Request::cookie('electorsListFileds');
+        $listFields=json_decode($listFields,true);
+      }
+        // print_r ($listFields);
+        $electors=SELF::buildQuery($filter);
+        $electors=$electors->paginate($pageCount);
+        //$electors->withPath('/#/electors/list/');
+
+        $electors=SELF::fixResponse($electors,$listFields);
+      $html=view('electors.family_Tree')->with(['listFields'=>$listFields,'electors'=>$electors,'id'=>$id,'IDNumber'=>$IDNumber]);
+      return response($html)->cookie('electorsFilter', json_encode($filter), 6000)->cookie('electorsListFileds', json_encode($listFields), 6000);
+
+
+    }
+    public function storeIdNumber(Request $request)
+    {
+      echo($request::get('idNumberSelect'));
+      $idSelected=$request::get('idNumberSelect');
+      // $post=DB::table('electors')->where('IDNumber',$idSelected)->first();//person main
+      //   $post->mother_id =$request::get('mother_id');
+      //   $post->father_id =$request::get('father_id');
+      //   $post->save();
+        DB::table('electors')->where('IDNumber', $idSelected)->update(['mother_id' =>$request::get('mother_id'),'father_id' =>$request::get('father_id')]);
+
+        return redirect('/#/familyTree'.'/'.$request::get('id').'/'.$request::get('idNumber'))->with('status', 'brother add sucessfully');
     }
 
     public static function postPageCount(){
