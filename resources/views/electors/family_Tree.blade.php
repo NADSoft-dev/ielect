@@ -128,6 +128,8 @@
             -moz-transition: all 0.5s;
             position: relative;
             background-color: white;
+            min-width: 120px;
+            min-height: 120px;
         }
 
         /*Time for some hover effects*/
@@ -175,8 +177,8 @@
         } */
         .rowSelect{
             position:absolute;
-            right:6px;
-            top:1px;
+            right:10px;
+            top:2px;
         }
        .male{
             color:#1B72DF
@@ -189,19 +191,19 @@
             background-color: #DDEAFA;
             border-radius: 50%;
             border: 1px solid #DDEAFA;
-            padding: 10px;
+            padding: 14px;
             margin-top:20%;
-            width: 50px;
-            height:50px;
+            width: 53px;
+            height:53px;
         }
         i.female{
             background-color:#FADDF5;
             border-radius: 50%;
             border: 1px solid #FADDF5;
-            padding: 10px;
+            padding: 14px;
             margin-top:20%;
-            width: 50px;
-            height:50px;
+            width: 53px;
+            height: 53px;
         }
         .add{
          color:#1BDF5D
@@ -210,10 +212,10 @@
             background-color:#DDFAE7;
             border-radius: 50%;
             border: 1px solid #DDFAE7;
-            padding: 13px;
+            padding: 14px;
             margin-top: 13%;
-            width: 50px;
-            height:50px;
+            width: 53px;
+            height:53px;
         }
         i.doteIcon{
             position: absolute;
