@@ -525,8 +525,6 @@
             
         </div> 
         
-
-
         <div class="stickTopContainer">
 
                 <ul class="nav nav-pills" role="tablist">
@@ -549,7 +547,7 @@
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
                         </li>
-                        {{-- <li>
+                        <li>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-ielect dropdown-toggle" data-toggle="dropdown">
                                     ביטול 
@@ -572,7 +570,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li> --}}
+                        </li>
                         
                     @endif
 

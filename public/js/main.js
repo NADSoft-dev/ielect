@@ -3,6 +3,7 @@ var selectedIds=[];
 var familyMerge=[];
 var widgetsInterval=null;
 var has_focus=true;
+var arrarIDNumber=[];
 
 function cancelVoters(){
   
@@ -286,6 +287,7 @@ $('body').on('click','.disableList',function(){
   if(window.selectedIds.length){
     // if($('.selectedIDS').length){
     // alert(arrarIDNumber);
+    // console.log(arrarIDNumber);
     ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
     var join=window.selectedIds.join();
     PostData('/'+type+'/cancel','ids='+join,function(){
@@ -298,11 +300,29 @@ $('body').on('click','.disableList',function(){
       }
     },function(){},'POST')
   });
-}
-else{
-    ShowAlert('עליך לבחור מרשימת הבוחרים');
-}
-// if(arrarIDNumber)
+  }
+  else if(arrarIDNumber.length >0){
+    // if($('.selectedIDS').length){
+    // alert(arrarIDNumber +'test');
+    // console.log(arrarIDNumber);
+    ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
+    var join=window.selectedIds.join();
+    PostData('/'+type+'/cancel','ids='+join,function(){
+      if(type=='list'){
+      $('.selected').removeClass('selected hasList');
+      $('.filterElectors').click();
+      }else{
+        $('.selected').removeClass('selected');
+      $('.filterElectors').click();
+      }
+    },function(){},'POST')
+  });
+  }
+  else{
+      ShowAlert('עליך לבחור מרשימת הבוחרים');
+  }
+  
+ 
 });
 
 $(document).ajaxComplete(function(response,options) {
