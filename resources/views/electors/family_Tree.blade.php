@@ -298,7 +298,7 @@
                                         $children_Children=DB::table('electors')->where('mother_id',$child->IDNumber)->orWhere('father_id',$child->IDNumber)->get();
                                         // print_r($children_Children);
                                     ?>
-                                    @if(isset($children_Children) && !empty($children_Children))
+                                    @if(isset($children_Children) && !empty($children_Children) && count($children_Children)>0)
                                         
                                         <ul>
                                             @if(isset($children_Children) && count($children_Children)>0)
@@ -352,7 +352,7 @@
                                                     $children_Children_Children=DB::table('electors')->where('mother_id',$subchild->IDNumber)->get();
                                                     // echo($children_Children);
                                                 ?>
-                                                @if(isset($children_Children_Children) && !empty($children_Children_Children))
+                                                @if(isset($children_Children_Children) && !empty($children_Children_Children) && count($children_Children_Children)>0)
                                                     
                                                     <ul>
                                                         @foreach ($children_Children_Children as $subsubchild)
