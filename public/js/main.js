@@ -279,9 +279,9 @@ $('body').on('click','.resetFields',function(){
 });
 
 $('body').on('click','.disableList',function(){
-  // alert(arrarIDNumber);
+  // alert(arrarIDNumber.length);
   // $('.selectedIDS').val(arrarIDNumber);
-  // alert($('.selectedIDS').length);
+  // alert($('.selectedIds').length);
   var type=$(this).attr('data-type');
   if(window.selectedIds.length){
     // if($('.selectedIDS').length){
@@ -302,6 +302,7 @@ $('body').on('click','.disableList',function(){
 else{
     ShowAlert('עליך לבחור מרשימת הבוחרים');
 }
+// if(arrarIDNumber)
 });
 
 $(document).ajaxComplete(function(response,options) {

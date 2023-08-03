@@ -21,9 +21,12 @@
     <style>
                 /*Now the CSS*/
         * {margin: 0; padding: 0}
+        body{
+            background-color:#F2F6FF;
+        }
          .tree{
              display: flex;
-             justify-content: right;
+             justify-content: center;
              width: 100%;
              height: 100%;
              /* overflow-x: scroll;
@@ -35,23 +38,22 @@
             
          }
         .tree ul {
-            padding-top: 20px; position: relative;
-            
+            padding-top: 20px; 
+            position: relative;        
             transition: all 0.5s;
             -webkit-transition: all 0.5s;
             -moz-transition: all 0.5s;
-            /* overflow-x: auto; */
             display: flex;
             flex-direction: row-reverse;
         }
 
         .tree li {
             /* overflow-x: auto; */
-            float: left; text-align: center;
-            list-style-type: none;
+            float: left; 
+            text-align: center;
+            list-style-type:none;
             position: relative;
             padding: 20px 5px 0 5px;
-            
             transition: all 0.5s;
             -webkit-transition: all 0.5s;
             -moz-transition: all 0.5s;
@@ -63,16 +65,18 @@
         .tree li::before, .tree li::after{
             content: '';
             position: absolute; top: 0; right: 50%;
-            border-top: 1px solid #ccc;
-            width: 50%; height: 20px;
+            border-top:3px dashed #ccc;
+            width: 50%; 
+            height: 20px;
+            
         }
         .tree li::after{
             right: auto; left: 50%;
-            border-left: 1px solid #ccc;
+            border-left: 3px dashed #ccc;
+            
         }
 
-        /*We need to remove left-right connectors from elements without 
-        any siblings*/
+      
         .tree li:only-child::after, .tree li:only-child::before {
             display: none;
         }
@@ -107,7 +111,7 @@
         }
 
         .tree li .box{
-            border: 1px solid #ccc;
+            border: 1px solid white;
             padding: 5px 10px;
             text-decoration: none;
             color: #666;
@@ -122,6 +126,8 @@
             transition: all 0.5s;
             -webkit-transition: all 0.5s;
             -moz-transition: all 0.5s;
+            position: relative;
+            background-color: white;
         }
 
         /*Time for some hover effects*/
@@ -137,11 +143,7 @@
             border-color:  #94a0b4;
         }
 
-        /*Thats all. I hope you enjoyed it.
-        Thanks :)*/
-        /* .wrap-select-div:hover .select-div{
-           display: block;
-        } */
+      
         .wrap-select-div{
             position: relative;
         }
@@ -154,22 +156,64 @@
             border: 1px solid black;
             background-color: white;
             border-radius: 15px;
+            padding: 31%;
         }
         .select-div .btn-primary{
             margin-top: 10%;
             padding: 2px 37px;
         }
-        /* .stickTopContainer{
-            position: fixed;
+        .stickTopContainer{
+            /* position: fix;
             right:30% ;
-            bottom: 0;
+            bottom:0; */
             width: 100%;
             color: white;
             
-        } */
+        }
         /* .navbar-default {
             min-width:2500px;
         } */
+        .rowSelect{
+            position:absolute;
+            right:0;
+            top:0;
+        }
+       .male{
+            color:#1B72DF
+        }
+        .female{
+            color:#DF1DB5
+        }
+       
+         i.male{
+            background-color: #DDEAFA;
+            border-radius: 50%;
+            border: 1px solid #DDEAFA;
+            padding: 10px;
+            margin-top: 13%;
+        }
+        i.female{
+            background-color:#FADDF5;
+            border-radius: 50%;
+            border: 1px solid #FADDF5;
+            padding: 10px;
+            margin-top: 13%;
+        }
+        .add{
+         color:#1BDF5D
+        }
+        i.add{
+            background-color:#DDFAE7;
+            border-radius: 50%;
+            border: 1px solid #DDFAE7;
+            padding: 13px;
+            margin-top: 13%;
+        }
+        i.doteIcon{
+            position: absolute;
+            right:30%;
+            top:0;
+        }
     </style>
 </head>
 <body>
@@ -192,29 +236,31 @@
                     @if (isset($couple) && $couple!=null && $couple->gender !=null)
                     
                     <div class="partner box"> 
-                        {{-- <p style="margin: 3% 0;color:black">partner</p> --}}
-                            @if($couple->gender === 1 )
-                            <i style="font-size:24px" class="fa">&#xf222;</i>
-                            @else
-                            <i style="font-size:24px" class="fa">&#xf221;</i>
-                            @endif   
-                    
-                        
-                        <p style="margin: 3% 0"> {{$couple->PersonalName ?? ''}}: {{$couple->IDNumber ?? ''}}</p>
                         <input type="checkbox" data-id="{{$couple->IDNumber ?? ''}}" id="parent{{$couple->IDNumber ?? ''}}" name="parent{{$couple->IDNumber ?? ''}}" value="{{$couple->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$couple->IDNumber ?? 0}})">
+                                @if($couple->gender === 1 )
+                                <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                @else
+                                <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                @endif   
+                    
+                            <p style="margin: 3% 0;"> {{$couple->PersonalName ?? ''}}</p>
+
+                            <p style="margin: 3% 0;color:black;">{{$couple->IDNumber ?? ''}}</p>
                         
                     </div>
                     @endif  
                     <div class="person box">
                         @if (isset($person) && $person!=null && $person->gender !=null)
                             @if($person->gender === 1 )
-                            <i style="font-size:24px" class="fa">&#xf222;</i>
+                            <i style="font-size:24px" class="fa male">&#xf222;</i>
                             @else
-                            <i style="font-size:24px" class="fa">&#xf221;</i>
+                            <i style="font-size:24px" class="fa female">&#xf221;</i>
                             @endif   
                         @endif 
-                    <p style="margin: 3% 0"> {{$person->PersonalName ?? ''}}: {{$person->IDNumber ?? ''}}</p>
-                    <input type="checkbox" data-id="{{$person->IDNumber ?? ''}}" id="parent{{$person->IDNumber ?? ''}}" name="parent{{$person->IDNumber ?? ''}}" value="{{$person->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$person->IDNumber ?? 0}})">
+                            <p style="margin: 3% 0"> {{$person->PersonalName ?? ''}}</p>
+
+                            <p style="margin: 3% 0">{{$person->IDNumber ?? ''}}</p>
+                            <input type="checkbox" data-id="{{$person->IDNumber ?? ''}}" id="parent{{$person->IDNumber ?? ''}}" name="parent{{$person->IDNumber ?? ''}}" value="{{$person->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$person->IDNumber ?? 0}})">
                         
                     </div>
                     
@@ -225,17 +271,19 @@
                         @if(isset($children) && !empty($children))
                                 
                             @foreach ($children as $child)
-
                                 <li>
+                                    {{-- <i  class="fa doteIcon">&#xf111;</i> --}}
                                     <div class="child box">
                                         @if (isset($children) && $children!=null && $child->gender !=null)
                                             @if($child->gender == 1 )
-                                            <i style="font-size:24px" class="fa">&#xf222;</i>
+                                            <i style="font-size:24px" class="fa male">&#xf222;</i>
                                             @else
-                                            <i style="font-size:24px" class="fa">&#xf221;</i>
+                                            <i style="font-size:24px" class="fa female">&#xf221;</i>
                                             @endif   
                                         @endif 
-                                        <p style="margin: 3% 0"> {{$child->PersonalName ?? ''}}: {{$child->IDNumber ?? ''}}</p>
+                                        <p style="margin: 3% 0"> {{$child->PersonalName ?? ''}}</p>
+
+                                        <p style="margin: 3% 0">{{$child->IDNumber ?? ''}}</p>
                                         <input type="checkbox" data-id="{{$child->IDNumber ?? ''}}" id="parent{{$child->IDNumber ?? ''}}" name="parent{{$child->IDNumber ?? ''}}" value="{{$child->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$child->IDNumber ?? 0}})"> 
                                     </div>
                                     <?php
@@ -247,9 +295,13 @@
                                         <ul>
                                             @if(isset($children_Children) && count($children_Children)>0)
                                             <li>
+                                                {{-- <i  class="fa doteIcon">&#xf111;</i> --}}
                                                 <div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>
-                                                <div class="wrap-select-div">
-                                                    <button id="showselect" onclick="showSelect({{$child->id ?? 0}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
+                                                <div class="wrap-select-div box" id="showselect" onclick="showSelect({{$child->id ?? 0}})">
+                                                    {{-- <button id="showselect" onclick="showSelect({{$child->id ?? 0}})"> --}}
+                                                        <i style="font-size:24px" class="fa add">&#xf067;</i>
+                                                    {{-- </button> --}}
+                                                    <p style="margin-top:15%">Add New</p>
                                                     <div class="select-div" id="select-div{{$child->id ?? 0}}">
                                                         <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                                         
@@ -274,16 +326,18 @@
                                             @endif
                                             @foreach ($children_Children as $subchild)
                                             <li>
-                                                
+                                                {{-- <i  class="fa doteIcon">&#xf111;</i> --}}
                                                 <div class="childchild box">
                                                     @if (isset($children_Children) && $children_Children!=null && $subchild->gender !=null)
                                                         @if($subchild->gender === 1 )
-                                                        <i style="font-size:24px" class="fa">&#xf222;</i>
+                                                        <i style="font-size:24px" class="fa male">&#xf222;</i>
                                                         @else
-                                                        <i style="font-size:24px" class="fa">&#xf221;</i>
+                                                        <i style="font-size:24px" class="fa female">&#xf221;</i>
                                                         @endif   
                                                     @endif 
-                                                    <p style="margin: 3% 0"> {{$subchild->PersonalName ?? ''}}: {{$subchild->IDNumber ?? ''}}</p>
+                                                    <p style="margin: 3% 0"> {{$subchild->PersonalName ?? ''}}</p>
+
+                                                    <p style="margin: 3% 0">{{$subchild->IDNumber ?? ''}}</p>
                                                     <input type="checkbox" data-id="{{$subchild->IDNumber ?? ''}}" id="parent{{$subchild->IDNumber ?? ''}}" name="parent{{$subchild->IDNumber ?? ''}}" value="{{$subchild->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$subchild->IDNumber ?? 0}})"> 
                                                 </div>
                                                 <?php
@@ -295,16 +349,18 @@
                                                     <ul>
                                                         @foreach ($children_Children_Children as $subsubchild)
                                                         <li>
-                                                            
+                                                            {{-- <i  class="fa doteIcon">&#xf111;</i> --}}
                                                             <div class="childchild box">
                                                                 @if (isset($children_Children_Children) && $children_Children_Children!=null && $subsubchild->gender !=null)
                                                                     @if($subsubchild->gender === 1 )
-                                                                    <i style="font-size:24px" class="fa">&#xf222;</i>
+                                                                    <i style="font-size:24px" class="fa male">&#xf222;</i>
                                                                     @else
-                                                                    <i style="font-size:24px" class="fa">&#xf221;</i>
+                                                                    <i style="font-size:24px" class="fa female">&#xf221;</i>
                                                                     @endif   
                                                                 @endif
-                                                                <p style="margin: 3% 0"> {{$subsubchild->PersonalName ?? ''}}: {{$subsubchild->IDNumber ?? ''}}</p>
+                                                                <p style="margin: 3% 0"> {{$subsubchild->PersonalName ?? ''}}</p>
+
+                                                                <p style="margin: 3% 0">{{$subsubchild->IDNumber ?? ''}}</p>
                                                                 <input type="checkbox" data-id="{{$subsubchild->IDNumber ?? ''}}" id="parent{{$subsubchild->IDNumber ?? ''}}" name="parent{{$subsubchild->IDNumber ?? ''}}" value="{{$subsubchild->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$subsubchild->IDNumber ?? 0}})"> 
                                                             </div>
                                                             
@@ -324,8 +380,11 @@
                                 
                             @endforeach
                             <li>
-                                <div class="wrap-select-div">
-                                    <button id="showselect" onclick="showSelect({{$person->id}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
+                                <div class="wrap-select-div box" id="showselect" onclick="showSelect({{$person->id ?? 0}})">
+                                    {{-- <button id="showselect" onclick="showSelect({{$person->id}})"> --}}
+                                        <i style="font-size:24px" class="fa add">&#xf067;</i>
+                                    {{-- </button> --}}
+                                    <p style="margin-top:15%">Add New</p>
                                     <div class="select-div" id="select-div{{$person->id }}">
                                         <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                         
@@ -364,16 +423,18 @@
                     @if (isset($person) && $person!=null && $person->gender !=null)
                         <div class="mother box">
                             {{-- <p style="margin: 3% 0;color:black">Mother</p> --}}
-                            <i style="font-size:24px" class="fa">&#xf221;</i>
+                            <i style="font-size:24px" class="fa female">&#xf221;</i>
                     
-                            <p style="margin: 3% 0"> {{$mother->PersonalName ?? ''}}: {{$mother->IDNumber ?? ''}}</p>
+                            <p style="margin: 3% 0"> {{$mother->PersonalName ?? ''}}</p>
+                            <p style="margin: 3% 0">{{$mother->IDNumber ?? ''}}</p>
                             <input type="checkbox" data-id="{{$mother->IDNumber ?? ''}}" id="parent{{$mother->IDNumber ?? ''}}" name="parent{{$mother->IDNumber ?? ''}}" value="{{$mother->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$mother->IDNumber ?? 0}})">
                             
                         </div>
                         <div class="father box"> 
                             {{-- <p style="margin: 3% 0;color:black">father</p> --}}
-                            <i style="font-size:24px" class="fa">&#xf222;</i>
-                            <p style="margin: 3% 0"> {{$father->PersonalName ?? ''}}: {{$father->IDNumber ?? ''}}</p>
+                            <i style="font-size:24px" class="fa male">&#xf222;</i>
+                            <p style="margin: 3% 0"> {{$father->PersonalName ?? ''}}</p>
+                            <p style="margin: 3% 0">{{$father->IDNumber ?? ''}}</p>
                             <input type="checkbox" data-id="{{$father->IDNumber ?? ''}}" id="parent{{$father->IDNumber ?? ''}}" name="parent{{$father->IDNumber ?? ''}}" value="{{$father->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$father->IDNumber ?? 0}})">
                                 
                         </div>
@@ -385,8 +446,11 @@
                     
                     
                         <li>
-                            <div class="wrap-select-div">
-                                <button id="showselect" onclick="showSelect({{$person->id ?? 0}})"><i style="font-size:24px" class="fa">&#xf067;</i></button>
+                            <div class="wrap-select-div box" id="showselect" onclick="showSelect({{$person->id ?? 0}})">
+                                {{-- <button id="showselect" onclick="showSelect({{$person->id ?? 0}})"> --}}
+                                    <i style="font-size:24px" class="fa add">&#xf067;</i>
+                                {{-- </button> --}}
+                                <p style="margin-top:15%">Add New</p>
                                 <div class="select-div" id="select-div{{$person->id ?? 0}}">
                                     <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                     
@@ -416,12 +480,13 @@
                         <li>
                             <div class="brother box" @if($brotherfirst->IDNumber == $person->IDNumber ) style="border:1px solid black" @endif >
                                 @if($brotherfirst->gender == 1 )
-                                <i style="font-size:24px" class="fa">&#xf222;</i>
+                                <i style="font-size:24px" class="fa female">&#xf221;</i>
                                 @else
-                                <i style="font-size:24px" class="fa">&#xf221;</i>
+                                <i style="font-size:24px" class="fa female">&#xf221;</i>
                                 @endif   
                             
-                                <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}: {{$brotherfirst->IDNumber ?? ''}}</p>
+                                <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}</p>
+                                <p style="margin: 3% 0">{{$brotherfirst->IDNumber ?? ''}}</p>
                                 <input type="checkbox" data-id="{{$brotherfirst->IDNumber ?? ''}}" id="parent{{$brotherfirst->IDNumber ?? ''}}" name="parent{{$brotherfirst->IDNumber ?? ''}}" value="{{$brotherfirst->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$brotherfirst->IDNumber ?? 0}})"> 
                             </div>
                         </li>
@@ -526,10 +591,7 @@
         };
         
       function selectChange(id){
-        // alert('change');
-        //  document.getElementById("select-div"+id).style.display = "block";
-        // $("select-div"+id).css("display","block");
-        // alert($("#selectAdd"+id).val());
+        
         $("#paraId"+id).text($("#selectAdd"+id).val());
         $("#paraId"+id).css("display","block");
       }
