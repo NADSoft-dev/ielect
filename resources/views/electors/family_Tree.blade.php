@@ -43,7 +43,7 @@
             
          }
         .tree ul {
-            padding-top: 20px; 
+            padding: 10px 0; 
             position: relative;        
             transition: all 0.5s;
             -webkit-transition: all 0.5s;
@@ -171,11 +171,13 @@
             padding: 2px 37px;
         }
         .stickTopContainer{
-            /* position: fix;
-            right:30% ;
-            bottom:0; */
             width: 100%;
             color: white;
+            position: absolute;
+            /* bottom: 0; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             
         }
         /* .navbar-default {
@@ -231,8 +233,7 @@
     </style>
 </head>
 <body>
-    {{-- {{"test:". Route::currentRouteName() }} --}}
-    {{-- <div class="container"> --}}
+  
         <div class="tree" > 
             <?php
             $person=DB::table('electors')->where('id',$id)->first();
@@ -526,7 +527,7 @@
         
 
 
-        <div class="stickTopContainer" style="margin:3% 30%">
+        <div class="stickTopContainer">
 
                 <ul class="nav nav-pills" role="tablist">
                     @if(session('is_admin') || session('permission')==1)
