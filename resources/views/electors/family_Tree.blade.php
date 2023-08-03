@@ -21,6 +21,11 @@
     <style>
                 /*Now the CSS*/
         * {margin: 0; padding: 0}
+        .container {
+            width: 100%!important;
+            padding-left: 0;
+            padding-right: 0
+        }
         body{
             background-color:#F2F6FF;
             overflow-x: hidden !important;
@@ -30,8 +35,7 @@
              justify-content: center;
              width: 100%;
              height: 100%;
-             /* overflow-x: scroll;
-            overflow-y: hidden; */
+          
                 
          }
          .tree ul:first-child{
@@ -46,7 +50,7 @@
             -moz-transition: all 0.5s;
             display: flex;
             flex-direction: row-reverse;
-            /* overflow-x: scroll; */
+            
         }
 
         .tree li {
@@ -229,7 +233,7 @@
 <body>
     {{-- {{"test:". Route::currentRouteName() }} --}}
     {{-- <div class="container"> --}}
-        <div class="tree"> 
+        <div class="tree" > 
             <?php
             $person=DB::table('electors')->where('id',$id)->first();
             $children=DB::table('electors')->where('mother_id',$IDNumber)->orWhere('father_id',$IDNumber)->get();
@@ -256,7 +260,7 @@
                         
                                 <p style="margin: 3% 0;"> {{$couple->PersonalName ?? ''}}</p>
 
-                                <p style="margin: 3% 0;color:black;">{{$couple->IDNumber ?? ''}}</p>
+                                <p style="margin: 3% 0;color:black;">גיל:{{$couple->birthYear ? Carbon\Carbon::now()->format('Y')- $couple->birthYear : ''}}</p>
                             
                         </div>
                         @endif  
@@ -269,8 +273,8 @@
                                 @endif   
                             @endif 
                                 <p style="margin: 3% 0"> {{$person->PersonalName ?? ''}}</p>
+                                <p style="margin: 3% 0;color:black;">גיל:{{$person->birthYear ? Carbon\Carbon::now()->format('Y')- $person->birthYear : ''}}</p>
 
-                                <p style="margin: 3% 0">{{$person->IDNumber ?? ''}}</p>
                                 <input type="checkbox" data-id="{{$person->IDNumber ?? ''}}" id="parent{{$person->IDNumber ?? ''}}" name="parent{{$person->IDNumber ?? ''}}" value="{{$person->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$person->IDNumber ?? 0}})">
                             
                         </div>
@@ -294,7 +298,7 @@
                                             @endif 
                                             <p style="margin: 3% 0"> {{$child->PersonalName ?? ''}}</p>
 
-                                            <p style="margin: 3% 0">{{$child->IDNumber ?? ''}}</p>
+                                            <p style="margin: 3% 0;color:black;">גיל:{{$child->birthYear ? Carbon\Carbon::now()->format('Y')- $child->birthYear : ''}}</p>
                                             <input type="checkbox" data-id="{{$child->IDNumber ?? ''}}" id="parent{{$child->IDNumber ?? ''}}" name="parent{{$child->IDNumber ?? ''}}" value="{{$child->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$child->IDNumber ?? 0}})"> 
                                         </div>
                                         <?php
@@ -312,7 +316,7 @@
                                                         {{-- <button id="showselect" onclick="showSelect({{$child->id ?? 0}})"> --}}
                                                             <i style="font-size:24px" class="fa add">&#xf067;</i>
                                                         {{-- </button> --}}
-                                                        <p style="margin-top:15%">Add New</p>
+                                                        <p style="margin-top:15%">הוסף </p>
                                                         <div class="select-div" id="select-div{{$child->id ?? 0}}">
                                                             <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                                             
@@ -348,7 +352,8 @@
                                                         @endif 
                                                         <p style="margin: 3% 0"> {{$subchild->PersonalName ?? ''}}</p>
 
-                                                        <p style="margin: 3% 0">{{$subchild->IDNumber ?? ''}}</p>
+                                                        <p style="margin: 3% 0;color:black;">גיל:{{$subchild->birthYear ? Carbon\Carbon::now()->format('Y')- $subchild->birthYear : ''}}</p>
+
                                                         <input type="checkbox" data-id="{{$subchild->IDNumber ?? ''}}" id="parent{{$subchild->IDNumber ?? ''}}" name="parent{{$subchild->IDNumber ?? ''}}" value="{{$subchild->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$subchild->IDNumber ?? 0}})"> 
                                                     </div>
                                                     <?php
@@ -371,7 +376,8 @@
                                                                     @endif
                                                                     <p style="margin: 3% 0"> {{$subsubchild->PersonalName ?? ''}}</p>
 
-                                                                    <p style="margin: 3% 0">{{$subsubchild->IDNumber ?? ''}}</p>
+                                                                    <p style="margin: 3% 0;color:black;">גיל:{{$subsubchild->birthYear ? Carbon\Carbon::now()->format('Y')- $subsubchild->birthYear : ''}}</p>
+
                                                                     <input type="checkbox" data-id="{{$subsubchild->IDNumber ?? ''}}" id="parent{{$subsubchild->IDNumber ?? ''}}" name="parent{{$subsubchild->IDNumber ?? ''}}" value="{{$subsubchild->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$subsubchild->IDNumber ?? 0}})"> 
                                                                 </div>
                                                                 
@@ -395,7 +401,7 @@
                                         {{-- <button id="showselect" onclick="showSelect({{$person->id}})"> --}}
                                             <i style="font-size:24px" class="fa add">&#xf067;</i>
                                         {{-- </button> --}}
-                                        <p style="margin-top:15%">Add New</p>
+                                        <p style="margin-top:15%">הוסף </p>
                                         <div class="select-div" id="select-div{{$person->id }}">
                                             <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                             
@@ -437,7 +443,8 @@
                                 <i style="font-size:24px" class="fa female">&#xf221;</i>
                         
                                 <p style="margin: 3% 0"> {{$mother->PersonalName ?? ''}}</p>
-                                <p style="margin: 3% 0">{{$mother->IDNumber ?? ''}}</p>
+                                <p style="margin: 3% 0;color:black;">גיל:{{$mother->birthYear ? Carbon\Carbon::now()->format('Y')- $mother->birthYear : ''}}</p>
+
                                 <input type="checkbox" data-id="{{$mother->IDNumber ?? ''}}" id="parent{{$mother->IDNumber ?? ''}}" name="parent{{$mother->IDNumber ?? ''}}" value="{{$mother->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$mother->IDNumber ?? 0}})">
                                 
                             </div>
@@ -445,7 +452,8 @@
                                 {{-- <p style="margin: 3% 0;color:black">father</p> --}}
                                 <i style="font-size:24px" class="fa male">&#xf222;</i>
                                 <p style="margin: 3% 0"> {{$father->PersonalName ?? ''}}</p>
-                                <p style="margin: 3% 0">{{$father->IDNumber ?? ''}}</p>
+                                <p style="margin: 3% 0;color:black;">גיל:{{$father->birthYear ? Carbon\Carbon::now()->format('Y')- $father->birthYear : ''}}</p>
+
                                 <input type="checkbox" data-id="{{$father->IDNumber ?? ''}}" id="parent{{$father->IDNumber ?? ''}}" name="parent{{$father->IDNumber ?? ''}}" value="{{$father->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$father->IDNumber ?? 0}})">
                                     
                             </div>
@@ -461,7 +469,7 @@
                                     {{-- <button id="showselect" onclick="showSelect({{$person->id ?? 0}})"> --}}
                                         <i style="font-size:24px" class="fa add">&#xf067;</i>
                                     {{-- </button> --}}
-                                    <p style="margin-top:15%">Add New</p>
+                                    <p style="margin-top:15%">הוסף </p>
                                     <div class="select-div" id="select-div{{$person->id ?? 0}}">
                                         <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
                                         
@@ -497,7 +505,8 @@
                                     @endif   
                                 
                                     <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}</p>
-                                    <p style="margin: 3% 0">{{$brotherfirst->IDNumber ?? ''}}</p>
+                                    <p style="margin: 3% 0;color:black;">גיל:{{$brotherfirst->birthYear ? Carbon\Carbon::now()->format('Y')- $brotherfirst->birthYear : ''}}</p>
+
                                     <input type="checkbox" data-id="{{$brotherfirst->IDNumber ?? ''}}" id="parent{{$brotherfirst->IDNumber ?? ''}}" name="parent{{$brotherfirst->IDNumber ?? ''}}" value="{{$brotherfirst->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$brotherfirst->IDNumber ?? 0}})"> 
                                 </div>
                             </li>
@@ -517,7 +526,7 @@
         
 
 
-        <div class="stickTopContainer" >
+        <div class="stickTopContainer" style="margin:3% 30%">
 
                 <ul class="nav nav-pills" role="tablist">
                     @if(session('is_admin') || session('permission')==1)
@@ -539,7 +548,7 @@
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-ielect dropdown-toggle" data-toggle="dropdown">
                                     ביטול 
@@ -562,16 +571,15 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
                         
                     @endif
 
                 </ul>
             
         </div>
-   {{-- </div> --}}
     <script>
-    var arrarIDNumber =[];
+       var arrarIDNumber =[];
         function showSelect(id) {
             // alert('h');
            document.getElementById("select-div"+id).style.display = "block";
