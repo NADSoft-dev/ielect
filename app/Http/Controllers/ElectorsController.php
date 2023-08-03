@@ -421,7 +421,7 @@ class ElectorsController extends Controller
     }
     public function storeIdNumber(Request $request)
     {
-      // echo($request::get('idNumberSelect'));
+      echo($request::get('idNumberSelect'));
       $idSelected=$request::get('idNumberSelect');
       // $post=DB::table('electors')->where('IDNumber',$idSelected)->first();//person main
       //   $post->mother_id =$request::get('mother_id');

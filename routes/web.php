@@ -122,7 +122,7 @@ Route::group(['middleware' => ['admin']], function () {
 
 });
 Route::get('/familyTree/{id}/{idNumber}', 'ElectorsController@getTree')->name('tree');
-Route::post('storeIdNumber', 'ElectorsController@storeIdNumber');
+Route::post('/storeIdNumber', 'ElectorsController@storeIdNumber');
 // Route::get('/#/test', 'ElectorsController@test');
 // Route::get('/tree', function () {
 //   // $fathername=DB::electors->get();

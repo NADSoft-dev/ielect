@@ -43,14 +43,15 @@
             
          }
         .tree ul {
-            padding: 10px 0; 
-            position: relative;        
+            min-width: 100%;
+            min-height:55vh;
+            padding: 20px 0;
+            position: relative;
             transition: all 0.5s;
             -webkit-transition: all 0.5s;
             -moz-transition: all 0.5s;
             display: flex;
             flex-direction: row-reverse;
-            
         }
 
         .tree li {
@@ -81,8 +82,20 @@
             border-left: 3px dashed #ccc;
             
         }
-
-      
+        
+        .dropdown-menu  li::before, .dropdown-menu li::after{
+            content: '';
+            position: absolute; top: 0; right: 50%;
+            border-top:1px solid #eee;
+            width: 50%; 
+            height: 20px;
+            
+        }
+        .dropdown-menu li::after{
+            right: auto; left: 50%;
+            border-left: 1px solid #eee;
+            
+        }
         .tree li:only-child::after, .tree li:only-child::before {
             display: none;
         }
@@ -157,14 +170,16 @@
         }
         .select-div{
             position: absolute;
-            top: 22px;
-            right: 0;
+            top: 83px;
+            left: 0;
+            z-index: 99;
             display: none;
             padding: 20px;
             border: 1px solid black;
             background-color: white;
             border-radius: 15px;
             padding: 31%;
+            width: 280px
         }
         .select-div .btn-primary{
             margin-top: 10%;
@@ -285,7 +300,34 @@
                             
                             
                             @if(isset($children) && !empty($children))
-                                    
+                            <li>
+                                <div class="wrap-select-div box" id="showselect" onclick="showSelect({{$person->id ?? 0}})">
+                                    {{-- <button id="showselect" onclick="showSelect({{$person->id}})"> --}}
+                                        <i style="font-size:24px" class="fa add">&#xf067;</i>
+                                    {{-- </button> --}}
+                                    <p style="margin-top:15%">הוסף </p>
+                                    <div class="select-div" id="select-div{{$person->id }}">
+                                        <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
+                                        
+                                            <select name="idNumberSelect" id="selectAdd{{$person->id }}" class=" selectclass selectpicker" onchange="selectChange({{$person->id }})">
+                                                    <option value="0">choose</option>
+                                                    @foreach ($all_Id_Numbers as $Id_Number )
+                                                        
+                                                    <option value="{{$Id_Number->IDNumber }}" data-select="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}</option>
+                                                    @endforeach
+                                                    
+                                            </select>
+                                            <p id="paraId{{$person->id }}"  style="display: none;margin: 10%"></p>
+
+                                            <input type="hidden" value="{{$children[0]->mother_id ?? ''}}" name="mother_id" />
+                                            <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
+                                            <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
+                                            <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
+                                            <button type="submit" class="btn btn-primary">add</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>   
                                 @foreach ($children as $child)
                                     <li>
                                         {{-- <i  class="fa doteIcon">&#xf111;</i> --}}
@@ -325,7 +367,7 @@
                                                                         <option value="0">choose</option>
                                                                         @foreach ($all_Id_Numbers as $Id_Number )
                                                                             
-                                                                            <option value="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
+                                                                        <option value="{{$Id_Number->IDNumber }}" data-select="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}</option>
                                                                         @endforeach
                                                                         
                                                                 </select>
@@ -390,6 +432,7 @@
                                                     
                                                 </li>
                                                 @endforeach
+                                                
                                             
                                             </ul>
                                             
@@ -397,34 +440,7 @@
                                     </li>
                                     
                                 @endforeach
-                                <li>
-                                    <div class="wrap-select-div box" id="showselect" onclick="showSelect({{$person->id ?? 0}})">
-                                        {{-- <button id="showselect" onclick="showSelect({{$person->id}})"> --}}
-                                            <i style="font-size:24px" class="fa add">&#xf067;</i>
-                                        {{-- </button> --}}
-                                        <p style="margin-top:15%">הוסף </p>
-                                        <div class="select-div" id="select-div{{$person->id }}">
-                                            <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
-                                            
-                                                <select name="idNumberSelect" id="selectAdd{{$person->id }}" class=" selectclass selectpicker" onchange="selectChange({{$person->id }})">
-                                                        <option value="0">choose</option>
-                                                        @foreach ($all_Id_Numbers as $Id_Number )
-                                                            
-                                                            <option value="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
-                                                        @endforeach
-                                                        
-                                                </select>
-                                                <p id="paraId{{$person->id }}"  style="display: none;margin: 10%"></p>
-
-                                                <input type="hidden" value="{{$children[0]->mother_id ?? ''}}" name="mother_id" />
-                                                <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
-                                                <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
-                                                <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                <button type="submit" class="btn btn-primary">add</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </li>
+                                
                             @endif
                             
                             
@@ -465,7 +481,7 @@
                         <ul>
                         
                         
-                            <li>
+                            <li >
                                 <div class="wrap-select-div box" id="showselect" onclick="showSelect({{$person->id ?? 0}})">
                                     {{-- <button id="showselect" onclick="showSelect({{$person->id ?? 0}})"> --}}
                                         <i style="font-size:24px" class="fa add">&#xf067;</i>
@@ -478,10 +494,15 @@
                                                     <option value="0">choose</option>
                                                     @foreach ($all_Id_Numbers as $Id_Number )
                                                         
-                                                        <option value="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->IDNumber}}</option>
+                                                        <option class="optiondata{{$person->id ?? 0}}" value="{{$Id_Number->IDNumber }}" id="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}</option>
                                                     @endforeach
                                                     
                                             </select>
+                                            {{-- @foreach ($all_Id_Numbers as $Id_Number)
+                                            <input type="hidden" value="{{$Id_Number->IDNumber }}" data-input="" />
+
+                                            @endforeach --}}
+                                            
                                             <p id="paraId{{$person->id }}" style="display: none;margin: 10%"></p>
 
                                             <input type="hidden" value="{{$mother->IDNumber ?? ''}}" name="mother_id" />
@@ -577,45 +598,49 @@
                 </ul>
             
         </div>
-    <script>
-       var arrarIDNumber =[];
-        function showSelect(id) {
-            // alert('h');
-           document.getElementById("select-div"+id).style.display = "block";
+        <script>
+        var arrarIDNumber =[];
+            function showSelect(id) {
+                // alert('h');
+            document.getElementById("select-div"+id).style.display = "block";
 
-        }
-        function fillCheckbox(IDNumber){
-            
-            arrarIDNumber.push(IDNumber);
-           
-        }
-
-        let modal = document.querySelectorAll('.select-div');
-        document.onclick = function(e){
-        //   alert( e.target.classList[e.target.classList.length-1]);
-         
-            if(e.target.classList[0] !== 'select-div' && e.target.classList[0] !== 'fa' && e.target.classList[e.target.classList.length-1] !== 'pull-left' && e.target.classList[e.target.classList.length-1] !== 'text'){
-            //element clicked wasn't the div; hide the div
-            // alert(modal.length);
-             for(let i=0; i< modal.length; i++)
-             {
-                // alert(modal[i].id) ;
-                modal[i].style.display = 'none';
+            }
+            function fillCheckbox(IDNumber){
                 
-
-    
-             }
+                arrarIDNumber.push(IDNumber);
             
             }
-        };
-        
-      function selectChange(id){
-        
-        $("#paraId"+id).text($("#selectAdd"+id).val());
-        $("#paraId"+id).css("display","block");
-      }
+
+            let modal = document.querySelectorAll('.select-div');
+            document.onclick = function(e){
+            //   alert( e.target.classList[e.target.classList.length-1]);
             
-    </script>
+                if(e.target.classList[0] !== 'select-div' && e.target.classList[0] !== 'fa' && e.target.classList[e.target.classList.length-1] !== 'pull-left' && e.target.classList[e.target.classList.length-1] !== 'text'){
+                //element clicked wasn't the div; hide the div
+                // alert(modal.length);
+                for(let i=0; i< modal.length; i++)
+                {
+                    // alert(modal[i].id) ;
+                    modal[i].style.display = 'none';
+                    
+
+        
+                }
+                
+                }
+            };
+            
+        function selectChange(idvalue){
+            //data-select
+            // alert($("#selectAdd"+idvalue).val());
+            var selectval =$("#selectAdd"+idvalue).val();
+
+            // var DATA = ;
+            $("#paraId"+idvalue).text($(".selectAdd"+idvalue).id);
+            $("#paraId"+idvalue).css("display","block");
+        }
+                
+        </script>
      
 </body>
 </html>
