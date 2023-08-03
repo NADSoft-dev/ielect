@@ -175,8 +175,8 @@
         } */
         .rowSelect{
             position:absolute;
-            right:0;
-            top:0;
+            right:6px;
+            top:1px;
         }
        .male{
             color:#1B72DF
@@ -190,14 +190,18 @@
             border-radius: 50%;
             border: 1px solid #DDEAFA;
             padding: 10px;
-            margin-top: 13%;
+            margin-top:20%;
+            width: 50px;
+            height:50px;
         }
         i.female{
             background-color:#FADDF5;
             border-radius: 50%;
             border: 1px solid #FADDF5;
             padding: 10px;
-            margin-top: 13%;
+            margin-top:20%;
+            width: 50px;
+            height:50px;
         }
         .add{
          color:#1BDF5D
@@ -208,6 +212,8 @@
             border: 1px solid #DDFAE7;
             padding: 13px;
             margin-top: 13%;
+            width: 50px;
+            height:50px;
         }
         i.doteIcon{
             position: absolute;
@@ -505,7 +511,7 @@
     </div> 
 
 
-    <div class=" stickTopContainer" >
+    <div class="stickTopContainer" >
 
             <ul class="nav nav-pills" role="tablist">
                 @if(session('is_admin') || session('permission')==1)
