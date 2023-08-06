@@ -284,7 +284,7 @@ $('body').on('click','.disableList',function(){
   // $('.selectedIDS').val(arrarIDNumber);
   // alert($('.selectedIds').length);
   var type=$(this).attr('data-type');
-  if(window.selectedIds.length){
+  if(window.selectedIds.length || (arrarIDNumber.length)!=0){
     // if($('.selectedIDS').length){
     // alert(arrarIDNumber);
     // console.log(arrarIDNumber);
@@ -301,23 +301,7 @@ $('body').on('click','.disableList',function(){
     },function(){},'POST')
   });
   }
-  else if(arrarIDNumber.length >0){
-    // if($('.selectedIDS').length){
-    // alert(arrarIDNumber +'test');
-    // console.log(arrarIDNumber);
-    ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
-    var join=window.selectedIds.join();
-    PostData('/'+type+'/cancel','ids='+join,function(){
-      if(type=='list'){
-      $('.selected').removeClass('selected hasList');
-      $('.filterElectors').click();
-      }else{
-        $('.selected').removeClass('selected');
-      $('.filterElectors').click();
-      }
-    },function(){},'POST')
-  });
-  }
+  
   else{
       ShowAlert('עליך לבחור מרשימת הבוחרים');
   }

@@ -86,9 +86,9 @@ $filters=config('list.create_pop');
 
 <script>
   
-  // alert($('.selectedIDS').length);
-  // alert(arrarIDNumber);
-if($('.selectedIDS').length){
+  // alert((arrarIDNumber.length));
+  // alert(window.selectedIds.length);
+if(window.selectedIds.length || (arrarIDNumber.length)!=0){
   // alert(window.selectedIds.length);
   var join=window.selectedIds.join();
   // console.log(join);

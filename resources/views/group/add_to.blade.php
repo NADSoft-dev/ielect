@@ -52,7 +52,7 @@ $filters=config('group.create');
 </div>
 
 <script>
-if($('.selectedIDS').length){
+if(window.selectedIds.length || (arrarIDNumber.length)!=0){
   var join=window.selectedIds.join();
   console.log(join);
   $('.selectedIDS').val(join);
