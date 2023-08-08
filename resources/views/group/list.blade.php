@@ -47,6 +47,13 @@ $subSubCategory=DB::table('groups')->where('category_id',$subCategory->id)->firs
   $subCategoryCount +=$electorsSubSubSub; ///
 
   }
+  $subSubSubSubCategory=DB::table('groups')->where('category_id',$subSubSubCategory->id)->first();
+  if(isset($subSubSubSubCategory) || !empty($subSubSubSubCategory) || $subSubSubSubCategory !=null){
+  $electorsSubSubSubSub=DB::table('electors')->where('group',$subSubSubSubCategory->id)->count();
+  $electors+=$electorsSubSubSubSub;
+  $subCategoryCount +=$electorsSubSubSubSub; ///
+
+  }
 }
 }
 
