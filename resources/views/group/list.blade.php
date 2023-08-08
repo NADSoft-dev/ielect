@@ -35,11 +35,12 @@ if(isset($subCategory) || !empty($subCategory) || $subCategory !=null){
 $electorsSub=DB::table('electors')->where('group',$subCategory->id)->count();
 $electors +=$electorsSub;
 $subCategoryCount +=$electorsSub; ///
-// $subSubCategory=DB::table('groups')->where('category_id',$subCategory->id)->first();
-//   if(isset($subSubCategory) || !empty($subSubCategory) || $subSubCategory !=null){
-//   $electorsSubSub=DB::table('electors')->where('group',$subSubCategory->id)->count();
-//   $electors+=$electorsSubSub;
-//   $subCategoryCount +=$electorsSubSub; ///
+$subSubCategory=DB::table('groups')->where('category_id',$subCategory->id)->first();
+  if(isset($subSubCategory) || !empty($subSubCategory) || $subSubCategory !=null){
+  $electorsSubSub=DB::table('electors')->where('group',$subSubCategory->id)->count();
+  $electors+=$electorsSubSub;
+  $subCategoryCount +=$electorsSubSub; ///
+}
 
 //   $subSubSubCategory=DB::table('groups')->where('category_id',$subSubCategory->id)->first();
 //   if(isset($subSubSubCategory) || !empty($subSubSubCategory) || $subSubSubCategory !=null){
