@@ -52,12 +52,12 @@ $filters=config('group.create');
 </div>
 
 <script>
-if(window.selectedIds.length || (arrarIDNumber.length)!=0){
+if(window.selectedIds.length ){
   var join=window.selectedIds.join();
   console.log(join);
   $('.selectedIDS').val(join);
   // document.getElementsById(idsValue).value =arrarIDNumber;
-  $('.selectedIDS').val(arrarIDNumber);
+  // $('.selectedIDS').val(arrarIDNumber);
 
 }else{
   $('.popover').popover('destroy');
