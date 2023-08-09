@@ -36,7 +36,8 @@
 @foreach ($subCategory as $sub)
 <?php
     $SubcategoryCount=DB::table('groups')->where('category_id',$sub->id)->count();
-    $electors=DB::table('electors')->where('group',$sub->id)->count();
+    $electors=DB::table('electors')->where('group',197)->count();
+    echo($electors);
     ?>
 <tr class="Row-{{$sub->id}}">
 <td>{{$sub->name}}</td>
