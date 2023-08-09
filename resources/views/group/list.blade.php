@@ -29,31 +29,27 @@
    
 <?php
 $electors=DB::table('electors')->where('group',$row->id)->count();
-// echo($row->id);
-// $electors=DB::table('electors')->where('group',$row->id)->count();
-// $subCategoryCount=DB::table('groups')->where('category_id',$row->id)->count();
+
 $subCategoryCount=0;
 $mainCount=0;
 $sub1Category=DB::table('groups')->where('category_id',$row->id)->get();
-// echo(count($sub1Category));
 $mainCount += count($sub1Category);
 if(isset($sub1Category) && !empty($sub1Category) && count($sub1Category)!= 0 ){
   
     for($sub1Id=0;$sub1Id<count($sub1Category);$sub1Id++){
       $idsub1=$sub1Category[$sub1Id];
       $sub2Category=DB::table('groups')->where('category_id',$idsub1->id)->get();
-      // $electorsSub1=DB::table('electors')->where('group',$idsub1->id)->count();
-      // print_r($sub1Category[$sub1Id]);   
+      $electorsSub1=DB::table('electors')->where('group',$idsub1->id)->count();
       $mainCount += count($sub2Category);
-      // $electors += $electorsSub1;
+      $electors += $electorsSub1;
       if(isset($sub2Category) && !empty($sub2Category) && count($sub2Category)!= 0 ){
         for($sub2Id=0;$sub2Id<count($sub2Category);$sub2Id++){
             $idsub2=$sub2Category[$sub2Id];
             $sub3Category=DB::table('groups')->where('category_id',$idsub2->id)->get();
-            // $electorsSub2=DB::table('electors')->where('group',$idsub2->id)->count();
+            $electorsSub2=DB::table('electors')->where('group',$idsub2->id)->count();
             // print_r($sub3Category[$sub2Id]);   
             $mainCount += count($sub3Category);
-            // $electors += $electorsSub2;
+            $electors += $electorsSub2;
 
         }
       }

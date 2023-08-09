@@ -39,7 +39,9 @@ class GroupController extends Controller
 
     function postAdd(){
       $data=Request::all();
+      // print_r($data);
       DB::table('groups')->insert($data);
+      
       return response('')->header('x-callback',"window.location.href='/#/group/all/';fireEvent('create:success');");
     }
 

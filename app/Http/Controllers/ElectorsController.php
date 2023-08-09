@@ -46,6 +46,7 @@ class ElectorsController extends Controller
 
     function postUnvote(){
       $ids=Request::get('ids');
+      // print_r($ids);
       $ids=explode(',',$ids);
       if(count($ids)>0){
       DB::table('electors')->whereIn('IDNumber',$ids)->update(['voted'=>0]);

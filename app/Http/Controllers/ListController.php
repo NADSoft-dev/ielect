@@ -64,7 +64,7 @@ class ListController extends Controller
         $list=DB::table('personal_list')->where('id',$data['list'])->first();
         $ids=explode(',',$data['ids']);
 
-
+          // echo('bb');
 
       DB::table('electors')->whereIn('IDNumber', $ids)->update(['list'=>$list->id,'manid'=>$list->under]);
       return response('')->header('x-callback',"$('.popover').popover('destroy');$('.selected').addClass('hasList').removeClass('selected');");
