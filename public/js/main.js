@@ -284,7 +284,7 @@ $('body').on('click','.disableList',function(){
   // $('.selectedIDS').val(arrarIDNumber);
   // alert($('.selectedIds').length);
   var type=$(this).attr('data-type');
-  if(window.selectedIds.length ){
+  if(window.selectedIds.length || (arrarIDNumber.length)!=0){
     // if($('.selectedIDS').length){
     // alert(arrarIDNumber);
     // console.log(arrarIDNumber);
