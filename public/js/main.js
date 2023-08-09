@@ -301,7 +301,21 @@ $('body').on('click','.disableList',function(){
     },function(){},'POST')
   });
   }
-  
+  else if((arrarIDNumber.length)!=0){
+ // console.log(arrarIDNumber);
+ ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
+  var join=window.selectedIds.join();
+  PostData('/'+type+'/cancel','ids='+join,function(){
+    if(type=='list'){
+    $('.selected').removeClass('selected hasList');
+    $('.filterElectors').click();
+    }else{
+      $('.selected').removeClass('selected');
+    $('.filterElectors').click();
+    }
+  },function(){},'POST')
+});
+  }
   else{
       ShowAlert('עליך לבחור מרשימת הבוחרים');
   }

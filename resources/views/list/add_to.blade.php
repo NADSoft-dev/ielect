@@ -94,7 +94,7 @@ if(window.selectedIds.length ){
   // console.log(join);
   $('.selectedIDS').val(join);
   // document.getElementsById(idsValue).value =arrarIDNumber;
-  // $('.selectedIDS').val(arrarIDNumber);
+  $('.selectedIDS').val(arrarIDNumber);
 }
 else{
   $('.popover').popover('destroy');
