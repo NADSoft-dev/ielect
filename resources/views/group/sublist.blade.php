@@ -39,7 +39,6 @@
     $electors=DB::table('electors')->where('group',$sub->id)->count();
     // echo($electors);
     $sub1Category=DB::table('groups')->where('category_id',$sub->id)->get();
-    $SubcategoryCount += count($sub1Category);
     if(isset($sub1Category) && !empty($sub1Category) && count($sub1Category)!= 0 ){
       
         for($sub1Id=0;$sub1Id<count($sub1Category);$sub1Id++){
