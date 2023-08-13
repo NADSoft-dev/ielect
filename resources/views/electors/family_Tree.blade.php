@@ -455,25 +455,30 @@
                     <li>
                     
                         @if (isset($person) && $person!=null && $person->gender !=null)
-                            <div class="mother box">
-                                {{-- <p style="margin: 3% 0;color:black">Mother</p> --}}
-                                <i style="font-size:24px" class="fa female">&#xf221;</i>
-                        
-                                <p style="margin: 3% 0"> {{$mother->PersonalName ?? ''}}</p>
-                                <p style="margin: 3% 0;color:black;">גיל:{{$mother->birthYear ? Carbon\Carbon::now()->format('Y')- $mother->birthYear : ''}}</p>
-
-                                <input type="checkbox" data-id="{{$mother->IDNumber ?? ''}}" id="parent{{$mother->IDNumber ?? ''}}" name="parent{{$mother->IDNumber ?? ''}}" value="{{$mother->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$mother->IDNumber ?? 0}})">
+                                @if(isset($mother) && !empty($mother))
+                                    <div class="mother box">
+                                        {{-- <p style="margin: 3% 0;color:black">Mother</p> --}}
+                                        <i style="font-size:24px" class="fa female">&#xf221;</i>
                                 
-                            </div>
-                            <div class="father box"> 
-                                {{-- <p style="margin: 3% 0;color:black">father</p> --}}
-                                <i style="font-size:24px" class="fa male">&#xf222;</i>
-                                <p style="margin: 3% 0"> {{$father->PersonalName ?? ''}}</p>
-                                <p style="margin: 3% 0;color:black;">גיל:{{$father->birthYear ? Carbon\Carbon::now()->format('Y')- $father->birthYear : ''}}</p>
+                                        <p style="margin: 3% 0"> {{$mother->PersonalName ?? ''}}</p>
+                                        <p style="margin: 3% 0;color:black;">גיל:{{$mother->birthYear ? Carbon\Carbon::now()->format('Y')- $mother->birthYear : ''}}</p>
 
-                                <input type="checkbox" data-id="{{$father->IDNumber ?? ''}}" id="parent{{$father->IDNumber ?? ''}}" name="parent{{$father->IDNumber ?? ''}}" value="{{$father->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$father->IDNumber ?? 0}})">
-                                    
-                            </div>
+                                        <input type="checkbox" data-id="{{$mother->IDNumber ?? ''}}" id="parent{{$mother->IDNumber ?? ''}}" name="parent{{$mother->IDNumber ?? ''}}" value="{{$mother->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$mother->IDNumber ?? 0}})">
+                                        
+                                    </div>
+                                @endif
+                              
+                                @if(isset($father) && !empty($father))
+                                    <div class="father box"> 
+                                        {{-- <p style="margin: 3% 0;color:black">father</p> --}}
+                                        <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                        <p style="margin: 3% 0"> {{$father->PersonalName ?? ''}}</p>
+                                        <p style="margin: 3% 0;color:black;">גיל:{{$father->birthYear ? Carbon\Carbon::now()->format('Y')- $father->birthYear : ''}}</p>
+
+                                        <input type="checkbox" data-id="{{$father->IDNumber ?? ''}}" id="parent{{$father->IDNumber ?? ''}}" name="parent{{$father->IDNumber ?? ''}}" value="{{$father->IDNumber ?? ''}}" class="rowSelect  elector" onclick="fillCheckbox({{$father->IDNumber ?? 0}})">
+                                            
+                                    </div>
+                                @endif
                         
                         @endif
                     
@@ -498,11 +503,7 @@
                                                     @endforeach
                                                     
                                             </select>
-                                            {{-- @foreach ($all_Id_Numbers as $Id_Number)
-                                            <input type="hidden" value="{{$Id_Number->IDNumber }}" data-input="" />
-
-                                            @endforeach --}}
-                                            
+                                           
                                             <p id="paraId{{$person->id }}" style="display: none;margin: 10%"></p>
 
                                             <input type="hidden" value="{{$mother->IDNumber ?? ''}}" name="mother_id" />
