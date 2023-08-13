@@ -522,7 +522,7 @@
                             <li>
                                 <div class="brother box" @if($brotherfirst->IDNumber == $person->IDNumber ) style="border:1px solid black" @endif >
                                     @if($brotherfirst->gender == 1 )
-                                    <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                    <i style="font-size:24px" class="fa male">&#xf222;</i>
                                     @else
                                     <i style="font-size:24px" class="fa female">&#xf221;</i>
                                     @endif   
