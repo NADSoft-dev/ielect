@@ -587,6 +587,45 @@ class ElectorsController extends Controller
       //return($electors);
       return view('electors.card')->with('elector',$elector)->with('parents',$parents)->with('kids',$kids)->with('couple',$couple)->with('brothers',$brothers)->with('ids',$ids);
     }
+    function getView2($id){ //test
+      $elector=DB::table('electors')->where('IDNumber',$id)->leftJoin('ballot', 'electors.AddCode', '=', 'ballot.ballot_id')->select('electors.*','ballot.place_details as ballot_address')->first();
+      $parents=DB::table('electors')->where('IDNumber',$elector->father_id)->orWhere('IDNumber',$elector->mother_id)->select('*')->get();
+      $kids=DB::table('electors')->where('father_id',$elector->IDNumber)->orWhere('mother_id',$elector->IDNumber)->select('*')->get();
+      
+      $fatherID=$elector->father_id;
+      $motherID=$elector->mother_id;
+      if(!$motherID) $motherID="11";
+      if(!$fatherID) $fatherID="11";
+
+      $brothers=DB::select('select * from electors where(father_id="'.$fatherID.'" OR mother_id="'.$motherID.'" ) AND IDNumber!="'.$elector->IDNumber.'"');
+
+      $couple=[];
+      if(strlen($elector->couple)>1) $couple=DB::table('electors')->where('IDNumber',$elector->couple)->select('*')->get();
+      $ids[]=$elector->IDNumber;
+      $kidsIds=[];
+      $brothersIds=[];
+      $brothersCouples=[];
+      $kidsCouples=[];
+      foreach($parents as $e) $ids[]= $e->IDNumber;
+      foreach($kids as $e) $kidsIds[]= $e->IDNumber;
+      foreach($couple as $e) $ids[]= $e->IDNumber;
+      foreach($brothers as $e) $brothersIds[]= $e->IDNumber;
+      if($brothersIds){
+      $brothersCouples=DB::table('electors')->whereIn('couple',$brothersIds)->where('gender','2')->select('IDNumber')->get();
+      }
+      if($kidsIds){
+        $kidsCouples=DB::table('electors')->whereIn('couple',$kidsIds)->where('gender','2')->select('IDNumber')->get();
+        }
+
+        foreach($kids as $e) $ids[]= $e->IDNumber;
+        foreach($brothers as $e) $ids[]= $e->IDNumber;
+        foreach($brothersCouples as $e) $ids[]= $e->IDNumber;
+        foreach($kidsCouples as $e) $ids[]= $e->IDNumber;
+
+
+      //return($electors);
+      return view('electors.card2')->with('elector',$elector)->with('parents',$parents)->with('kids',$kids)->with('couple',$couple)->with('brothers',$brothers)->with('ids',$ids);
+    }
 
 
 

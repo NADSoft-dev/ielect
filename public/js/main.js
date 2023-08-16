@@ -531,15 +531,19 @@ $('body').on('dblclick','.elector',function(){
   },1000);
  openModal('/electors/view/'+id,'lg','כרטסת בוחר','electorCard');
 });
+
 $('body').on('click','.checkboxSelect ',function(){
   var id=$(this).attr('data-id');
   // $('.table').css('color', 'red');
+  // document.getElementById('tableHidden').style.visibility = 'hidden';
+  // $("#tableHidden").css("display","none");
+  // alert(document.getElementById("inputTest").val());
   $('.electorCard').modal('hide');
   setTimeout(function(){
     $(this).removeClass('selected');
     getSelectedIds();
   },1000);
- openModal('/electors/view/'+id,'lg','כרטסת בוחר','electorCard');
+ openModal('/electors/view2/'+id,'lg','כרטסת בוחר','electorCard');
 });
 $('body').on('click','.filterElectors',function(){
    lstSelected=null;

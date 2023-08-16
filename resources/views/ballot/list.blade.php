@@ -20,26 +20,26 @@
     <th>בוחרים</th>
     <th>עריכה</th>
     </thead>
-  <tbody>
+      <tbody>
 
-    @foreach($rows as $row)
-    <?php
-      $count=DB::table('electors')->where('AddCode',$row->ballot_id)->count();
-    ?>
+        @foreach($rows as $row)
+        <?php
+          $count=DB::table('electors')->where('AddCode',$row->ballot_id)->count();
+        ?>
 
-<tr>
-<td>{{$row->ballot_id}}</td>
-<td>{{$row->street_name}}</td>
-<td>{{$row->home_num}}</td>
-<td>{{$row->place_details}}</td>
-<td><a href="/#/electors/main/AddCode/{{$row->ballot_id}}/">{{$count}}</a></td>
-<td><a href="/#/kalfy/edit/{{$row->id}}/">
-<button class="btn btn-xs btn-primary">עדכון</button>
-</a></td>
-</tr>
-@endforeach
-  </tbody>
-</table>
+          <tr>
+          <td>{{$row->ballot_id}}</td>
+          <td>{{$row->street_name}}</td>
+          <td>{{$row->home_num}}</td>
+          <td>{{$row->place_details}}</td>
+          <td><a href="/#/electors/main/AddCode/{{$row->ballot_id}}/">{{$count}}</a></td>
+          <td><a href="/#/kalfy/edit/{{$row->id}}/">
+          <button class="btn btn-xs btn-primary">עדכון</button>
+          </a></td>
+          </tr>
+          @endforeach
+            </tbody>
+  </table>
 
 </div>
 </div>
