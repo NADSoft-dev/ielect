@@ -35,6 +35,15 @@
              justify-content: center;
              width: 100%;
              height: 100%;
+             cursor: grab;
+             /*  */
+            width: 100%;
+        
+            white-space: nowrap;
+            transition: all 0.2s;
+            transform: scale(0.98);
+            will-change: transform;
+            user-select: none;
           
                 
          }
@@ -276,13 +285,18 @@
             position: relative;
         }
         
-
+        .tree.active {
+        background: rgba(255,255,255,0.3);
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+        transform: scale(1);
+          }
 
     </style>
 </head>
-<body >
+<body>
        <div class="divAll" >
-            <div class="tree" style="zoom:0.4"> 
+            <div class="tree" style="zoom:0.4" id="tree"> 
                 <?php
                 $person=DB::table('electors')->where('id',$id)->first();
                 $couple=DB::table('electors')->where('couple',$IDNumber)->first();
@@ -311,6 +325,7 @@
                     <li>
                                 
                         @if (isset($person) && $person!=null && $person->gender !=null)
+                        
                                 @if(isset($mother) && !empty($mother))
                                     <div class="mother box">
                                         {{-- <p style="margin: 3% 0;color:black">Mother</p> --}}
@@ -337,7 +352,7 @@
                                 @endif
                         
                         @endif
-                    
+                    {{-- <li> --}}
                         <ul class="firstUL">
                             
                             <li> 
@@ -800,6 +815,7 @@
                             </li>
 
                         </ul>
+                    {{-- </li> --}}
                     </li>
                 </ul>
                 
@@ -927,7 +943,36 @@
             $('.tree').css({ zoom: zoomLevel, '-moz-transform': 'scale(' + zoomLevel + ')' });
             }
         </script>
-       
+         <script>
+        
+                const slider = document.querySelector('.firstUL');
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('active');
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+                });
+                slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                slider.classList.remove('active');
+                });
+                slider.addEventListener('mouseup', () => {
+                isDown = false;
+                slider.classList.remove('active');
+                });
+                slider.addEventListener('mousemove', (e) => {
+                if(!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 3; //scroll-fast
+                slider.scrollLeft = scrollLeft - walk;
+                console.log(walk);
+                });
+         </script>
      
 </body>
 </html>
