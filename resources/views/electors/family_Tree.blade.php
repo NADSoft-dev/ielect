@@ -200,11 +200,14 @@
         .stickTopContainer{
             width: 100%;
             color: white;
-            position: absolute;
+            /* position: absolute; */
             /* bottom: 0; */
             display: flex;
             justify-content: center;
             align-items: center;
+            position: fixed;
+            bottom: 1%;
+            left: 0%;
             
         }
         /* .navbar-default {
@@ -258,9 +261,9 @@
             top:0;
         }
         .zoomIcon{
-            position: absolute;
-            left:3%;
-            bottom: 10%;
+            position: fixed;
+            left: 1%;
+            top: 2%;
             z-index: 999999;
         }
         i.zoom{
@@ -268,8 +271,8 @@
             border-radius: 50%;
             border: 1px solid #DDFAE7;
             padding: 10px;
-            width:49px;
-            height:52px;
+            width:37px;
+            height:40px;
             
         }
         i.Z_in{
@@ -329,7 +332,7 @@
                                 @if(isset($mother) && !empty($mother))
                                     <div class="mother box">
                                         {{-- <p style="margin: 3% 0;color:black">Mother</p> --}}
-                                        <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                        <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                 
                                         <p style="margin: 3% 0"> {{$mother->PersonalName ?? ''}}</p>
                                         <p style="margin: 3% 0;color:black;">גיל:{{$mother->birthYear ? Carbon\Carbon::now()->format('Y')- $mother->birthYear : ''}}</p>
@@ -342,7 +345,7 @@
                                 @if(isset($father) && !empty($father))
                                     <div class="father box"> 
                                         {{-- <p style="margin: 3% 0;color:black">father</p> --}}
-                                        <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                        <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                         <p style="margin: 3% 0"> {{$father->PersonalName ?? ''}}</p>
                                         <p style="margin: 3% 0;color:black;">גיל:{{$father->birthYear ? Carbon\Carbon::now()->format('Y')- $father->birthYear : ''}}</p>
 
@@ -361,9 +364,9 @@
                                         <div class="partner box"> 
                                             <input type="checkbox" data-id="{{$couple->IDNumber ?? ''}}" id="parent{{$couple->IDNumber ?? ''}}" name="parent{{$couple->IDNumber ?? ''}}" value="{{$couple->IDNumber ?? ''}}" class="rowSelect  elector checkboxSelect" onclick="fillCheckbox({{$couple->IDNumber ?? 0}})">
                                                     @if($couple->gender === 1 )
-                                                    <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                    <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                     @else
-                                                    <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                    <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                     @endif   
                                         
                                                 <p style="margin: 3% 0;"> {{$couple->PersonalName ?? ''}}</p>
@@ -376,9 +379,9 @@
                                         <div class="person box" style="border:1px solid black">
                                             @if (isset($person) && $person!=null && $person->gender !=null)
                                                 @if($person->gender === 1 )
-                                                <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                 @else
-                                                <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                 @endif   
                                             @endif 
                                                 <p style="margin: 3% 0"> {{$person->PersonalName ?? ''}}</p>
@@ -405,9 +408,9 @@
                                         <li>                     
                                             <div class="brother box">
                                                 @if($brotherfirst->gender == 1 )
-                                                <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                 @else
-                                                <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                 @endif   
                                             
                                                 <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}</p>
@@ -420,9 +423,9 @@
                                             @if (isset($couple_brother) && ($couple_brother !== null || $couple_brother !=0) )
                                                 <div class="brother box">
                                                     @if($couple_brother->gender == 1 )
-                                                    <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                    <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                     @else
-                                                    <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                    <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                     @endif   
                                                 
                                                     <p style="margin: 3% 0"> {{$couple_brother->PersonalName ?? ''}}</p>
@@ -439,9 +442,9 @@
                                                                         <div class="person box">
                                                                             @if (isset($children_brother) && $children_brother!=null && $brother_child->gender !=null)
                                                                                 @if($brother_child->gender === 1 )
-                                                                                <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                                                <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                                                 @else
-                                                                                <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                                                <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                                 @endif   
                                                                             @endif 
                                                                                 <p style="margin: 3% 0"> {{$brother_child->PersonalName ?? ''}}</p>
@@ -485,7 +488,7 @@
                                                     <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
                                                     <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                     <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                    <button type="submit" class="btn btn-primary">add</button>
+                                                    <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}"  >הוסף</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -517,7 +520,7 @@
                                                     <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
                                                     <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                     <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                    <button type="submit" class="btn btn-primary">add</button>
+                                                    <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}" >הוסף</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -538,9 +541,9 @@
                                                                     <input type="checkbox" data-id="{{$child->couple ?? ''}}" id="parent{{$child->couple ?? ''}}" name="parent{{$child->couple ?? ''}}" value="{{$child->couple ?? ''}}" class="rowSelect  elector checkboxSelect" onclick="fillCheckbox({{$child->couple ?? 0}})">
                                                                     @if (isset($couple_chlidren) && $couple_chlidren!=null && $couple_chlidren->gender !=null)
                                                                         @if($couple_chlidren->gender == 1 )
-                                                                        <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                                        <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                                         @else
-                                                                        <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                                        <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                         @endif   
                                                                     @endif   
                                                                 
@@ -554,9 +557,9 @@
                                                                 <div class="child box">
                                                                     @if (isset($children) && $children!=null && $child->gender !=null)
                                                                         @if($child->gender == 1 )
-                                                                        <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                                        <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                                         @else
-                                                                        <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                                        <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                         @endif   
                                                                     @endif 
                                                                     <p style="margin: 3% 0"> {{$child->PersonalName ?? ''}}</p>
@@ -592,7 +595,7 @@
                                                                                         <input type="hidden" value="{{$children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                                                         <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                                                         <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                                                        <button type="submit" class="btn btn-primary" >add</button>
+                                                                                        <button type="submit" class="btn btn-primary" id="addbutton{{$child->id ?? 0}}" >הוסף</button>
                                                                                     </form>
                                                                                 </div>
                                                                             </div>
@@ -615,9 +618,9 @@
                                                                                         <input type="checkbox" data-id="{{$subchild->couple ?? ''}}" id="parent{{$subchild->couple ?? ''}}" name="parent{{$subchild->couple ?? ''}}" value="{{$subchild->couple ?? ''}}" class="rowSelect  elector checkboxSelect" onclick="fillCheckbox({{$subchild->couple ?? 0}})">
                                                                                             @if (isset($couple_children_Children) && $couple_children_Children!=null && $couple_children_Children->gender !=null)
                                                                                                 @if($couple_children_Children->gender == 1 )
-                                                                                                <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                                                                <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                                                                 @else
-                                                                                                <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                                                                <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                                                 @endif   
                                                                                             @endif   
                                                                                     
@@ -631,9 +634,9 @@
                                                                                         <div class="childchild box">
                                                                                             @if (isset($children_Children) && $children_Children!=null && $subchild->gender !=null)
                                                                                                 @if($subchild->gender === 1 )
-                                                                                                <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                                                                <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                                                                 @else
-                                                                                                <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                                                                <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                                                 @endif   
                                                                                             @endif 
                                                                                             <p style="margin: 3% 0"> {{$subchild->PersonalName ?? ''}}</p>
@@ -650,9 +653,9 @@
                                                                                                         <div class="childchild box">
                                                                                                             @if (isset($children_Children_Children) && $children_Children_Children!=null && $subsubchild->gender !=null)
                                                                                                                 @if($subsubchild->gender === 1 )
-                                                                                                                <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                                                                                <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                                                                                 @else
-                                                                                                                <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                                                                                <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                                                                 @endif   
                                                                                                             @endif
                                                                                                             <p style="margin: 3% 0"> {{$subsubchild->PersonalName ?? ''}}</p>
@@ -689,7 +692,7 @@
                                                                                                                 <input type="hidden" value="{{$children_Children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                                                                                 <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                                                                                 <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                                                                                <button type="submit" class="btn btn-primary" >add</button>
+                                                                                                                <button type="submit" class="btn btn-primary" id="addbutton{{$subsubchild->id ?? 0}}"  >הוסף</button>
                                                                                                             </form>
                                                                                                         </div>
                                                                                                 </div>
@@ -703,9 +706,9 @@
                                                                                 <div class="childchild box">
                                                                                     @if (isset($children_Children) && $children_Children!=null && $subchild->gender !=null)
                                                                                         @if($subchild->gender === 1 )
-                                                                                        <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                                                        <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                                                         @else
-                                                                                        <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                                                        <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                                         @endif   
                                                                                     @endif 
                                                                                     <p style="margin: 3% 0"> {{$subchild->PersonalName ?? ''}}</p>
@@ -722,9 +725,9 @@
                                                                                                 <div class="childchild box">
                                                                                                     @if (isset($children_Children_Children) && $children_Children_Children!=null && $subsubchild->gender !=null)
                                                                                                         @if($subsubchild->gender === 1 )
-                                                                                                        <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                                                                        <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                                                                         @else
-                                                                                                        <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                                                                        <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                                                         @endif   
                                                                                                     @endif
                                                                                                     <p style="margin: 3% 0"> {{$subsubchild->PersonalName ?? ''}}</p>
@@ -761,7 +764,7 @@
                                                                                                         <input type="hidden" value="{{$children_Children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                                                                         <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                                                                         <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                                                                        <button type="submit" class="btn btn-primary" >add</button>
+                                                                                                        <button type="submit" class="btn btn-primary" id="addbutton{{$subsubchild->id ?? 0}}" >הוסף</button>
                                                                                                     </form>
                                                                                                 </div>
                                                                                             </div>
@@ -788,9 +791,9 @@
                                                         <div class="child box">
                                                             @if (isset($children) && $children!=null && $child->gender !=null)
                                                                 @if($child->gender == 1 )
-                                                                <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                                <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
                                                                 @else
-                                                                <i style="font-size:24px" class="fa female">&#xf221;</i>
+                                                                <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                 @endif   
                                                             @endif 
                                                             <p style="margin: 3% 0"> {{$child->PersonalName ?? ''}}</p>
@@ -822,10 +825,10 @@
             </div> 
             <div class="zoomIcon" >
                 <div  id="zoom-in" >
-                    <i style="font-size:35px" class="fa zoom Z_in">&#xf067;</i>
+                    <i style="font-size:20px" class="fa zoom Z_in">&#xf067;</i>
                 </div> 
                 <div  id="zoom-out" >
-                    <i style="font-size:35px" class="fa zoom Z_out">&#xf068;</i>
+                    <i style="font-size:20px" class="fa zoom Z_out">&#xf068;</i>
                 </div>
             </div>
        </div>
@@ -916,12 +919,12 @@
                     
                 function selectChange(idvalue){
                     //data-select
-                    // alert($("#selectAdd"+idvalue).val());
                     var selectval =$("#selectAdd"+idvalue).val();
-
-                    // var DATA = ;
                     $("#paraId"+idvalue).text($(".selectAdd"+idvalue).id);
                     $("#paraId"+idvalue).css("display","block");
+                    alert('set add enable');
+                    // $("#addbutton"+idvalue).
+
                 }
                         
         </script>
