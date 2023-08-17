@@ -380,7 +380,7 @@
                                         <div class="person box" style="border:1px solid black">
                                             @if (isset($person) && $person!=null && $person->gender !=null)
                                                 @if($person->gender === 1 )
-                                                <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
+                                                <i style="font-size:24px" class="fa male openPoppup" >&#xf222;</i>
                                                 @else
                                                 <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                 @endif   
@@ -445,7 +445,7 @@
                                                                         <div class="person box">
                                                                             @if (isset($children_brother) && $children_brother!=null && $brother_child->gender !=null)
                                                                                 @if($brother_child->gender === 1 )
-                                                                                <i style="font-size:24px" class="fa male openPoppup">&#xf222;</i>
+                                                                                <i style="font-size:24px" class="fa male openPoppup" >&#xf222;</i>
                                                                                 @else
                                                                                 <i style="font-size:24px" class="fa female openPoppup">&#xf221;</i>
                                                                                 @endif   
