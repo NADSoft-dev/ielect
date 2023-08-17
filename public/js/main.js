@@ -532,7 +532,7 @@ $('body').on('dblclick','.elector',function(){
  openModal('/electors/view/'+id,'lg','כרטסת בוחר','electorCard');
 });
 
-$('body').on('click','.openPoppup ',function(){
+$('body').on('click','.checkboxSelect ',function(){
   var id=$(this).attr('data-id');
   // $('.table').css('color', 'red');
   // document.getElementById('tableHidden').style.visibility = 'hidden';
