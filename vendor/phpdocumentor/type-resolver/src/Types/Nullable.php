@@ -17,13 +17,11 @@ use phpDocumentor\Reflection\Type;
 
 /**
  * Value Object representing a nullable type. The real type is wrapped.
- *
- * @psalm-immutable
  */
 final class Nullable implements Type
 {
     /** @var Type The actual type that is wrapped */
-    private Type $realType;
+    private $realType;
 
     /**
      * Initialises this nullable type using the real type embedded
@@ -36,7 +34,7 @@ final class Nullable implements Type
     /**
      * Provide access to the actual type directly, if needed.
      */
-    public function getActualType(): Type
+    public function getActualType() : Type
     {
         return $this->realType;
     }
@@ -44,7 +42,7 @@ final class Nullable implements Type
     /**
      * Returns a rendered output of the Type as it would be used in a DocBlock.
      */
-    public function __toString(): string
+    public function __toString() : string
     {
         return '?' . $this->realType->__toString();
     }
