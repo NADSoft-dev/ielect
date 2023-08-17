@@ -319,15 +319,13 @@
                 $children=DB::table('electors')->where('father_id',$IDNumber)->get();
                 $brother=DB::table('electors')->where('father_id','!=',0)->where('father_id',$person_father)->get();
                 }
-                // if($couple != null){
-                //     echo 'gggggggggggggg';
-                // }
+               
                 
                 ?>
             
                 
                 {{-- {{count($brother)}}     --}}
-                <ul>
+                <ul class="firstUL">
                     <li>
                                 
                         @if (isset($person) && $person!=null && $person->gender !=null)
@@ -359,7 +357,7 @@
                         
                         @endif
                     {{-- <li> --}}
-                        <ul class="firstUL">
+                        <ul >
                             
                             <li> 
                                     @if (isset($couple) && $couple!=null && $couple->gender !=null)
