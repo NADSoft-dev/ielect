@@ -1,5 +1,18 @@
 # Change Log
 
+## [4.54.0](https://github.com/plivo/plivo-php/tree/v7.33.0) (2023-08-07)
+**Feature - WhatsApp message support**
+- Added new param `template` and  new message_type `whatsapp` to [send message API](https://www.plivo.com/docs/sms/api/message#send-a-message)
+- Added  new  `message_states` (`read`)   `message_type`(`whatsapp`),`conversation_id`, `conversation_origin`, `conversation_expiry_timestamp` in [list all messages API](https://www.plivo.com/docs/sms/api/message#list-all-messages) and [get message details API](https://www.plivo.com/docs/sms/api/message#retrieve-a-message) response
+
+## [4.53.0](https://github.com/plivo/plivo-php/tree/v4.53.0) (2023-08-03)
+**Feature - DLT parameters**
+- Added new params `DLTEntityID`, `DLTTemplateID`, `DLTTemplateCategory` to the [send message API](https://www.plivo.com/docs/sms/api/message/send-a-message/)
+- Added new params `DLTEntityID`, `DLTTemplateID`, `DLTTemplateCategory` to the response for the [list all messages API](https://www.plivo.com/docs/sms/api/message/list-all-messages/) and the [get message details API](https://www.plivo.com/docs/sms/api/message#retrieve-a-message)
+
+## [4.52.0](https://github.com/plivo/plivo-php/tree/v4.52.0) (2023-07-18)
+-  Removed object_id and object_type in the parameter as well as response in [list all numbers API]
+
 ## [v4.51.0](https://github.com/plivo/plivo-php/tree/v4.51.0) (2023-06-28)
 **Audio Streaming**
 - API support for starting, deleting, getting streams on a live call

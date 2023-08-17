@@ -284,6 +284,7 @@ $('body').on('click','.disableList',function(){
   // $('.selectedIDS').val(arrarIDNumber);
   // alert($('.selectedIds').length);
   var type=$(this).attr('data-type');
+
   if(window.selectedIds.length){
     // if($('.selectedIDS').length){
     // alert(arrarIDNumber);
@@ -301,22 +302,21 @@ $('body').on('click','.disableList',function(){
     },function(){},'POST')
   });
   }
-  else if(arrarIDNumber.length >0){
-    // if($('.selectedIDS').length){
-    // alert(arrarIDNumber +'test');
-    // console.log(arrarIDNumber);
-    ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
-    var join=window.selectedIds.join();
-    PostData('/'+type+'/cancel','ids='+join,function(){
-      if(type=='list'){
-      $('.selected').removeClass('selected hasList');
-      $('.filterElectors').click();
-      }else{
-        $('.selected').removeClass('selected');
-      $('.filterElectors').click();
-      }
-    },function(){},'POST')
-  });
+  else if((arrarIDNumber.length)!=0){
+ // console.log(arrarIDNumber);
+ ShowConfirm('האם אתה מאשר ביטול שיוכים לרשימת הבוחרים ?',function(){
+  var join=window.selectedIds.join();
+  PostData('/'+type+'/cancel','ids='+join,function(){
+    if(type=='list'){
+    $('.selected').removeClass('selected hasList');
+    $('.filterElectors').click();
+    }else{
+      $('.selected').removeClass('selected');
+    $('.filterElectors').click();
+    }
+  },function(){},'POST')
+});
+
   }
   else{
       ShowAlert('עליך לבחור מרשימת הבוחרים');
@@ -534,6 +534,19 @@ $('body').on('dblclick','.elector',function(){
  openModal('/electors/view/'+id,'lg','כרטסת בוחר','electorCard');
 });
 
+$('body').on('click','.checkboxSelect ',function(){
+  var id=$(this).attr('data-id');
+  // $('.table').css('color', 'red');
+  // document.getElementById('tableHidden').style.visibility = 'hidden';
+  // $("#tableHidden").css("display","none");
+  // alert(document.getElementById("inputTest").val());
+  $('.electorCard').modal('hide');
+  setTimeout(function(){
+    $(this).removeClass('selected');
+    getSelectedIds();
+  },1000);
+ openModal('/electors/view2/'+id,'lg','כרטסת בוחר','electorCard');
+});
 $('body').on('click','.filterElectors',function(){
    lstSelected=null;
    selectedIds=[];

@@ -86,14 +86,21 @@ $filters=config('list.create_pop');
 
 <script>
   
-  // alert($('.selectedIDS').length);
-  // alert(arrarIDNumber);
-if($('.selectedIDS').length){
+  // alert((arrarIDNumber.length));
+  // alert(window.selectedIds.length);
+if(window.selectedIds.length ){
+
   // alert(window.selectedIds.length);
   var join=window.selectedIds.join();
   // console.log(join);
   $('.selectedIDS').val(join);
   // document.getElementsById(idsValue).value =arrarIDNumber;
+  // $('.selectedIDS').val(arrarIDNumber);
+}
+else if((arrarIDNumber.length)!=0){
+  // alert('second');
+
+
   $('.selectedIDS').val(arrarIDNumber);
 }
 else{
