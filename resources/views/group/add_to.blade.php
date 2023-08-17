@@ -53,6 +53,7 @@ $filters=config('group.create');
 
 <script>
 if(window.selectedIds.length ){
+
   var join=window.selectedIds.join();
   console.log(join);
   $('.selectedIDS').val(join);

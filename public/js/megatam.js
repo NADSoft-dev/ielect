@@ -7,7 +7,7 @@ function PostData(url, alldata, callback,callback2,method,headers) {
    postDataXHR=$.ajax({
         type: method,
         async: true,
-        url: url,
+        url: url.replace('http://','https://'),
         data: alldata,
         beforeSend: function(xhr){
           if(headers){

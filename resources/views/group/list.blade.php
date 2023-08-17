@@ -78,6 +78,7 @@ if(isset($sub1Category) && !empty($sub1Category) && count($sub1Category)!= 0 ){
 // }
 // }
 
+
 ?>
 <tr class="Row-{{$row->id}}">
 <td>{{$row->name}}</td>
