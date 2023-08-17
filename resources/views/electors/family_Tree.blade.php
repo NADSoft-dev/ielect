@@ -491,7 +491,9 @@
                                                     <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
                                                     <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                     <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
+                                                    <div>
                                                     <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}" disabled >הוסף</button>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
@@ -523,7 +525,9 @@
                                                     <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
                                                     <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                     <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
+                                                    <div>
                                                     <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}" disabled>הוסף</button>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
@@ -598,7 +602,9 @@
                                                                                         <input type="hidden" value="{{$children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                                                         <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                                                         <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
+                                                                                        <div>
                                                                                         <button type="submit" class="btn btn-primary" id="addbutton{{$child->id ?? 0}}" disabled >הוסף</button>
+                                                                                        </div>
                                                                                     </form>
                                                                                 </div>
                                                                             </div>
@@ -695,7 +701,9 @@
                                                                                                                 <input type="hidden" value="{{$children_Children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                                                                                 <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                                                                                 <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
+                                                                                                                <div>
                                                                                                                 <button type="submit" class="btn btn-primary" id="addbutton{{$subsubchild->id ?? 0}}" disabled >הוסף</button>
+                                                                                                                </div>
                                                                                                             </form>
                                                                                                         </div>
                                                                                                 </div>
@@ -767,7 +775,9 @@
                                                                                                         <input type="hidden" value="{{$children_Children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                                                                         <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                                                                         <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
+                                                                                                        <div>
                                                                                                         <button type="submit" class="btn btn-primary" id="addbutton{{$subsubchild->id ?? 0}}" disabled >הוסף</button>
+                                                                                                        </div>
                                                                                                     </form>
                                                                                                 </div>
                                                                                             </div>
