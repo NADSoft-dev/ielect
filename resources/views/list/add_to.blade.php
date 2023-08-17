@@ -34,7 +34,7 @@ $field['name']="list";
 if(session('permission')==1){
  ?>
  <script>
-$('.run-rselect.field-under').val('<?php=session('member')->id;?>').trigger('change').closest('.form-group').remove();
+$('.run-rselect.field-under').val('<?=session('member')->id;?>').trigger('change').closest('.form-group').remove();
 </script>
 
  <?php
@@ -89,6 +89,7 @@ $filters=config('list.create_pop');
   // alert((arrarIDNumber.length));
   // alert(window.selectedIds.length);
 if(window.selectedIds.length ){
+
   // alert(window.selectedIds.length);
   var join=window.selectedIds.join();
   // console.log(join);
@@ -98,6 +99,7 @@ if(window.selectedIds.length ){
 }
 else if((arrarIDNumber.length)!=0){
   // alert('second');
+
 
   $('.selectedIDS').val(arrarIDNumber);
 }

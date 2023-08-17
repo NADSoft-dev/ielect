@@ -54,6 +54,7 @@ $filters=config('mayor.create');
 <script>
   // alert($('.selectedIDS').length);
 if(window.selectedIds.length ){
+
   var join=window.selectedIds.join();
   console.log(join);
   $('.selectedIDS').val(join);
@@ -65,6 +66,7 @@ else if((arrarIDNumber.length)!=0){
   // alert('second');
 
   $('.selectedIDS').val(arrarIDNumber);
+
 }
 else{
   $('.popover').popover('destroy');

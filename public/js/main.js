@@ -284,7 +284,8 @@ $('body').on('click','.disableList',function(){
   // $('.selectedIDS').val(arrarIDNumber);
   // alert($('.selectedIds').length);
   var type=$(this).attr('data-type');
-  if(window.selectedIds.length ){
+
+  if(window.selectedIds.length){
     // if($('.selectedIDS').length){
     // alert(arrarIDNumber);
     // console.log(arrarIDNumber);
@@ -315,6 +316,7 @@ $('body').on('click','.disableList',function(){
     }
   },function(){},'POST')
 });
+
   }
   else{
       ShowAlert('עליך לבחור מרשימת הבוחרים');
