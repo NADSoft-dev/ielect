@@ -394,7 +394,9 @@
                                 
                                     @endif
                                     {{-- {{print_r($couple).'H' }} --}}
-                                @if(isset($brother) && !empty($brother) && count($brother) > 0 && ($couple == null || $couple == 0) && count($children)==0  )
+                                @if(isset($brother) && !empty($brother) && (count($brother) > 0) &&  (count($children)==0)  )
+                                {{-- @if(isset($brother) && !empty($brother) && count($brother) > 0 && ($couple == null || $couple == 0) && count($children)==0  ) --}}
+
                                     
                                     @foreach($brother as  $brotherfirst)
                                     <?php 
