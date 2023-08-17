@@ -294,6 +294,9 @@
         cursor: -webkit-grabbing;
         transform: scale(1);
           }
+          /* .selectclass{
+
+          } */
 
     </style>
 </head>
@@ -488,7 +491,7 @@
                                                     <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
                                                     <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                     <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                    <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}"  >הוסף</button>
+                                                    <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}" disabled >הוסף</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -520,7 +523,7 @@
                                                     <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
                                                     <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                     <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                    <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}" >הוסף</button>
+                                                    <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}" disabled>הוסף</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -595,7 +598,7 @@
                                                                                         <input type="hidden" value="{{$children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                                                         <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                                                         <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                                                        <button type="submit" class="btn btn-primary" id="addbutton{{$child->id ?? 0}}" >הוסף</button>
+                                                                                        <button type="submit" class="btn btn-primary" id="addbutton{{$child->id ?? 0}}" disabled >הוסף</button>
                                                                                     </form>
                                                                                 </div>
                                                                             </div>
@@ -692,7 +695,7 @@
                                                                                                                 <input type="hidden" value="{{$children_Children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                                                                                 <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                                                                                 <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                                                                                <button type="submit" class="btn btn-primary" id="addbutton{{$subsubchild->id ?? 0}}"  >הוסף</button>
+                                                                                                                <button type="submit" class="btn btn-primary" id="addbutton{{$subsubchild->id ?? 0}}" disabled >הוסף</button>
                                                                                                             </form>
                                                                                                         </div>
                                                                                                 </div>
@@ -764,7 +767,7 @@
                                                                                                         <input type="hidden" value="{{$children_Children_Children[0]->father_id ?? ''}}" name="father_id" />
                                                                                                         <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
                                                                                                         <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                                                                        <button type="submit" class="btn btn-primary" id="addbutton{{$subsubchild->id ?? 0}}" >הוסף</button>
+                                                                                                        <button type="submit" class="btn btn-primary" id="addbutton{{$subsubchild->id ?? 0}}" disabled >הוסף</button>
                                                                                                     </form>
                                                                                                 </div>
                                                                                             </div>
@@ -922,8 +925,9 @@
                     var selectval =$("#selectAdd"+idvalue).val();
                     $("#paraId"+idvalue).text($(".selectAdd"+idvalue).id);
                     $("#paraId"+idvalue).css("display","block");
-                    alert('set add enable');
+                    // alert('set add enable');
                     // $("#addbutton"+idvalue).
+                    document.getElementById("addbutton"+idvalue).disabled = false;
 
                 }
                         
