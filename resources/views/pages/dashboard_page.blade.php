@@ -149,7 +149,7 @@ $el4=DB::table('electors');
 <script>
 $(document).ready(function($){
 $('.countdown').dsCountDown({
-endDate: new Date("October 30, 2018 22:00:00")
+endDate: new Date("October 31, 2023 22:00:00")
 });
 });
 </script>
