@@ -390,7 +390,7 @@ class ElectorsController extends Controller
         array_push($all_array_sub,$sub->id);
       }
       // print_r($all_array_sub);
-      $electors=SELF::buildQuery($filter)->orWhereIn('group',$all_array_sub);
+      $electors=SELF::buildQuery($filter)->whereIn('group',$all_array_sub);
       $electors=$electors->paginate($pageCount);
       //$electors->withPath('/#/electors/list/');
      
