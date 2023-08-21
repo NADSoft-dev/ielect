@@ -12,6 +12,7 @@
 <form class="form-horizontal" id="filterForm">
 <div class="col-sm-6">
 <?php
+
 $fields=config('electors.fields');
 
 
