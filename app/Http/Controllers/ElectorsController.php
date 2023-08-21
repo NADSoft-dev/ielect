@@ -360,30 +360,43 @@ class ElectorsController extends Controller
 
       }
     function getList(){
-
       $pageCount=Request::cookie('pageCount');
       $pageCount=intval($pageCount);
       $pageCount= $pageCount ? $pageCount:50;
 
     if(Request::has('filter')){
+      
       $filter=json_decode(Request::get('filter'),true);
+      $idfilter=$filter[1]['value'];
+      // print_r($idfilter);
     }else{
       $filter=Request::cookie('electorsFilter');
       $filter=json_decode($filter,true);
+      
     }
         if(Request::has('listFields')){
       $listFields=json_decode(Request::get('listFields'),true);
+      // print_r($listFields);
     }else{
 
       $listFields=Request::cookie('electorsListFileds');
       $listFields=json_decode($listFields,true);
     }
       // print_r ($listFields);
-      $electors=SELF::buildQuery($filter);
+      $all_sub=DB::table('groups')->where('category_id',$idfilter)->get();
+      $all_array_sub=[];
+      
+      foreach($all_sub as $sub){
+        array_push($all_array_sub,$sub->id);
+      }
+      // print_r($all_array_sub);
+      $electors=SELF::buildQuery($filter)->orWhereIn('group',$all_array_sub);
       $electors=$electors->paginate($pageCount);
       //$electors->withPath('/#/electors/list/');
+     
+      $electors=SELF::fixResponse($electors,$listFields);    
+        // print_r($electors);
 
-      $electors=SELF::fixResponse($electors,$listFields);
     $html=view('electors.list')->with(['listFields'=>$listFields,'electors'=>$electors]);
     return response($html)->cookie('electorsFilter', json_encode($filter), 6000)->cookie('electorsListFileds', json_encode($listFields), 6000);
 

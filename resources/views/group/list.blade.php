@@ -28,6 +28,7 @@
     @foreach($rows as $row)
    
 <?php
+// print_r($rows);
 $electors=DB::table('electors')->where('group',$row->id)->count();
 
 $subCategoryCount=0;
@@ -55,28 +56,6 @@ if(isset($sub1Category) && !empty($sub1Category) && count($sub1Category)!= 0 ){
       }
     }
 }
-// if(isset($subCategory) || !empty($subCategory) || $subCategory !=null){
-// $electorsSub=DB::table('electors')->where('group',$subCategory->id)->count();
-// $electors +=$electorsSub;
-// $subCategoryCount +=$electorsSub; ///
-// $subSubCategory=DB::table('groups')->where('category_id',$subCategory->id)->first();
-//   if(isset($subSubCategory) || !empty($subSubCategory) || $subSubCategory !=null){
-//   $electorsSubSub=DB::table('electors')->where('group',$subSubCategory->id)->count();
-//   $electors+=$electorsSubSub;
-//   $subCategoryCount +=$electorsSubSub; ///
-  
-// // }
-
-//   $subSubSubCategory=DB::table('groups')->where('category_id',$subSubCategory->id)->first();
-//   if(isset($subSubSubCategory) || !empty($subSubSubCategory) || $subSubSubCategory !=null){
-//   $electorsSubSubSub=DB::table('electors')->where('group',$subSubSubCategory->id)->count();
-//   $electors+=$electorsSubSubSub;
-//   $subCategoryCount +=$electorsSubSubSub; ///
-
-//   }
-
-// }
-// }
 
 
 ?>

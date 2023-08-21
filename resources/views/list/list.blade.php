@@ -47,6 +47,7 @@ $delegate=isset($delegate) ? $delegate:false;
 
     @foreach($rows as $row)
 <?php
+
 $electors=DB::table('electors')->where('list',$row->id)->count();
 $delegate=DB::table('delegate')->find($row->under);
 $delegate_name= $delegate ? $delegate->full_name :"";
