@@ -398,7 +398,7 @@ class ElectorsController extends Controller
           foreach($sub_sub as $sub2){
             array_push($all_array_sub,$sub2->id);
           }
-          print_r($all_array_sub);
+          // print_r($all_array_sub);
           $electors=SELF::buildQuery($filter)->orWhereIn('group',$all_array_sub);
       }
       else{
