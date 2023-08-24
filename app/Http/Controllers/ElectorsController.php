@@ -365,10 +365,20 @@ class ElectorsController extends Controller
       $pageCount= $pageCount ? $pageCount:50;
 
     if(Request::has('filter')){
-      
+      // $url =$_SERVER['REQUEST_URI'];
+      // echo $url;
+
+        // if (!strpos($url,'car')) {
+        //     echo 'Car exists.';
+        // } else {
+        //     echo 'No cars.';
+        // }
       $filter=json_decode(Request::get('filter'),true);
+      
       if(count($filter)>1){
+        // print_r($filter[1]['name']);
         $idfilter=$filter[1]['value'];
+        $namefilter=$filter[1]['name'];
       // print_r(count($filter));
       }
       
@@ -386,7 +396,8 @@ class ElectorsController extends Controller
       $listFields=json_decode($listFields,true);
     }
       // print_r ($listFields);
-      if(isset($idfilter) && $idfilter !=null){
+      if(isset($namefilter) && $namefilter =='group'){
+        // print_r($filter[1]['name']);
            $all_sub=DB::table('groups')->where('category_id',$idfilter)->get();
         
           $all_array_sub=[];
@@ -400,12 +411,13 @@ class ElectorsController extends Controller
           }
           // print_r($all_array_sub);
           $electors=SELF::buildQuery($filter)->orWhereIn('group',$all_array_sub);
+          // print_r($electors);
       }
       else{
         $electors=SELF::buildQuery($filter);
       }
       
-      
+      // $electors=SELF::buildQuery($filter);
       $electors=$electors->paginate($pageCount);
       //$electors->withPath('/#/electors/list/');
      
