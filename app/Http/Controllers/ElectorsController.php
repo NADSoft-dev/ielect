@@ -365,16 +365,9 @@ class ElectorsController extends Controller
       $pageCount= $pageCount ? $pageCount:50;
 
     if(Request::has('filter')){
-      // $url =$_SERVER['REQUEST_URI'];
-      // echo $url;
 
-        // if (!strpos($url,'car')) {
-        //     echo 'Car exists.';
-        // } else {
-        //     echo 'No cars.';
-        // }
       $filter=json_decode(Request::get('filter'),true);
-      print_r($filter);
+      
       if(count($filter)>1){
         // print_r($filter[1]['name']);
         $idfilter=$filter[1]['value'];
@@ -387,6 +380,7 @@ class ElectorsController extends Controller
       $filter=json_decode($filter,true);
       
     }
+    print_r($filter);
         if(Request::has('listFields')){
       $listFields=json_decode(Request::get('listFields'),true);
       // print_r($listFields);
