@@ -360,15 +360,19 @@ class ElectorsController extends Controller
 
       }
     function getList(){
-      
       $pageCount=Request::cookie('pageCount');
       $pageCount=intval($pageCount);
       $pageCount= $pageCount ? $pageCount:50;
 
-      echo "pageCount=".$pageCount;
-
     if(Request::has('filter')){
+      // $url =$_SERVER['REQUEST_URI'];
+      // echo $url;
 
+        // if (!strpos($url,'car')) {
+        //     echo 'Car exists.';
+        // } else {
+        //     echo 'No cars.';
+        // }
       $filter=json_decode(Request::get('filter'),true);
       
       if(count($filter)>1){
@@ -383,7 +387,6 @@ class ElectorsController extends Controller
       $filter=json_decode($filter,true);
       
     }
-    print_r($filter);
         if(Request::has('listFields')){
       $listFields=json_decode(Request::get('listFields'),true);
       // print_r($listFields);
@@ -413,6 +416,7 @@ class ElectorsController extends Controller
       else{
         $electors=SELF::buildQuery($filter);
       }
+      print($electors->toSql());
       
       // $electors=SELF::buildQuery($filter);
       $electors=$electors->paginate($pageCount);
