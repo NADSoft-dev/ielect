@@ -420,7 +420,7 @@ class ElectorsController extends Controller
       
       // $electors=SELF::buildQuery($filter);
       $electors=$electors->paginate($pageCount);
-      print($electors->toSql());
+      print_r($electors);
       //$electors->withPath('/#/electors/list/');
      
       $electors=SELF::fixResponse($electors,$listFields);    
