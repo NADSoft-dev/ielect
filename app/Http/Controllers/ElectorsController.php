@@ -375,10 +375,19 @@ class ElectorsController extends Controller
         // }
       $filter=json_decode(Request::get('filter'),true);
       
-      if(count($filter)>1){
+      // if(count($filter)>1){
+      //   // print_r($filter[1]['name']);
+      //   $idfilter=$filter[1]['value'];
+      //   $namefilter=$filter[1]['name'];
+      // // print_r(count($filter));
+      // }
+
+      $key_filter = array_search('group', $filter);
+      
+      if($key_filter){
         // print_r($filter[1]['name']);
-        $idfilter=$filter[1]['value'];
-        $namefilter=$filter[1]['name'];
+        $idfilter=$filter[$key_filter]['value'];
+        $namefilter=$filter[$key_filter]['name'];
       // print_r(count($filter));
       }
       
@@ -411,16 +420,14 @@ class ElectorsController extends Controller
           }
           // print_r($all_array_sub);
           $electors=SELF::buildQuery($filter)->orWhereIn('group',$all_array_sub);
-          $electors=$electors->paginate($pageCount);
           // print_r($electors);
       }
       else{
         $electors=SELF::buildQuery($filter);
-        $electors=$electors->paginate($pageCount);
       }
       
       // $electors=SELF::buildQuery($filter);
-      /////$electors=$electors->paginate($pageCount);
+      $electors=$electors->paginate($pageCount);
       //$electors->withPath('/#/electors/list/');
      
       $electors=SELF::fixResponse($electors,$listFields);    
