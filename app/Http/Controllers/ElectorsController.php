@@ -412,15 +412,17 @@ class ElectorsController extends Controller
           // print_r($all_array_sub);
           $electors=SELF::buildQuery($filter)->orWhereIn('group',$all_array_sub);
           // print_r($electors);
+          // $electors=$electors->paginate($pageCount);
+
+      $electors->withPath('/#/electors/list/');
       }
       else{
         $electors=SELF::buildQuery($filter);
+        $electors=$electors->paginate($pageCount);
       }
       
-      
       // $electors=SELF::buildQuery($filter);
-      $electors=$electors->paginate($pageCount);
-      print_r($electors);
+      // $electors=$electors->paginate($pageCount);
       //$electors->withPath('/#/electors/list/');
      
       $electors=SELF::fixResponse($electors,$listFields);    
