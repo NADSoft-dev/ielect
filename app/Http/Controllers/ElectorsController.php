@@ -374,20 +374,11 @@ class ElectorsController extends Controller
         //     echo 'No cars.';
         // }
       $filter=json_decode(Request::get('filter'),true);
-      
-      // if(count($filter)>1){
-      //   // print_r($filter[1]['name']);
-      //   $idfilter=$filter[1]['value'];
-      //   $namefilter=$filter[1]['name'];
-      // // print_r(count($filter));
-      // }
-
-      $key_filter = array_search('group', $filter);
-      
-      if($key_filter){
+      print_r($filter);
+      if(count($filter)>1){
         // print_r($filter[1]['name']);
-        $idfilter=$filter[$key_filter]['value'];
-        $namefilter=$filter[$key_filter]['name'];
+        $idfilter=$filter[1]['value'];
+        $namefilter=$filter[1]['name'];
       // print_r(count($filter));
       }
       
