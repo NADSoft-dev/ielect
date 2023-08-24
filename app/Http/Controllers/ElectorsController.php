@@ -365,12 +365,21 @@ class ElectorsController extends Controller
       $pageCount= $pageCount ? $pageCount:50;
 
     if(Request::has('filter')){
-      
+      // $url =$_SERVER['REQUEST_URI'];
+      // echo $url;
+
+        // if (!strpos($url,'car')) {
+        //     echo 'Car exists.';
+        // } else {
+        //     echo 'No cars.';
+        // }
       $filter=json_decode(Request::get('filter'),true);
-      // if(count($filter)>1){
-      //   $idfilter=$filter[1]['value'];
-      // // print_r(count($filter));
-      // }
+      // print_r($filter[1]['name']);
+      if(count($filter)>1){
+        $idfilter=$filter[1]['value'];
+        $namefilter=$filter[1]['name'];
+      // print_r(count($filter));
+      }
       
     }else{
       $filter=Request::cookie('electorsFilter');
@@ -386,24 +395,24 @@ class ElectorsController extends Controller
       $listFields=json_decode($listFields,true);
     }
       // print_r ($listFields);
-      // if(isset($idfilter) && $idfilter !=null){
-      //      $all_sub=DB::table('groups')->where('category_id',$idfilter)->get();
+      if(isset($namefilter) && $namefilter !='group'){
+           $all_sub=DB::table('groups')->where('category_id',$idfilter)->get();
         
-      //     $all_array_sub=[];
+          $all_array_sub=[];
           
-      //     foreach($all_sub as $sub){
-      //       array_push($all_array_sub,$sub->id);
-      //     }
-      //     $sub_sub=DB::table('groups')->whereIn('category_id',$all_array_sub)->get();
-      //     foreach($sub_sub as $sub2){
-      //       array_push($all_array_sub,$sub2->id);
-      //     }
-      //     // print_r($all_array_sub);
-      //     $electors=SELF::buildQuery($filter)->orWhereIn('group',$all_array_sub);
-      // }
-      // else{
-      //   $electors=SELF::buildQuery($filter);
-      // }
+          foreach($all_sub as $sub){
+            array_push($all_array_sub,$sub->id);
+          }
+          $sub_sub=DB::table('groups')->whereIn('category_id',$all_array_sub)->get();
+          foreach($sub_sub as $sub2){
+            array_push($all_array_sub,$sub2->id);
+          }
+          // print_r($all_array_sub);
+          $electors=SELF::buildQuery($filter)->orWhereIn('group',$all_array_sub);
+      }
+      else{
+        $electors=SELF::buildQuery($filter);
+      }
       
       $electors=SELF::buildQuery($filter);
       $electors=$electors->paginate($pageCount);
