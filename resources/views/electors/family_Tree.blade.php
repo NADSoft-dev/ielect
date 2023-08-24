@@ -363,11 +363,12 @@
                        {{-- <li> --}}
                         <ul >
                             
-                            <li> 
+                            {{-- <li>  --}}
  
                                     @if(isset($person) && $person!=null)
                                         @if(isset($brother) && !empty($brother) && (count($brother) > 0) &&  (count($children)>0)  )
                                             @foreach($brother as  $brotherfirst)
+                                          <li>
                                             <div class="brother box">
                                                 <div class="openPoppup" data-id="{{$brotherfirst->IDNumber ?? ''}}">
                                                         @if($brotherfirst->gender == 1 )
@@ -383,8 +384,10 @@
                                                 <input type="checkbox" data-id="{{$brotherfirst->IDNumber ?? ''}}" id="parent{{$brotherfirst->IDNumber ?? ''}}" name="parent{{$brotherfirst->IDNumber ?? ''}}" value="{{$brotherfirst->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$brotherfirst->IDNumber ?? 0}})"> 
 
                                             </div>
+                                            <li>
                                             @endforeach
                                         @endif
+                                        <li>
                                         <div class="person box" style="border:1px solid black">
                                             <div class="openPoppup" data-id="{{$person->IDNumber ?? ''}}">
                                                 @if (isset($person) && $person!=null && $person->gender !=null)
@@ -402,143 +405,7 @@
 
                                             
                                         </div>
-                                        
-                                    @endif
-                                    {{-- {{print_r($couple).'H' }} --}}
-                                @if(isset($brother) && !empty($brother) && (count($brother) > 0) &&  (count($children)==0)  )
-                                 {{-- @if(isset($brother) && !empty($brother) && count($brother) > 0 && ($couple == null || $couple == 0) && count($children)==0  ) --}}
-
-                                    
-                                    @foreach($brother as  $brotherfirst)
-                                    <?php 
-                                    $children_brother=DB::table('electors')->where('mother_id',$brotherfirst->IDNumber)->orWhere('father_id',$brotherfirst->IDNumber)->get();
-                                    
-                                    $couple_brother=DB::table('electors')->where('couple',$brotherfirst->IDNumber)->first();
-                                        // echo($brotherfirst->IDNumber);
-                                    ?>
-                                    @if($brotherfirst->IDNumber != $person->IDNumber )
-                                    <li>   
-                                        <ul>  
-                                            <li>                     
-                                                <div class="brother box">
-                                                    <div class="openPoppup" data-id="{{$brotherfirst->IDNumber ?? ''}}">
-                                                            @if($brotherfirst->gender == 1 )
-                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i>
-                                                            @else
-                                                            <i style="font-size:24px" class="fa female " >&#xf221;</i>
-
-                                                            @endif   
-                                                        
-                                                            <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}</p>
-                                                            <p style="margin: 3% 0;color:black;">גיל:{{$brotherfirst->birthYear ? Carbon\Carbon::now()->format('Y')- $brotherfirst->birthYear : ''}}</p>
-                                                    </div>
-                                                    <input type="checkbox" data-id="{{$brotherfirst->IDNumber ?? ''}}" id="parent{{$brotherfirst->IDNumber ?? ''}}" name="parent{{$brotherfirst->IDNumber ?? ''}}" value="{{$brotherfirst->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$brotherfirst->IDNumber ?? 0}})"> 
-
-                                                </div>
-                                            </li>
-                                            <li>
-                                                @if (isset($couple_brother) && ($couple_brother !== null || $couple_brother !=0) )
-                                                    <div class="brother box">
-                                                        <div class="openPoppup" data-id="{{$couple_brother->IDNumber ?? ''}}">
-                                                            @if($couple_brother->gender == 1 )
-                                                            <i style="font-size:24px" class="fa male">&#xf222;</i>
-                                                            @else
-                                                            <i style="font-size:24px" class="fa female" >&#xf221;</i>
-                                                            @endif   
-                                                        
-                                                            <p style="margin: 3% 0"> {{$couple_brother->PersonalName ?? ''}}</p>
-                                                            <p style="margin: 3% 0;color:black;">גיל:{{$couple_brother->birthYear ? Carbon\Carbon::now()->format('Y')- $couple_brother->birthYear : ''}}</p>
-                                                        </div>
-                                                        <input type="checkbox" data-id="{{$couple_brother->IDNumber ?? ''}}" id="parent{{$couple_brother->IDNumber ?? ''}}" name="parent{{$couple_brother->IDNumber ?? ''}}" value="{{$couple_brother->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$couple_brother->IDNumber ?? 0}})"> 
-
-                                                    </div> 
-                                                @endif 
-                                                @if(isset($children_brother) && !empty($children_brother) && count($children_brother)>0)
-                                                    <ul>
-                                                            @foreach ($children_brother as $brother_child)
-                                                                    
-                                                                        <li>
-                                                                            <div class="person box">
-                                                                                <div class="openPoppup" data-id="{{$brother_child->IDNumber ?? ''}}">
-                                                                                    @if (isset($children_brother) && $children_brother!=null && $brother_child->gender !=null)
-                                                                                        @if($brother_child->gender === 1 )
-                                                                                        <i style="font-size:24px" class="fa male" >&#xf222;</i>
-                                                                                        @else
-                                                                                        <i style="font-size:24px" class="fa female ">&#xf221;</i>
-
-                                                                                        @endif   
-                                                                                    @endif 
-                                                                                        <p style="margin: 3% 0"> {{$brother_child->PersonalName ?? ''}}</p>
-                                                                                        <p style="margin: 3% 0;color:black;">גיל:{{$brother_child->birthYear ? Carbon\Carbon::now()->format('Y')- $brother_child->birthYear : ''}}</p>
-                                                                                </div>
-                                                                                    <input type="checkbox" data-id="{{$brother_child->IDNumber ?? ''}}" id="parent{{$brother_child->IDNumber ?? ''}}" name="parent{{$brother_child->IDNumber ?? ''}}" value="{{$brother_child->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$brother_child->IDNumber ?? 0}})">
-
-                                                                                
-                                                                            </div>
-
-                                                                        </li>
-                                                                    
-                                                            @endforeach
-                                                    </ul>
-                                                @endif
-                                            </li>
-                                        </ul>
-                                    
-                                        
-                                    </li>
-                                    @endif
-                                    @endforeach
-
-                                    <li>
-                                        <div class="wrap-select-div box" id="showselect" onclick="showSelect({{$person->id ?? 0}})">
-                                                <i style="font-size:24px" class="fa add">&#xf067;</i>
-                                            <p style="margin-top:15%">הוסף </p>
-                                            <div class="select-div" id="select-div{{$person->id }}">
-                                                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
-                                                
-                                                    <select name="idNumberSelect" id="selectAdd{{$person->id }}" class=" selectclass selectpicker" onchange="selectChange({{$person->id }})">
-                                                            <option value="0">choose</option>
-                                                            @foreach ($all_Id_Numbers as $Id_Number )
-                                                                
-                                                            <option value="{{$Id_Number->IDNumber }}" data-select="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}</option>
-                                                            @endforeach
-                                                            
-                                                    </select>
-                                                    <p id="paraId{{$person->id }}"  style="display: none;margin: 10%"></p>
-
-                                                    <input type="hidden" value="{{$children[0]->mother_id ?? ''}}" name="mother_id" />
-                                                    <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
-                                                    <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
-                                                    <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
-                                                    <div>
-                                                    <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}" disabled >הוסף</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </li>  
-                                    
-                                @endif
-                            
-                                @if (isset($couple) && $couple!=null && $couple->gender !=null)
-                                    
-                                    <div class="partner box"> 
-                                        <input type="checkbox" data-id="{{$couple->IDNumber ?? ''}}" id="parent{{$couple->IDNumber ?? ''}}" name="parent{{$couple->IDNumber ?? ''}}" value="{{$couple->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$couple->IDNumber ?? 0}})">
-                                        <div class="openPoppup" data-id="{{$couple->IDNumber ?? ''}}">
-                                                @if($couple->gender === 1 )
-                                                <i style="font-size:24px" class="fa male ">&#xf222;</i>
-                                                @else
-                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
-
-                                                @endif   
-                                    
-                                            <p style="margin: 3% 0;"> {{$couple->PersonalName ?? ''}}</p>
-
-                                            <p style="margin: 3% 0;color:black;">גיל:{{$couple->birthYear ? Carbon\Carbon::now()->format('Y')- $couple->birthYear : ''}}</p>
-                                        </div>
-                                    </div>
-                                @endif  
-                                @if(isset($children) && !empty($children) && count($children)>0)
+                                        @if(isset($children) && !empty($children) && count($children)>0)
                                 <ul>
                                     
                                     <li>
@@ -900,7 +767,145 @@
                                     
                                 </ul>
                                 @endif
-                            </li>
+                                        </li>
+                                    @endif
+                                    {{-- {{print_r($couple).'H' }} --}}
+                                @if(isset($brother) && !empty($brother) && (count($brother) > 0) &&  (count($children)==0)  )
+                                 {{-- @if(isset($brother) && !empty($brother) && count($brother) > 0 && ($couple == null || $couple == 0) && count($children)==0  ) --}}
+
+                                    
+                                    @foreach($brother as  $brotherfirst)
+                                    <?php 
+                                    $children_brother=DB::table('electors')->where('mother_id',$brotherfirst->IDNumber)->orWhere('father_id',$brotherfirst->IDNumber)->get();
+                                    
+                                    $couple_brother=DB::table('electors')->where('couple',$brotherfirst->IDNumber)->first();
+                                        // echo($brotherfirst->IDNumber);
+                                    ?>
+                                    @if($brotherfirst->IDNumber != $person->IDNumber )
+                                    <li>   
+                                        <ul>  
+                                            <li>                     
+                                                <div class="brother box">
+                                                    <div class="openPoppup" data-id="{{$brotherfirst->IDNumber ?? ''}}">
+                                                            @if($brotherfirst->gender == 1 )
+                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i>
+                                                            @else
+                                                            <i style="font-size:24px" class="fa female " >&#xf221;</i>
+
+                                                            @endif   
+                                                        
+                                                            <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}</p>
+                                                            <p style="margin: 3% 0;color:black;">גיל:{{$brotherfirst->birthYear ? Carbon\Carbon::now()->format('Y')- $brotherfirst->birthYear : ''}}</p>
+                                                    </div>
+                                                    <input type="checkbox" data-id="{{$brotherfirst->IDNumber ?? ''}}" id="parent{{$brotherfirst->IDNumber ?? ''}}" name="parent{{$brotherfirst->IDNumber ?? ''}}" value="{{$brotherfirst->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$brotherfirst->IDNumber ?? 0}})"> 
+
+                                                </div>
+                                            </li>
+                                            <li>
+                                                @if (isset($couple_brother) && ($couple_brother !== null || $couple_brother !=0) )
+                                                    <div class="brother box">
+                                                        <div class="openPoppup" data-id="{{$couple_brother->IDNumber ?? ''}}">
+                                                            @if($couple_brother->gender == 1 )
+                                                            <i style="font-size:24px" class="fa male">&#xf222;</i>
+                                                            @else
+                                                            <i style="font-size:24px" class="fa female" >&#xf221;</i>
+                                                            @endif   
+                                                        
+                                                            <p style="margin: 3% 0"> {{$couple_brother->PersonalName ?? ''}}</p>
+                                                            <p style="margin: 3% 0;color:black;">גיל:{{$couple_brother->birthYear ? Carbon\Carbon::now()->format('Y')- $couple_brother->birthYear : ''}}</p>
+                                                        </div>
+                                                        <input type="checkbox" data-id="{{$couple_brother->IDNumber ?? ''}}" id="parent{{$couple_brother->IDNumber ?? ''}}" name="parent{{$couple_brother->IDNumber ?? ''}}" value="{{$couple_brother->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$couple_brother->IDNumber ?? 0}})"> 
+
+                                                    </div> 
+                                                @endif 
+                                                @if(isset($children_brother) && !empty($children_brother) && count($children_brother)>0)
+                                                    <ul>
+                                                            @foreach ($children_brother as $brother_child)
+                                                                    
+                                                                        <li>
+                                                                            <div class="person box">
+                                                                                <div class="openPoppup" data-id="{{$brother_child->IDNumber ?? ''}}">
+                                                                                    @if (isset($children_brother) && $children_brother!=null && $brother_child->gender !=null)
+                                                                                        @if($brother_child->gender === 1 )
+                                                                                        <i style="font-size:24px" class="fa male" >&#xf222;</i>
+                                                                                        @else
+                                                                                        <i style="font-size:24px" class="fa female ">&#xf221;</i>
+
+                                                                                        @endif   
+                                                                                    @endif 
+                                                                                        <p style="margin: 3% 0"> {{$brother_child->PersonalName ?? ''}}</p>
+                                                                                        <p style="margin: 3% 0;color:black;">גיל:{{$brother_child->birthYear ? Carbon\Carbon::now()->format('Y')- $brother_child->birthYear : ''}}</p>
+                                                                                </div>
+                                                                                    <input type="checkbox" data-id="{{$brother_child->IDNumber ?? ''}}" id="parent{{$brother_child->IDNumber ?? ''}}" name="parent{{$brother_child->IDNumber ?? ''}}" value="{{$brother_child->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$brother_child->IDNumber ?? 0}})">
+
+                                                                                
+                                                                            </div>
+
+                                                                        </li>
+                                                                    
+                                                            @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        </ul>
+                                    
+                                        
+                                    </li>
+                                    @endif
+                                    @endforeach
+
+                                    <li>
+                                        <div class="wrap-select-div box" id="showselect" onclick="showSelect({{$person->id ?? 0}})">
+                                                <i style="font-size:24px" class="fa add">&#xf067;</i>
+                                            <p style="margin-top:15%">הוסף </p>
+                                            <div class="select-div" id="select-div{{$person->id }}">
+                                                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('/storeIdNumber')}}">
+                                                
+                                                    <select name="idNumberSelect" id="selectAdd{{$person->id }}" class=" selectclass selectpicker" onchange="selectChange({{$person->id }})">
+                                                            <option value="0">choose</option>
+                                                            @foreach ($all_Id_Numbers as $Id_Number )
+                                                                
+                                                            <option value="{{$Id_Number->IDNumber }}" data-select="{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}" >{{$Id_Number->PersonalName }}:{{$Id_Number->IDNumber }}</option>
+                                                            @endforeach
+                                                            
+                                                    </select>
+                                                    <p id="paraId{{$person->id }}"  style="display: none;margin: 10%"></p>
+
+                                                    <input type="hidden" value="{{$children[0]->mother_id ?? ''}}" name="mother_id" />
+                                                    <input type="hidden" value="{{$children[0]->father_id ?? ''}}" name="father_id" />
+                                                    <input type="hidden" value="{{$person->id ?? 0}}" name="id" />
+                                                    <input type="hidden" value="{{$person->IDNumber ?? ''}}" name="idNumber" />
+                                                    <div>
+                                                    <button type="submit" class="btn btn-primary" id="addbutton{{$person->id }}" disabled >הוסף</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </li>  
+                                    
+                                @endif
+                            
+                                @if (isset($couple) && $couple!=null && $couple->gender !=null)
+                                    <li>
+                                    <div class="partner box"> 
+                                        <input type="checkbox" data-id="{{$couple->IDNumber ?? ''}}" id="parent{{$couple->IDNumber ?? ''}}" name="parent{{$couple->IDNumber ?? ''}}" value="{{$couple->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$couple->IDNumber ?? 0}})">
+                                        <div class="openPoppup" data-id="{{$couple->IDNumber ?? ''}}">
+                                                @if($couple->gender === 1 )
+                                                <i style="font-size:24px" class="fa male ">&#xf222;</i>
+                                                @else
+                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
+
+                                                @endif   
+                                    
+                                            <p style="margin: 3% 0;"> {{$couple->PersonalName ?? ''}}</p>
+
+                                            <p style="margin: 3% 0;color:black;">גיל:{{$couple->birthYear ? Carbon\Carbon::now()->format('Y')- $couple->birthYear : ''}}</p>
+                                        </div>
+                                    </div>
+                                    </li>
+                                @endif  
+                                
+                            {{-- </li> --}}
 
                         </ul>
                     {{-- </li> --}}
