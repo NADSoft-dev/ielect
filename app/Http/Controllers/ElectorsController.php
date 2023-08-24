@@ -360,6 +360,7 @@ class ElectorsController extends Controller
 
       }
     function getList(){
+      echo "pageCount=".$pageCount;
       $pageCount=Request::cookie('pageCount');
       $pageCount=intval($pageCount);
       $pageCount= $pageCount ? $pageCount:50;
