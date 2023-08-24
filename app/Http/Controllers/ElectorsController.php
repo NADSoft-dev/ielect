@@ -395,7 +395,7 @@ class ElectorsController extends Controller
       $listFields=json_decode($listFields,true);
     }
       // print_r ($listFields);
-      if(isset($namefilter) && $namefilter !='group'){
+      if(isset($namefilter) && $namefilter =='group'){
            $all_sub=DB::table('groups')->where('category_id',$idfilter)->get();
         
           $all_array_sub=[];
