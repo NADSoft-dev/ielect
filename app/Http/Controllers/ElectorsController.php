@@ -365,7 +365,6 @@ class ElectorsController extends Controller
       $pageCount=intval($pageCount);
       $pageCount= $pageCount ? $pageCount:50;
 
-      echo "pageCount=".$pageCount;
 
     if(Request::has('filter')){
 
