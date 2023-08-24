@@ -374,8 +374,9 @@ class ElectorsController extends Controller
         //     echo 'No cars.';
         // }
       $filter=json_decode(Request::get('filter'),true);
-      // print_r($filter[1]['name']);
+      
       if(count($filter)>1){
+        // print_r($filter[1]['name']);
         $idfilter=$filter[1]['value'];
         $namefilter=$filter[1]['name'];
       // print_r(count($filter));
@@ -396,6 +397,7 @@ class ElectorsController extends Controller
     }
       // print_r ($listFields);
       if(isset($namefilter) && $namefilter =='group'){
+        // print_r($filter[1]['name']);
            $all_sub=DB::table('groups')->where('category_id',$idfilter)->get();
         
           $all_array_sub=[];
@@ -409,12 +411,13 @@ class ElectorsController extends Controller
           }
           // print_r($all_array_sub);
           $electors=SELF::buildQuery($filter)->orWhereIn('group',$all_array_sub);
+          // print_r($electors);
       }
       else{
         $electors=SELF::buildQuery($filter);
       }
       
-      $electors=SELF::buildQuery($filter);
+      // $electors=SELF::buildQuery($filter);
       $electors=$electors->paginate($pageCount);
       //$electors->withPath('/#/electors/list/');
      
