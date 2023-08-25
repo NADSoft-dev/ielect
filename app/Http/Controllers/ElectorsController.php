@@ -256,8 +256,8 @@ class ElectorsController extends Controller
               array_push($all_array_sub,$sub2->id);
             }
             array_push($all_array_sub,$f['value']);
-            print_r($all_array_sub);
-            $electors=$electors->orWhereIn('group',$all_array_sub);
+            // print_r($all_array_sub);
+            $electors=$electors->orWhereIn('electors.group',$all_array_sub);
             break;
 
 
