@@ -252,11 +252,11 @@ class ElectorsController extends Controller
               array_push($all_array_sub,$sub->id);
             }
             $sub_sub=DB::table('groups')->whereIn('category_id',$all_array_sub)->get();
-            foreach($sub_sub as $sub2){
+            foreach($sub_sub as $sub2){ا
               array_push($all_array_sub,$sub2->id);
             }
             // print_r($all_array_sub);
-            $electors=$electors->orWhereIn('group',$all_array_sub);
+            $electors=$electors->orWhereIn('electors.group',$all_array_sub);
             break;
 
 
