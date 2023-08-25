@@ -247,8 +247,6 @@ class ElectorsController extends Controller
             $all_sub=DB::table('groups')->where('category_id',$f['value'])->get();
           
             $all_array_sub=[];
-
-            array_push($all_array_sub,$f['value']);
             
             foreach($all_sub as $sub){
               array_push($all_array_sub,$sub->id);
@@ -257,8 +255,9 @@ class ElectorsController extends Controller
             foreach($sub_sub as $sub2){
               array_push($all_array_sub,$sub2->id);
             }
+            array_push($all_array_sub,$f['value']);
             print_r($all_array_sub);
-            $electors=$electors->WhereIn('electors.group',$all_array_sub);
+            $electors=$electors->orWhereIn('group',$all_array_sub);
             break;
 
 
