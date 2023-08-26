@@ -141,6 +141,18 @@ class ElectorsController extends Controller
       DB::table('electors')->where('id',$id)->update([$field=>$val]);
     }
 
+    function returnSubCatIds($catid) {
+      
+      $subCats = Array();
+      $getSubs = DB::table('groups')->where('category_id',$catid)->get();
+        foreach($getSubs as $sub){
+            array_push($subCats,$sub->id);
+            $subCats = array_merge($subCats,SELF::returnSubCatIds($sub->id));
+        }
+
+      return $subCats;
+  }
+
     function buildQuery($filter){
       $electors=DB::table('electors');
       if(session('permission')==1){
@@ -244,17 +256,26 @@ class ElectorsController extends Controller
           break;
 
           case "group":
-            $all_sub=DB::table('groups')->where('category_id',$f['value'])->get();
+
+            // $all_array_sub = SELF::returnSubCatIds($f['value']);
+            // $all_sub=DB::table('groups')->where('category_id',$f['value'])->get();
           
             $all_array_sub=[];
             
-            foreach($all_sub as $sub){
-              array_push($all_array_sub,$sub->id);
-            }
-            $sub_sub=DB::table('groups')->whereIn('category_id',$all_array_sub)->get();
-            foreach($sub_sub as $sub2){
-              array_push($all_array_sub,$sub2->id);
-            }
+            // foreach($all_sub as $sub){
+            //   array_push($all_array_sub,$sub->id);
+            // }
+            // $sub_sub=DB::table('groups')->whereIn('category_id',$all_array_sub)->get();
+            // foreach($sub_sub as $sub2){
+            //   array_push($all_array_sub,$sub2->id);
+            //   $sub_sub_sub=DB::table('groups')->where('category_id',$sub2->id)->get();
+            //   foreach($sub_sub_sub as $sub3){
+            //     array_push($all_array_sub,$sub3->id);
+            //   }
+            // }
+
+            $all_array_sub = SELF::returnSubCatIds($f['value']);
+
             array_push($all_array_sub,$f['value']);
             // print_r($all_array_sub);
             $electors=$electors->WhereIn('electors.group',$all_array_sub);
