@@ -52,6 +52,18 @@ if(isset($sub1Category) && !empty($sub1Category) && count($sub1Category)!= 0 ){
             $mainCount += count($sub3Category);
             $electors += $electorsSub2;
 
+            if(isset($sub3Category) && !empty($sub3Category) && count($sub3Category)!= 0 ){
+                for($sub3Id=0;$sub3Id<count($sub3Category);$sub3Id++){
+                    $idsub2=$sub2Category[$sub2Id];
+                    $sub4Category=DB::table('groups')->where('category_id',$idsub3->id)->get();
+                    $electorsSub3=DB::table('electors')->where('group',$idsub3->id)->count();
+                    // print_r($sub3Category[$sub2Id]);   
+                    $mainCount += count($sub4Category);
+                    $electors += $electorsSub3;
+
+                }
+              }
+
         }
       }
     }
