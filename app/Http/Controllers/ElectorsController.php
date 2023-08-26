@@ -254,6 +254,10 @@ class ElectorsController extends Controller
             $sub_sub=DB::table('groups')->whereIn('category_id',$all_array_sub)->get();
             foreach($sub_sub as $sub2){
               array_push($all_array_sub,$sub2->id);
+              $sub_sub2=DB::table('groups')->whereIn('category_id',$sub2->id)->get();
+              foreach($sub_sub2 as $sub3){
+                array_push($all_array_sub,$sub3->id);
+              }
             }
             array_push($all_array_sub,$f['value']);
             // print_r($all_array_sub);
