@@ -56,7 +56,7 @@
                 $SubcategoryCount += count($sub3Category);
                 $electors += $electorsSub2;
 
-                if(isset($sub3Category) && !empty($sub3Category) && count($sub3ategory)!= 0 ){
+                if(isset($sub3Category) && !empty($sub3Category) && count($sub3Category)!= 0 ){
                   for($sub3Id=0;$sub3Id<count($sub3Category);$sub3Id++){
                       $idsub3=$sub3Category[$sub3Id];
                       $sub4Category=DB::table('groups')->where('category_id',$idsub3->id)->get();
