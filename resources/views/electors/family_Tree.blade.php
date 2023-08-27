@@ -163,7 +163,7 @@
             min-height: 120px;
         }
         .partner{
-            background-color: rgb(248 248 248) !important;
+            background-color: rgb(240 237 237) !important;
         }
 
         /*Time for some hover effects*/
