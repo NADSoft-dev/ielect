@@ -835,7 +835,7 @@
                                                 </li>
                                                 <li>
                                                     @if (isset($couple_brother) && ($couple_brother !== null || $couple_brother !=0) )
-                                                        <div class="brother box">
+                                                        <div class="partner box">
                                                             <div class="openPoppup" data-id="{{$couple_brother->IDNumber ?? ''}}">
                                                                 @if($couple_brother->gender == 1 )
                                                                 <i style="font-size:24px" class="fa male">&#xf222;</i>
