@@ -246,6 +246,15 @@
             width: 53px;
             height: 53px;
         }
+        i.nogender{
+            background-color:#c7bec5;
+            border-radius: 50%;
+            border: 1px solid #FADDF5;
+            padding: 14px;
+            margin-top:20%;
+            width: 53px;
+            height: 53px;
+        }
         .add{
          color:#1BDF5D
         }
@@ -387,12 +396,16 @@
                                                     <li>
                                                         <div class="brother box">
                                                             <div class="openPoppup" data-id="{{$brotherfirst->IDNumber ?? ''}}">
-                                                                    @if($brotherfirst->gender == 1 )
-                                                                    <i style="font-size:24px" class="fa male " >&#xf222;</i>
-                                                                    @else
-                                                                    <i style="font-size:24px" class="fa female " >&#xf221;</i>
-
-                                                                    @endif   
+                                                                @if($brotherfirst->gender == 1 )
+                                                                <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                @endif 
+                                                                @if($brotherfirst->gender == 2)
+                                                                    <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                @endif
+                                                                
+                                                                @if($brotherfirst->gender === null) 
+                                                                    <i style="font-size:24px" class="fa nogender" ></i>
+                                                                @endif    
                                                                 
                                                                     <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}</p>
                                                                     <p style="margin: 3% 0;color:black;">גיל:{{$brotherfirst->birthYear ? Carbon\Carbon::now()->format('Y')- $brotherfirst->birthYear : ''}}</p>
@@ -407,12 +420,16 @@
                                         <li> <!-- person li -->
                                             <div class="person box" style="border:1px solid black">
                                                 <div class="openPoppup" data-id="{{$person->IDNumber ?? ''}}">
-                                                    @if (isset($person) && $person!=null && $person->gender !=null)
-                                                        @if($person->gender === 1 )
-                                                        <i style="font-size:24px" class="fa male " >&#xf222;</i>
-                                                        @else
-                                                        <i style="font-size:24px" class="fa female " >&#xf221;</i>
-
+                                                    @if (isset($person) && $person!=null )
+                                                        @if($person->gender == 1 )
+                                                        <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                        @endif 
+                                                        @if($person->gender == 2)
+                                                            <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                        @endif
+                                                        
+                                                        @if($person->gender === null) 
+                                                            <i style="font-size:24px" class="fa nogender" ></i>
                                                         @endif   
                                                     @endif 
                                                         <p style="margin: 3% 0"> {{$person->PersonalName ?? ''}}</p>
@@ -460,7 +477,8 @@
                                                                             $children_Children=DB::table('electors')->where('mother_id',$child->IDNumber)->orWhere('father_id',$child->IDNumber)->get();
                                                                             $child_couple=$child->couple !=0 ? $child->couple :'';
                                                                             $couple_chlidren=DB::table('electors')->where('IDNumber',$child_couple)->first();
-                                                                            // echo $couple_chlidren;
+                                                                            //  print_r($couple_chlidren) ;
+                                                                            
                                                                         ?>
                                                                         @if (isset($child->couple) && $child->couple!=null )
                                                                             <ul> 
@@ -469,13 +487,20 @@
 
                                                                                         <input type="checkbox" data-id="{{$child->couple ?? ''}}" id="parent{{$child->couple ?? ''}}" name="parent{{$child->couple ?? ''}}" value="{{$child->couple ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$child->couple ?? 0}})">
                                                                                         <div class="openPoppup" data-id="{{$child->couple ?? ''}}">
-                                                                                            @if (isset($couple_chlidren) && $couple_chlidren!=null && $couple_chlidren->gender !=null)
+                                                                                            @if (isset($couple_chlidren) && $couple_chlidren!=null )
+                                                                                               
                                                                                                 @if($couple_chlidren->gender == 1 )
-                                                                                                <i style="font-size:24px" class="fa male " >&#xf222;</i>
-                                                                                                @else
-                                                                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
-
-                                                                                                @endif   
+                                                                                                   <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                                @endif 
+                                                                                                @if($couple_chlidren->gender == 2)
+                                                                                                   <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                                @endif
+                                                                                                
+                                                                                                @if($couple_chlidren->gender == null) 
+                                                                                                   <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                                @endif
+                                                                                                {{-- @else
+                                                                                                <i style="font-size:24px" class="fa nogender" ></i> --}}
                                                                                             @endif   
                                                                                         
                                                                                                 <p style="margin: 3% 0;"> {{$couple_chlidren->PersonalName ?? ''}}</p>
@@ -487,15 +512,20 @@
                                                                                 <li>
                                                                                     <div class="child box">
                                                                                         <div class="openPoppup" data-id="{{$child->IDNumber ?? ''}}">
-                                                                                                @if (isset($children) && $children!=null && $child->gender !=null)
+                                                                                                @if (isset($children) && $children!=null )
                                                                                                     @if($child->gender == 1 )
-
-                                                                                                    <i style="font-size:24px" class="fa male">&#xf222;</i>
-                                                                                                    @else
-                                                                                                    <i style="font-size:24px" class="fa female" >&#xf221;</i>
-
-                                                                                                    @endif   
+                                                                                                    <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                                    @endif 
+                                                                                                    @if($child->gender == 2)
+                                                                                                        <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                                    @endif
+                                                                                                    
+                                                                                                    @if($child->gender === null) 
+                                                                                                        <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                                    @endif
                                                                                                 @endif 
+                                                                                                
+                                                                                                
                                                                                                 <p style="margin: 3% 0"> {{$child->PersonalName ?? ''}}</p>
                                             
                                                                                                 <p style="margin: 3% 0;color:black;">גיל:{{$child->birthYear ? Carbon\Carbon::now()->format('Y')- $child->birthYear : ''}}</p>
@@ -556,14 +586,18 @@
 
                                                                                                             <input type="checkbox" data-id="{{$subchild->couple ?? ''}}" id="parent{{$subchild->couple ?? ''}}" name="parent{{$subchild->couple ?? ''}}" value="{{$subchild->couple ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$subchild->couple ?? 0}})">
                                                                                                                 <div class="openPoppup" data-id="{{$subchild->couple ?? ''}}">
-                                                                                                                    @if (isset($couple_children_Children) && $couple_children_Children!=null && $couple_children_Children->gender !=null)
+                                                                                                                    @if (isset($couple_children_Children) && $couple_children_Children!=null)
                                                                                                                             @if($couple_children_Children->gender == 1 )
-                                                                                                                            <i style="font-size:24px" class="fa male" >&#xf222;</i>
-                                                                                                                            @else
-                                                                                                                            <i style="font-size:24px" class="fa female">&#xf221;</i>
-
-                                                                                                                            @endif   
-                                                                                                                        @endif   
+                                                                                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                                                            @endif 
+                                                                                                                            @if($couple_children_Children->gender == 2)
+                                                                                                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                                                            @endif
+                                                                                                                            
+                                                                                                                            @if($couple_children_Children->gender === null) 
+                                                                                                                                <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                                                            @endif
+                                                                                                                    @endif   
                                                                                                                 
                                                                                                                         <p style="margin: 3% 0;"> {{$couple_children_Children->PersonalName ?? ''}}</p>
                                                                 
@@ -574,14 +608,17 @@
                                                                                                         <li>
                                                                                                             <div class="childchild box">
                                                                                                                 <div class="openPoppup" data-id="{{$subchild->IDNumber ?? ''}}">
-                                                                                                                        @if (isset($children_Children) && $children_Children!=null && $subchild->gender !=null)
-                                                                                                                            @if($subchild->gender === 1 )
-
-                                                                                                                            <i style="font-size:24px" class="fa male">&#xf222;</i>
-                                                                                                                            @else
-                                                                                                                            <i style="font-size:24px" class="fa female">&#xf221;</i>
-
-                                                                                                                            @endif   
+                                                                                                                        @if (isset($children_Children) && $children_Children!=null )
+                                                                                                                            @if($subchild->gender == 1 )
+                                                                                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                                                            @endif 
+                                                                                                                            @if($subchild->gender == 2)
+                                                                                                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                                                            @endif
+                                                                                                                            
+                                                                                                                            @if($subchild->gender === null) 
+                                                                                                                                <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                                                            @endif
                                                                                                                         @endif 
                                                                                                                         <p style="margin: 3% 0"> {{$subchild->PersonalName ?? ''}}</p>
                                                                 
@@ -598,14 +635,17 @@
                                                                                                                             {{-- <i  class="fa doteIcon">&#xf111;</i> --}}
                                                                                                                             <div class="childchild box">
                                                                                                                                 <div class="openPoppup" data-id="{{$subsubchild->IDNumber ?? ''}}">
-                                                                                                                                        @if (isset($children_Children_Children) && $children_Children_Children!=null && $subsubchild->gender !=null)
-                                                                                                                                            @if($subsubchild->gender === 1 )
-
-                                                                                                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i>
-                                                                                                                                            @else
-                                                                                                                                            <i style="font-size:24px" class="fa female ">&#xf221;</i>
-
-                                                                                                                                            @endif   
+                                                                                                                                        @if (isset($children_Children_Children) && $children_Children_Children!=null )
+                                                                                                                                            @if($subsubchild->gender == 1 )
+                                                                                                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                                                                            @endif 
+                                                                                                                                            @if($subsubchild->gender == 2)
+                                                                                                                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                                                                            @endif
+                                                                                                                                            
+                                                                                                                                            @if($subsubchild->gender === null) 
+                                                                                                                                                <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                                                                            @endif
                                                                                                                                         @endif
                                                                                                                                         <p style="margin: 3% 0"> {{$subsubchild->PersonalName ?? ''}}</p>
                                                                 
@@ -658,14 +698,17 @@
                                                                                                 @else
                                                                                                     <div class="childchild box">
                                                                                                         <div class="openPoppup" data-id="{{$subchild->IDNumber ?? ''}}">
-                                                                                                                @if (isset($children_Children) && $children_Children!=null && $subchild->gender !=null)
-                                                                                                                    @if($subchild->gender === 1 )
-
-                                                                                                                    <i style="font-size:24px" class="fa male " >&#xf222;</i>
-                                                                                                                    @else
-                                                                                                                    <i style="font-size:24px" class="fa female " >&#xf221;</i>
-
-                                                                                                                    @endif   
+                                                                                                                @if (isset($children_Children) && $children_Children!=null )
+                                                                                                                    @if($subchild->gender == 1 )
+                                                                                                                    <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                                                    @endif 
+                                                                                                                    @if($subchild->gender == 2)
+                                                                                                                        <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                                                    @endif
+                                                                                                                    
+                                                                                                                    @if($subchild->gender === null) 
+                                                                                                                        <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                                                    @endif 
                                                                                                                 @endif 
                                                                                                                 <p style="margin: 3% 0"> {{$subchild->PersonalName ?? ''}}</p>
                                                         
@@ -681,14 +724,17 @@
                                                                                                                     {{-- <i  class="fa doteIcon">&#xf111;</i> --}}
                                                                                                                     <div class="childchild box">
                                                                                                                         <div class="openPoppup" data-id="{{$subsubchild->IDNumber ?? ''}}">
-                                                                                                                        @if (isset($children_Children_Children) && $children_Children_Children!=null && $subsubchild->gender !=null)
-                                                                                                                            @if($subsubchild->gender === 1 )
-
-                                                                                                                            <i style="font-size:24px" class="fa male" >&#xf222;</i>
-                                                                                                                            @else
-                                                                                                                            <i style="font-size:24px" class="fa female " >&#xf221;</i>
-
-                                                                                                                            @endif   
+                                                                                                                        @if (isset($children_Children_Children) && $children_Children_Children!=null )
+                                                                                                                            @if($subsubchild->gender == 1 )
+                                                                                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                                                            @endif 
+                                                                                                                            @if($subsubchild->gender == 2)
+                                                                                                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                                                            @endif
+                                                                                                                            
+                                                                                                                            @if($subsubchild->gender === null) 
+                                                                                                                                <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                                                            @endif                                           
                                                                                                                         @endif
                                                                                                                         <p style="margin: 3% 0"> {{$subsubchild->PersonalName ?? ''}}</p>
                                                 
@@ -754,14 +800,17 @@
                                                                     @else
                                                                             <div class="child box">
                                                                                 <div class="openPoppup" data-id="{{$child->IDNumber ?? ''}}">
-                                                                                @if (isset($children) && $children!=null && $child->gender !=null)
+                                                                                @if (isset($children) && $children!=null )
                                                                                     @if($child->gender == 1 )
-
-                                                                                    <i style="font-size:24px" class="fa male " >&#xf222;</i>
-                                                                                    @else
-                                                                                    <i style="font-size:24px" class="fa female ">&#xf221;</i>
-
-                                                                                    @endif   
+                                                                                    <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                    @endif 
+                                                                                    @if($child->gender == 2)
+                                                                                        <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                    @endif
+                                                                                    
+                                                                                    @if($child->gender === null) 
+                                                                                        <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                    @endif  
                                                                                 @endif 
                                                                                 <p style="margin: 3% 0"> {{$child->PersonalName ?? ''}}</p>
 
@@ -786,17 +835,21 @@
                                                 @endif
                                         </li>
                                     @endif
-                                    @if (isset($couple) && $couple!=null && $couple->gender !=null)
+                                    @if (isset($couple) && $couple!=null )
                                         <li>
                                             <div class="partner box"> 
                                                 <input type="checkbox" data-id="{{$couple->IDNumber ?? ''}}" id="parent{{$couple->IDNumber ?? ''}}" name="parent{{$couple->IDNumber ?? ''}}" value="{{$couple->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$couple->IDNumber ?? 0}})">
                                                 <div class="openPoppup" data-id="{{$couple->IDNumber ?? ''}}">
-                                                        @if($couple->gender === 1 )
-                                                        <i style="font-size:24px" class="fa male ">&#xf222;</i>
-                                                        @else
+                                                    @if($couple->gender == 1 )
+                                                    <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                    @endif 
+                                                    @if($couple->gender == 2)
                                                         <i style="font-size:24px" class="fa female ">&#xf221;</i>
-
-                                                        @endif   
+                                                    @endif
+                                                    
+                                                    @if($couple->gender === null) 
+                                                        <i style="font-size:24px" class="fa nogender" ></i>
+                                                    @endif    
                                             
                                                     <p style="margin: 3% 0;"> {{$couple->PersonalName ?? ''}}</p>
 
@@ -819,12 +872,16 @@
                                                 <li>                     
                                                     <div class="brother box">
                                                         <div class="openPoppup" data-id="{{$brotherfirst->IDNumber ?? ''}}">
-                                                                @if($brotherfirst->gender == 1 )
-                                                                <i style="font-size:24px" class="fa male " >&#xf222;</i>
-                                                                @else
-                                                                <i style="font-size:24px" class="fa female " >&#xf221;</i>
-
-                                                                @endif   
+                                                            @if($brotherfirst->gender == 1 )
+                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                            @endif 
+                                                            @if($brotherfirst->gender == 2)
+                                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                            @endif
+                                                            
+                                                            @if($brotherfirst->gender === null) 
+                                                                <i style="font-size:24px" class="fa nogender" ></i>
+                                                            @endif  
                                                             
                                                                 <p style="margin: 3% 0"> {{$brotherfirst->PersonalName ?? ''}}</p>
                                                                 <p style="margin: 3% 0;color:black;">גיל:{{$brotherfirst->birthYear ? Carbon\Carbon::now()->format('Y')- $brotherfirst->birthYear : ''}}</p>
@@ -838,9 +895,14 @@
                                                         <div class="partner box">
                                                             <div class="openPoppup" data-id="{{$couple_brother->IDNumber ?? ''}}">
                                                                 @if($couple_brother->gender == 1 )
-                                                                <i style="font-size:24px" class="fa male">&#xf222;</i>
-                                                                @else
-                                                                <i style="font-size:24px" class="fa female" >&#xf221;</i>
+                                                                <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                @endif 
+                                                                @if($couple_brother->gender == 2)
+                                                                    <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                @endif
+                                                                
+                                                                @if($couple_brother->gender === null) 
+                                                                    <i style="font-size:24px" class="fa nogender" ></i>
                                                                 @endif   
                                                             
                                                                 <p style="margin: 3% 0"> {{$couple_brother->PersonalName ?? ''}}</p>
@@ -857,13 +919,17 @@
                                                                             <li>
                                                                                 <div class="person box">
                                                                                     <div class="openPoppup" data-id="{{$brother_child->IDNumber ?? ''}}">
-                                                                                        @if (isset($children_brother) && $children_brother!=null && $brother_child->gender !=null)
-                                                                                            @if($brother_child->gender === 1 )
-                                                                                            <i style="font-size:24px" class="fa male" >&#xf222;</i>
-                                                                                            @else
-                                                                                            <i style="font-size:24px" class="fa female ">&#xf221;</i>
-
-                                                                                            @endif   
+                                                                                        @if (isset($children_brother) && $children_brother!=null )
+                                                                                            @if($children_brother->gender == 1 )
+                                                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                            @endif 
+                                                                                            @if($children_brother->gender == 2)
+                                                                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                            @endif
+                                                                                            
+                                                                                            @if($children_brother->gender === null) 
+                                                                                                <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                            @endif    
                                                                                         @endif 
                                                                                             <p style="margin: 3% 0"> {{$brother_child->PersonalName ?? ''}}</p>
                                                                                             <p style="margin: 3% 0;color:black;">גיל:{{$brother_child->birthYear ? Carbon\Carbon::now()->format('Y')- $brother_child->birthYear : ''}}</p>
