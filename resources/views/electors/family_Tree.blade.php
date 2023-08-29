@@ -501,8 +501,7 @@
                                                                                                 @if($couple_chlidren->gender === null) 
                                                                                                    <i style="font-size:24px" class="fa nogender" ></i>
                                                                                                 @endif
-                                                                                                {{-- @else
-                                                                                                <i style="font-size:24px" class="fa nogender" ></i> --}}
+                                                                                                
                                                                                             @endif   
                                                                                         
                                                                                                 <p style="margin: 3% 0;"> {{$couple_chlidren->PersonalName ?? ''}}</p>
@@ -864,10 +863,19 @@
                                 @if(isset($brother) && !empty($brother) && (count($brother) > 0) &&  (count($children)==0)  )
                                     @foreach($brother as  $brotherfirst)
                                     <?php 
-                                    $children_brother=DB::table('electors')->where('mother_id',$brotherfirst->IDNumber)->orWhere('father_id',$brotherfirst->IDNumber)->get();
+                                    // echo($brotherfirst->gender);
+                                    if($brotherfirst->gender == 1){
+                                        $children_brother=DB::table('electors')->where('father_id',$brotherfirst->IDNumber)->get();
+                                    }
+                                    else {
+                                        $children_brother=DB::table('electors')->where('mother_id',$brotherfirst->IDNumber)->get();
+                                    }
+                                    // if(count($children_brother)==0){
+                                    //     echo 'ggggggggggggg';
+                                    // }
                                     
                                     $couple_brother=DB::table('electors')->where('couple',$brotherfirst->IDNumber)->first();
-                                        // echo($brotherfirst->IDNumber);
+                                        // print_r($children_brother);
                                     ?>
                                     @if($brotherfirst->IDNumber != $person->IDNumber )
                                         <li>   
@@ -915,35 +923,35 @@
 
                                                         </div> 
                                                     @endif 
-                                                    @if(isset($children_brother) && !empty($children_brother) && count($children_brother)>0)
+                                                    @if(isset($children_brother) && !empty($children_brother) && count($children_brother)!= 0)
                                                         <ul>
                                                                 @foreach ($children_brother as $brother_child)
-                                                                        
-                                                                            <li>
-                                                                                <div class="person box">
-                                                                                    <div class="openPoppup" data-id="{{$brother_child->IDNumber ?? ''}}">
-                                                                                        @if (isset($children_brother) && $children_brother!=null )
-                                                                                            @if($children_brother->gender == 1 )
-                                                                                            <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                    @if (isset($children_brother) && $children_brother!=null && !empty($children_brother) )
+                                                                                <li>
+                                                                                    <div class="person box">
+                                                                                        <div class="openPoppup" data-id="{{$brother_child->IDNumber ?? ''}}">
+                                                                                            @if (isset($children_brother) && $children_brother!=null )
+                                                                                                @if($brother_child->gender == 1 )
+                                                                                                <i style="font-size:24px" class="fa male " >&#xf222;</i> 
+                                                                                                @endif 
+                                                                                                @if($brother_child->gender == 2)
+                                                                                                    <i style="font-size:24px" class="fa female ">&#xf221;</i>
+                                                                                                @endif
+                                                                                                
+                                                                                                @if($brother_child->gender === null) 
+                                                                                                    <i style="font-size:24px" class="fa nogender" ></i>
+                                                                                                @endif    
                                                                                             @endif 
-                                                                                            @if($children_brother->gender == 2)
-                                                                                                <i style="font-size:24px" class="fa female ">&#xf221;</i>
-                                                                                            @endif
-                                                                                            
-                                                                                            @if($children_brother->gender === null) 
-                                                                                                <i style="font-size:24px" class="fa nogender" ></i>
-                                                                                            @endif    
-                                                                                        @endif 
-                                                                                            <p style="margin: 3% 0"> {{$brother_child->PersonalName ?? ''}}</p>
-                                                                                            <p style="margin: 3% 0;color:black;">גיל:{{$brother_child->birthYear ? Carbon\Carbon::now()->format('Y')- $brother_child->birthYear : ''}}</p>
+                                                                                                <p style="margin: 3% 0"> {{$brother_child->PersonalName ?? ''}}</p>
+                                                                                                <p style="margin: 3% 0;color:black;">גיל:{{$brother_child->birthYear ? Carbon\Carbon::now()->format('Y')- $brother_child->birthYear : ''}}</p>
+                                                                                        </div>
+                                                                                            <input type="checkbox" data-id="{{$brother_child->IDNumber ?? ''}}" id="parent{{$brother_child->IDNumber ?? ''}}" name="parent{{$brother_child->IDNumber ?? ''}}" value="{{$brother_child->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$brother_child->IDNumber ?? 0}})">
+
+                                                                                        
                                                                                     </div>
-                                                                                        <input type="checkbox" data-id="{{$brother_child->IDNumber ?? ''}}" id="parent{{$brother_child->IDNumber ?? ''}}" name="parent{{$brother_child->IDNumber ?? ''}}" value="{{$brother_child->IDNumber ?? ''}}" class="rowSelect   checkboxSelect" onclick="fillCheckbox({{$brother_child->IDNumber ?? 0}})">
 
-                                                                                    
-                                                                                </div>
-
-                                                                            </li>
-                                                                        
+                                                                                </li>
+                                                                    @endif
                                                                 @endforeach
                                                         </ul>
                                                     @endif
