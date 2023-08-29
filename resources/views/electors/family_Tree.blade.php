@@ -478,10 +478,12 @@
                                                                             $child_couple=$child->couple !=0 ? $child->couple :'';
                                                                             $couple_chlidren=DB::table('electors')->where('IDNumber',$child_couple)->first();
                                                                             //  print_r($couple_chlidren) ;
-                                                                            
+                                                                            // $ss=DB::table('electors')->where('IDNumber',33177155)->first();
+                                                                            // print_r($ss);
                                                                         ?>
                                                                         @if (isset($child->couple) && $child->couple!=null )
                                                                             <ul> 
+                                                                                @if (isset($couple_chlidren) && $couple_chlidren!=null )
                                                                                 <li>
                                                                                     <div class="partner box"> 
 
@@ -496,7 +498,7 @@
                                                                                                    <i style="font-size:24px" class="fa female ">&#xf221;</i>
                                                                                                 @endif
                                                                                                 
-                                                                                                @if($couple_chlidren->gender == null) 
+                                                                                                @if($couple_chlidren->gender === null) 
                                                                                                    <i style="font-size:24px" class="fa nogender" ></i>
                                                                                                 @endif
                                                                                                 {{-- @else
@@ -509,6 +511,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </li>
+                                                                                @endif
                                                                                 <li>
                                                                                     <div class="child box">
                                                                                         <div class="openPoppup" data-id="{{$child->IDNumber ?? ''}}">
