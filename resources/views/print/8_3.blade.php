@@ -76,9 +76,9 @@ $num=0;
 				 $kalfy='מס קלפי: '.$row['AddCode'];
 				$row['Address']=trim($row['Address']);
         if(!isset($savedData[$row['AddCode']])) $savedData[$row['AddCode']]=DB::table('ballot')->where('ballot_id',$row['AddCode'])->select('*')->first();
-        $row['place_details']=$savedData[$row['AddCode']]->place_details;
-        $row['street_name']=$savedData[$row['AddCode']]->street_name;
-         $row['home_num']=$savedData[$row['AddCode']]->home_num;
+        $row['place_details']= $savedData[$row['AddCode']]->place_details ?? '';
+        $row['street_name']=$savedData[$row['AddCode']]->street_name ?? '';
+         $row['home_num']=$savedData[$row['AddCode']]->home_num ?? '';
 				 $kalfyPlace="מקום קלפי: ".$row['place_details'];
 				 $city="ישוב: ".$row['Address'].'&nbsp;&nbsp;&nbsp;&nbsp; מיקוד: '.$row['Zip'];
 				 $street="רחוב: ".$row['street_name']."&nbsp;&nbsp;&nbsp;&nbsp; בית: ".$row['home_num'];
@@ -92,7 +92,11 @@ $num=0;
 ?>
 
 <div class="stick" >
-<div class="logo"><img src="<?=$settings['print_logo'];?>" width="30" height="30" /></div>
+<div class="logo">
+  @if($settings['print_logo']!='')
+  <img src="<?=$settings['print_logo'] ?? ''; ?>" width="30" height="30" />
+  @endif
+</div>
 <div class="row" style="margin-top:10px;"> <?=$name;?> </div>
 <div class="row"> <?=$kalfy;?> </div>
 <div class="row"> <?=$kalfyPlace;?> </div>
@@ -101,7 +105,7 @@ $num=0;
 <div class="row"> <?=$Serial;?> </div>
 </div>
 
-<?
+<?php
 if ($num%24 == 0) echo "<div class=\"page\"></div><div class=\"header\"></div> ";
 }
 
