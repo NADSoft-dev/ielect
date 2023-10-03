@@ -92,7 +92,11 @@ $num=0;
 ?>
 
 <div class="stick" >
-<div class="logo"><img src="<?=$settings['print_logo'];?>" width="30" height="30" /></div>
+<div class="logo">
+  @if($settings['print_logo']!='')
+  <img src="<?=$settings['print_logo'] ?? ''; ?>" width="30" height="30" />
+  @endif
+</div>
 <div class="row" style="margin-top:10px;"> <?=$name;?> </div>
 <div class="row"> <?=$kalfy;?> </div>
 <div class="row"> <?=$kalfyPlace;?> </div>
